@@ -1,0 +1,24 @@
+{
+  "name": "nabla-react-native",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "SampleApp",
+      "packages/*"
+    ],
+    "nohoist": [
+      "**/react-native",
+      "**/react-native/**",
+      "**/@react-native-community",
+      "**/@react-native-community/**",
+      "**/@nabla",
+      "**/@nabla/**",
+      "**/@jest",
+      "**/@jest/**"
+    ]
+  },
+  "scripts": {
+    "run-messaging-core-example-ios": "yarn --cwd packages/react-native-messaging-core run-example-ios",
+    "run-messaging-core-example-android": "yarn --cwd packages/react-native-messaging-core run-example-android"
+  }
+}
