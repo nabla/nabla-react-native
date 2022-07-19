@@ -14,6 +14,7 @@ val NablaException.code: Int
             is UnknownException -> 3
             is InvalidAppThemeException -> 4
             is AuthenticationException.NotAuthenticated -> 10
+            is AuthenticationException.AuthorizationDenied -> 13
             is AuthenticationException.UnableToGetFreshSessionToken -> 14
             is InvalidMessageException -> 20
             is MessageNotFoundException -> 21

@@ -1,4 +1,4 @@
-#  Nabla React Native SDK
+# Nabla React Native SDK
 
 The [Nabla](https://www.nabla.com/) React Native SDK makes it quick and easy to build an excellent healthcare communication experience in your React Native app. We provide powerful and customizable UI elements that can be used out-of-the-box to create a full healthcare communication experience. We also expose the low-level APIs that power those UIs so that you can build fully custom experiences.
 
@@ -10,14 +10,17 @@ Check our [documentation portal](https://docs.nabla.com/docs/setup-1) for in dep
 
 ## Getting started
 
-```sh
-npm install --save @nabla/react-native-messaging-core 
-```
+### Messaging Core
+
+Check the Messaging Core [documentation](./packages/react-native-messaging-core/README.md) for more information about the Messaging Core SDK.
+
+### Messaging UI
+
+Check the Messaging UI [documentation](./packages/react-native-messaging-ui/README.md) for more information about the Messaging Core SDK.
 
 ## Sample app
 
-[//]: # (TODO)
-
+You can find an example of a basic integration of the Messaging Core & UI SDK in our [demo app](./react-native-sample-app).
 
 ## Need more help?
 

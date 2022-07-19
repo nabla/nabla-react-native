@@ -1,0 +1,9 @@
+rootProject.name = 'ReactNativeSampleApp'
+apply from: file("../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesSettingsGradle(settings)
+include ':app'
+
+include ':nabla-react-native-messaging-core-src'
+project(':nabla-react-native-messaging-core-src').projectDir = new File(rootProject.projectDir, '../../packages/react-native-messaging-core/android/')
+
+include ':nabla-react-native-messaging-ui-src'
+project(':nabla-react-native-messaging-ui-src').projectDir = new File(rootProject.projectDir, '../../packages/react-native-messaging-ui/android/')

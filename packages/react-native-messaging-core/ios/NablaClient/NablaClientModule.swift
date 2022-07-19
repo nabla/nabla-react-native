@@ -41,7 +41,7 @@ final class NablaClientModule: RCTEventEmitter {
     @objc(provideTokens:accessToken:)
     func provideTokens(refreshToken: String, accessToken: String) {
         provideTokensCompletion?(
-            Tokens(
+            AuthTokens(
                 accessToken: accessToken,
                 refreshToken: refreshToken
             )
@@ -75,7 +75,7 @@ final class NablaClientModule: RCTEventEmitter {
     // MARK: - Private
 
     private var currentUserId: UUID?
-    private var provideTokensCompletion: ((Tokens?) -> Void)?
+    private var provideTokensCompletion: ((AuthTokens?) -> Void)?
 
     private enum Event: String, CaseIterable {
         case needProvideTokens
@@ -83,7 +83,7 @@ final class NablaClientModule: RCTEventEmitter {
 }
 
 extension NablaClientModule: SessionTokenProvider {
-    func provideTokens(forUserId userId: UUID, completion: @escaping (Tokens?) -> Void) {
+    func provideTokens(forUserId userId: UUID, completion: @escaping (AuthTokens?) -> Void) {
         provideTokensCompletion = completion
         sendEvent(withName: Event.needProvideTokens.rawValue, body: [:])
     }

@@ -2,13 +2,14 @@
   "name": "@nabla/react-native-messaging-core",
   "version": "1.0.0-alpha01",
   "description": "Nabla Messaging Core SDK",
-  "repository": "https://github.com/nabla/react-native-messaging-core",
+  "repository": "https://github.com/nabla/nabla-react-native",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "author": "Nabla",
   "license": "MIT",
   "files": [
-    "android",
+    "android/src",
+    "android/build.gradle",
     "ios",
     "lib",
     "nabla-react-native-messaging-core.podspec"

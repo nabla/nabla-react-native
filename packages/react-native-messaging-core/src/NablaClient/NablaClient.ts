@@ -19,7 +19,7 @@ export class NablaClient {
 
   public initialize(
     apiKey: string,
-    networkConfiguration?: NetworkConfiguration,
+    networkConfiguration: NetworkConfiguration | undefined = undefined,
   ) {
     nablaClientModule.initialize(apiKey, networkConfiguration);
   }
