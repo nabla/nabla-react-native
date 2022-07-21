@@ -1,6 +1,14 @@
 {
   "name": "nabla-react-native",
   "private": true,
+  "scripts": {
+    "prepare": "yarn compile-messaging-core & yarn compile-messaging-ui",
+    "compile-messaging-core": "yarn --cwd packages/react-native-messaging-core compile",
+    "compile-messaging-ui": "yarn --cwd packages/react-native-messaging-ui compile",
+    "test": "yarn test-messaging-core && yarn test-messaging-ui",
+    "test-messaging-core": "yarn --cwd packages/react-native-messaging-core test",
+    "test-messaging-ui": "yarn --cwd packages/react-native-messaging-ui test"
+  },
   "workspaces": {
     "packages": [
       "packages/*"
