@@ -19,6 +19,7 @@ You'll also need to have the React Native environment setup to build the app.
 4. Copy the `.env.sample` file to `.env` and fill in the values for the public API key, the user id and the 2 tokens
 5. ```sh
    yarn install
+   cd ios && pod install && cd ..
    yarn ios
    yarn android
    ```
