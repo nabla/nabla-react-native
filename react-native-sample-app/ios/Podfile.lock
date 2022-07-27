@@ -77,18 +77,18 @@ PODS:
   - glog (0.3.5)
   - libevent (2.1.12)
   - nabla-react-native-messaging-core (1.0.0-alpha01):
-    - NablaMessagingCore (= 1.0.0-alpha09)
+    - NablaMessagingCore (= 1.0.0-alpha10)
     - React-Core
   - nabla-react-native-messaging-ui (1.0.0-alpha01):
-    - NablaMessagingUI (= 1.0.0-alpha09)
+    - NablaMessagingUI (= 1.0.0-alpha10)
     - React-Core
-  - NablaCore (1.0.0-alpha09):
+  - NablaCore (1.0.0-alpha10):
     - Apollo/WebSocket (~> 0.50)
-  - NablaMessagingCore (1.0.0-alpha09):
-    - NablaCore (= 1.0.0-alpha09)
-  - NablaMessagingUI (1.0.0-alpha09):
-    - NablaCore (= 1.0.0-alpha09)
-    - NablaMessagingCore (= 1.0.0-alpha09)
+  - NablaMessagingCore (1.0.0-alpha10):
+    - NablaCore (= 1.0.0-alpha10)
+  - NablaMessagingUI (1.0.0-alpha10):
+    - NablaCore (= 1.0.0-alpha10)
+    - NablaMessagingCore (= 1.0.0-alpha10)
   - OpenSSL-Universal (1.1.180)
   - RCT-Folly (2021.06.28.00-v2):
     - boost
@@ -521,11 +521,11 @@ SPEC CHECKSUMS:
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 85ecdd10ee8d8ec362ef519a6a45ff9aa27b2e85
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
-  nabla-react-native-messaging-core: 7fa1a81c448f6a2e8711d90458daebd915fe711e
-  nabla-react-native-messaging-ui: 56711c199b5d931a2df4ce3d6169337214f2500e
-  NablaCore: 1e37346ad26c89de1936865bc737ae89dec7ad01
-  NablaMessagingCore: 2be25b2689fd265221970d09487ac361be950372
-  NablaMessagingUI: 5b85164f61f665f3c873f0fb08fb2f3f93ca3151
+  nabla-react-native-messaging-core: 84c591929e8bd1163025d0fc6cf99f38a495282e
+  nabla-react-native-messaging-ui: a68bfb7fedfa4ba6c04ad7340ee5b8edee81f489
+  NablaCore: c8b553285829508e6e580841a47c3b5f39b0d4c5
+  NablaMessagingCore: 28d43c531441829c5f04719172997a1ce4404fc2
+  NablaMessagingUI: e0794b1a403b2e05a6ec5b1f3636c7f8029b115b
   OpenSSL-Universal: 1aa4f6a6ee7256b83db99ec1ccdaa80d10f9af9b
   RCT-Folly: 803a9cfd78114b2ec0f140cfa6fa2a6bafb2d685
   RCTRequired: e5dc0c44cb366fc93383a2bffbc190fe821e7293

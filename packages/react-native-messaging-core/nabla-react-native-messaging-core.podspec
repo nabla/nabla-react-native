@@ -16,5 +16,5 @@ Pod::Spec.new do |s|
   s.source_files  = "ios/**/*.{h,m,swift}"
 
   s.dependency 'React-Core'
-  s.dependency 'NablaMessagingCore', '1.0.0-alpha09'
+  s.dependency 'NablaMessagingCore', '1.0.0-alpha10'
 end

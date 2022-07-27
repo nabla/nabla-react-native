@@ -25,7 +25,7 @@ extension NablaError {
 
     private var code: Int {
         switch self {
-//        case is NetworkError: return 0
+        case is NetworkError: return 0
         case is ServerError: return 1
         case is InternalError: return 2
         case is MissingAuthenticationProviderError: return 10
