@@ -17,16 +17,35 @@ import {
   View,
 } from 'react-native';
 
-import { authenticate } from './authenticate';
+import { authenticateUser } from './authenticateUser';
 import { ConversationCell } from './ConversationCell';
 import { nablaMessagingClient, nablaMessagingUIClient } from './nablaClients';
+import { NablaConversationListView } from '@nabla/react-native-messaging-ui';
+
+enum HomeState {
+  NONE,
+  AUTHENTICATED,
+  DISPLAY_NATIVE_CONVERSATION_LIST,
+  WATCH_MANUALLY,
+}
 
 export default function App() {
+  const [homeState, setHomeState] = useState(HomeState.NONE);
   const [conversationList, setConversationList] = useState<ConversationList>();
   const [watchConversationsError, setWatchConversationsError] =
     useState<NablaError>();
 
+  const authenticate = () => {
+    authenticateUser();
+    setHomeState(HomeState.AUTHENTICATED);
+  };
+
+  const displayNativeConversationListView = () => {
+    setHomeState(HomeState.DISPLAY_NATIVE_CONVERSATION_LIST);
+  };
+
   const watchConversations = () => {
+    setHomeState(HomeState.WATCH_MANUALLY);
     const subscription = nablaMessagingClient.watchConversations(
       (error) => {
         switch (error.type) {
@@ -67,6 +86,7 @@ export default function App() {
   };
 
   const navigateToConversation = (conversationId: string) => () => {
+    console.log('navigateToConversation', conversationId);
     nablaMessagingUIClient.navigateToConversation(conversationId);
   };
 
@@ -97,30 +117,94 @@ export default function App() {
     );
   }
 
-  const data = conversationList?.conversations.sort((a, b) => {
-    return (
-      new Date(b.lastModified).getTime() - new Date(a.lastModified).getTime()
-    );
-  });
+  let createConversationButton = (
+    <View style={styles.hEndContainer}>
+      <Button title="Create Conversation" onPress={createConversation} />
+    </View>
+  );
+
+  let contentView;
+  switch (homeState) {
+    case HomeState.NONE:
+      contentView = (
+        <SafeAreaView>
+          <Button title="Authenticate" onPress={authenticate} />
+        </SafeAreaView>
+      );
+      break;
+    case HomeState.AUTHENTICATED:
+      contentView = (
+        <SafeAreaView style={{ flex: 1 }}>
+          <View style={styles.hContainer}>
+            <View style={{ flex: 1.5 }}>
+              <Button
+                title="Display Native ConversationsListView"
+                onPress={displayNativeConversationListView}
+              />
+            </View>
+            <View style={{ flex: 1 }}>
+              <Button
+                title="Watch Conversations"
+                onPress={watchConversations}
+              />
+            </View>
+          </View>
+        </SafeAreaView>
+      );
+      break;
+    case HomeState.DISPLAY_NATIVE_CONVERSATION_LIST:
+      contentView = (
+        <View style={styles.vContainer}>
+          {createConversationButton}
+          <NablaConversationListView
+            onConversationSelected={(conversationId) => {
+              nablaMessagingUIClient.navigateToConversation(conversationId);
+            }}
+            style={{ flex: 1 }}
+          />
+        </View>
+      );
+      break;
+    case HomeState.WATCH_MANUALLY:
+      contentView = (
+        <View style={styles.vContainer}>
+          {watchConversationsErrorDescription}
+          {createConversationButton}
+          <FlatList
+            data={conversationList?.conversations}
+            renderItem={renderConversation}
+            keyExtractor={(conversation) => conversation.id}
+          />
+          {loadMoreConversationsButton}
+        </View>
+      );
+      break;
+  }
 
   return (
-    <SafeAreaView>
-      <Button title="Authenticate" onPress={authenticate} />
-      <Button title="Watch Conversations" onPress={watchConversations} />
-      <Button title="Create Conversation" onPress={createConversation} />
-      <View style={styles.separator} />
-      {watchConversationsErrorDescription}
-      <FlatList
-        data={data}
-        renderItem={renderConversation}
-        keyExtractor={(conversation) => conversation.id}
-      />
-      {loadMoreConversationsButton}
-    </SafeAreaView>
+    <View style={styles.vContainer}>
+      <SafeAreaView></SafeAreaView>
+      <View style={styles.vContainer}>{contentView}</View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  buttonsContainer: {
+    flex: 1,
+  },
+  hContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  hEndContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+  },
+  vContainer: {
+    flex: 1,
+  },
   separator: { height: 20, backgroundColor: 'white' },
   errorDescription: { marginBottom: 20 },
 });
