@@ -13,7 +13,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.suspendCancellableCoroutine
 
 class NablaClientModule(
-    reactContext: ReactApplicationContext
+    reactContext: ReactApplicationContext,
 ) : ReactContextBaseJavaModule(reactContext), SessionTokenProvider {
 
     override fun getName() = "NablaClientModule"
@@ -22,21 +22,23 @@ class NablaClientModule(
 
     @ReactMethod
     fun initialize(apiKey: String, networkConfiguration: ReadableMap?) {
-
         if (networkConfiguration != null) {
-            networkConfiguration.getString("scheme")?.let { scheme ->
-                networkConfiguration.getString("domain")?.let { domain ->
-                    networkConfiguration.getString("path")?.let { path ->
-                        val port = networkConfiguration.getInt("port")
-                        val baseUrl =
-                            if (port != 0) "$scheme://$domain:$port$path" else "$scheme://$domain$path"
-                        println("baseUrl $baseUrl")
-                        NablaClient.initialize(
-                            Configuration(publicApiKey = apiKey),
-                            NetworkConfiguration(baseUrl = baseUrl)
-                        )
-                    }
-                }
+            val scheme = networkConfiguration.getString("scheme")
+            val domain = networkConfiguration.getString("domain")
+            val path = networkConfiguration.getString("path")
+            val port = networkConfiguration.getInt("port")
+
+            if (scheme != null && domain != null && path != null) {
+                val baseUrl = if (port != 0) "$scheme://$domain:$port$path" else "$scheme://$domain$path"
+
+                NablaClient.initialize(
+                    Configuration(publicApiKey = apiKey),
+                    NetworkConfiguration(baseUrl = baseUrl)
+                )
+            } else {
+                NablaClient.initialize(
+                    Configuration(publicApiKey = apiKey)
+                )
             }
         } else {
             NablaClient.initialize(
@@ -47,7 +49,7 @@ class NablaClientModule(
 
     @ReactMethod
     fun willAuthenticateUser(
-        userId: String
+        userId: String,
     ) {
         currentUserId = userId
     }
@@ -73,7 +75,7 @@ class NablaClientModule(
     @ReactMethod
     fun provideTokens(
         refreshToken: String,
-        accessToken: String
+        accessToken: String,
     ) {
         provideAuthTokensContinuation?.resume(
             value = Result.success(AuthTokens(refreshToken, accessToken)),
@@ -94,6 +96,6 @@ class NablaClientModule(
     }
 
     companion object {
-        const val NEED_PROVIDE_TOKENS = "needProvideTokens"
+        private const val NEED_PROVIDE_TOKENS = "needProvideTokens"
     }
 }

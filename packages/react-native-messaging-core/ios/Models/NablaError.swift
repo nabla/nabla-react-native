@@ -27,7 +27,7 @@ extension NablaError {
         switch self {
         case is NetworkError: return 0
         case is ServerError: return 1
-        case is InternalError: return 2
+        case is InternalError: return NablaError.internalErrorCode
         case is MissingAuthenticationProviderError: return 10
         case is AuthenticationProviderFailedToProvideTokensError: return 11
         case is AuthenticationProviderDidProvideExpiredTokensError: return 12
@@ -43,7 +43,16 @@ extension NablaError {
             return 3 // UnknownError
         }
     }
-
+    
+    private static let internalErrorCode = 2
+    
+    static func createInternalErrorDictionnaryRepresentation(message: String) -> [String: Any] {
+        [
+            "code": NablaError.internalErrorCode,
+            "message": message,
+            "extra": [:],
+        ]
+    }
 
     private var nativeError: NativeError {
 

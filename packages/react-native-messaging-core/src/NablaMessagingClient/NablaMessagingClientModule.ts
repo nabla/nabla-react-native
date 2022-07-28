@@ -20,6 +20,13 @@ interface NablaMessagingClientModule extends NativeModule {
       conversationId: string | undefined,
     ) => void,
   ): void;
+
+  sendMessage(
+    input: any,
+    conversationId: string,
+    replyTo: string | undefined,
+    callback: (error: NativeError | undefined) => void,
+  ): void;
 }
 
 export const nablaMessagingClientModule: NablaMessagingClientModule =

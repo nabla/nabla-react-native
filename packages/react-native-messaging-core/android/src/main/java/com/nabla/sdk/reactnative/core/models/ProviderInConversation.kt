@@ -7,7 +7,7 @@ import com.nabla.sdk.core.domain.entity.Provider
 import com.nabla.sdk.messaging.core.domain.entity.ProviderInConversation
 
 @JvmName("toProviderInConversationMapArray")
-fun List<ProviderInConversation>.toMapArray(): ReadableArray {
+internal fun List<ProviderInConversation>.toMapArray(): ReadableArray {
     return Arguments.createArray().apply {
         forEach { providerInConversation ->
             pushMap(providerInConversation.toMap())
@@ -15,7 +15,7 @@ fun List<ProviderInConversation>.toMapArray(): ReadableArray {
     }
 }
 
-fun ProviderInConversation.toMap(): ReadableMap {
+internal fun ProviderInConversation.toMap(): ReadableMap {
     return Arguments.createMap().apply {
         putMap("provider", provider.toMap())
         putString("typingAt", typingAt?.toString())

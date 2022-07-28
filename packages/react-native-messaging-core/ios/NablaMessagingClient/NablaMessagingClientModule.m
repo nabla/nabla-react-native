@@ -9,4 +9,9 @@ RCT_EXTERN_METHOD(createConversation: (NSString *)title
                          providerIds: (NSArray<NSString *> *)providerIds
                             callback: (RCTResponseSenderBlock)callback)
 
+RCT_EXTERN_METHOD(sendMessage: (id)input
+               conversationId: (NSString *)conversationId
+                      replyTo: (NSString *)replyTo
+                     callback: (RCTResponseSenderBlock)callback)
+
 @end

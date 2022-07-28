@@ -5,7 +5,7 @@ import com.facebook.react.bridge.ReadableMap
 import com.nabla.sdk.core.domain.entity.*
 import com.nabla.sdk.messaging.core.domain.entity.*
 
-val NablaException.code: Int
+internal val NablaException.code: Int
     get() {
         return when (this) {
             is NetworkException -> 0
@@ -28,7 +28,7 @@ val NablaException.code: Int
         }
     }
 
-fun NablaException.toMap(): ReadableMap {
+internal fun NablaException.toMap(): ReadableMap {
     return Arguments.createMap().apply {
         putInt("code", code)
         putString("message", message)

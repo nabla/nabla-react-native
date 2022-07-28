@@ -5,3 +5,4 @@ export * from './NablaError';
 export * from './NetworkConfiguration';
 export * from './Provider';
 export * from './ProviderInConversation';
+export * from './MessageInput';

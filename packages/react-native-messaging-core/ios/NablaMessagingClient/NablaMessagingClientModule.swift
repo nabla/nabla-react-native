@@ -8,6 +8,7 @@ final class NablaMessagingClientModule: RCTEventEmitter {
     private var conversationsWatcher: PaginatedWatcher?
     private var conversationsLoadMoreCancellable: Cancellable?
     private var createConversationCancellable: Cancellable?
+    private var sendMessageCancellable: Cancellable?
 
     enum Event: String, CaseIterable {
         case watchConversationsUpdated
@@ -71,8 +72,41 @@ final class NablaMessagingClientModule: RCTEventEmitter {
             }
         }
     }
+    
+    @objc(sendMessage:conversationId:replyTo:callback:)
+    func sendMessage(
+        input: Dictionary<String, Any>,
+        conversationId: String,
+        replyTo: String?,
+        callback: @escaping RCTResponseSenderBlock
+    ) {
+        guard let messageInput = input.messageInput else {
+            callback([NablaError.createInternalErrorDictionnaryRepresentation(message: "Unable to parse message input")])
+            return
+        }
+        
+        guard let conversationId = UUID.init(uuidString: conversationId) else {
+            callback([NablaError.createInternalErrorDictionnaryRepresentation(message: "Unable to parse conversationId")])
+            return
+        }
+        
+        sendMessageCancellable = NablaMessagingClient.shared.sendMessage(
+            messageInput,
+            replyingToMessageWithId: UUID.init(uuidString: replyTo ?? ""),
+            inConversationWithId: conversationId,
+            handler: { result in
+                switch result {
+                case .success:
+                    callback([NSNull()])
+                case .failure(let error):
+                    callback([error.dictionaryRepresentation])
+                }
+            }
+        )
+    }
 
     override class func requiresMainQueueSetup() -> Bool {
         false
     }
 }
+

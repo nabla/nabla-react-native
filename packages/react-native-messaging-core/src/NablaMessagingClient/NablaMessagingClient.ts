@@ -1,5 +1,6 @@
 import { ConversationList, NablaError } from '../types';
 import { ConversationsEventSubscription } from './types/ConversationsEventSubscription';
+import { MessageInput } from "../types";
 import { NativeError } from './types/NativeError';
 import { mapError } from './types/ErrorMapper';
 import { NativeEventEmitter } from 'react-native';
@@ -68,6 +69,27 @@ export class NablaMessagingClient {
           errorCallback(mapError(error));
         } else if (conversationId) {
           successCallback(conversationId);
+        }
+      },
+    );
+  }
+
+  public sendMessage(
+    errorCallback: (error: NablaError) => void,
+    successCallback: () => void,
+    input: MessageInput,
+    conversationId: string,
+    replyTo?: string,
+  ) {
+    nablaMessagingClientModule.sendMessage(
+      input.serialize(),
+      conversationId,
+      replyTo,
+      (error) => {
+        if (error) {
+          errorCallback(mapError(error));
+        } else {
+          successCallback();
         }
       },
     );
