@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.nabla.sdk.reactnative.ui">
 
     <application>
         <activity
             android:name=".nablamessagingui.NablaConversationActivity"
-            android:exported="false"
-            android:theme="@style/NablaConversationActivityTheme" />
+            android:exported="false" />
         <activity
             android:name=".nablamessagingui.NablaInboxActivity"
-            android:exported="false"
-            android:theme="@style/NablaInboxActivityTheme" />
+            android:exported="false" />
     </application>
 
 </manifest>
