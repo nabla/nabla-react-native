@@ -4,6 +4,7 @@
   "description": "Nabla Messaging UI SDK",
   "repository": "https://github.com/nabla/nabla-react-native",
   "main": "lib/index.js",
+  "devMain": "src/index.ts",
   "types": "lib/index.d.ts",
   "author": "Nabla",
   "license": "MIT",
