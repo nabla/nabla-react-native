@@ -19,7 +19,8 @@
     "@nabla/react-native-messaging-core": "./../packages/react-native-messaging-core",
     "@nabla/react-native-messaging-ui": "./../packages/react-native-messaging-ui",
     "react": "17.0.2",
-    "react-native": "0.67.1"
+    "react-native": "0.67.1",
+    "react-native-paper": "^4.12.4"
   },
   "devDependencies": {
     "@babel/core": "^7.16.12",
@@ -35,7 +36,6 @@
     "jest": "^27.4.7",
     "metro-react-native-babel-preset": "^0.67.0",
     "prettier": "^2.3.2",
-    "react-native-dotenv": "^3.3.1",
     "react-test-renderer": "17.0.2",
     "typescript": "^4.5.5"
   },

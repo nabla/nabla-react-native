@@ -6,13 +6,13 @@ const LINKING_ERROR =
   '- You rebuilt the app after installing the package\n' +
   '- You are not using Expo managed workflow\n';
 
-interface NablaMessagingUIClientModule extends NativeModule {
+interface NablaMessagingUIModule extends NativeModule {
   navigateToConversation(conversationId: string, showComposer: boolean): void;
 }
 
-export const nablaMessagingUIClientModule: NablaMessagingUIClientModule =
-  NativeModules.NablaMessagingUIClientModule
-    ? NativeModules.NablaMessagingUIClientModule
+export const nablaMessagingUIModule: NablaMessagingUIModule =
+  NativeModules.NablaMessagingUIModule
+    ? NativeModules.NablaMessagingUIModule
     : new Proxy(
         {},
         {

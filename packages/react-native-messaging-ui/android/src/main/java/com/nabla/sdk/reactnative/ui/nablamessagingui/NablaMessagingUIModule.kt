@@ -5,11 +5,10 @@ import com.benasher44.uuid.Uuid
 import com.facebook.react.bridge.*
 import com.nabla.sdk.reactnative.ui.NablaConversationActivity
 
-class NablaMessagingUIClientModule(
+class NablaMessagingUIModule(
     reactContext: ReactApplicationContext
 ) : ReactContextBaseJavaModule(reactContext){
-    override fun getName() = "NablaMessagingUIClientModule"
-
+    override fun getName() = "NablaMessagingUIModule"
 
     @ReactMethod
     fun navigateToConversation(conversationId: String, showComposer: Boolean) {

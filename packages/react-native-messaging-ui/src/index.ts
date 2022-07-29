@@ -1,3 +1,3 @@
-export { NablaMessagingUIClient } from './NablaMessagingUIClient/NablaMessagingUIClient';
+export { NablaMessagingUI } from './NablaMessagingUI/NablaMessagingUI';
 
 export { NablaConversationListView } from './NablaConversationListView/NablaConversationListView';

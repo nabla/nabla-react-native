@@ -2,8 +2,8 @@ import Foundation
 import NablaMessagingUI
 import UIKit
 
-@objc(NablaMessagingUIClientModule)
-final class NablaMessagingUIClientModule: NSObject {
+@objc(NablaMessagingUIModule)
+final class NablaMessagingUIModule: NSObject {
     
     var conversationNavigationController: UINavigationController?
     
