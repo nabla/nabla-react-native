@@ -1,14 +1,22 @@
-package com.nabla.sdk.reactnative.ui.nablamessaginguiclient
+package com.nabla.sdk.reactnative.ui.nablamessagingui
 
 import android.content.Intent
 import com.benasher44.uuid.Uuid
 import com.facebook.react.bridge.*
-import com.nabla.sdk.reactnative.ui.NablaConversationActivity
 
 class NablaMessagingUIModule(
     reactContext: ReactApplicationContext
 ) : ReactContextBaseJavaModule(reactContext){
     override fun getName() = "NablaMessagingUIModule"
+
+    @ReactMethod
+    fun navigateToInbox() {
+        currentActivity?.let {
+            it.startActivity(
+                Intent(it, NablaInboxActivity::class.java)
+            )
+        }
+    }
 
     @ReactMethod
     fun navigateToConversation(conversationId: String, showComposer: Boolean) {

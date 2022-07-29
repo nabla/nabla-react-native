@@ -4,9 +4,13 @@
 
     <application>
         <activity
-            android:name=".NablaConversationActivity"
+            android:name=".nablamessagingui.NablaConversationActivity"
             android:exported="false"
             android:theme="@style/NablaConversationActivityTheme" />
+        <activity
+            android:name=".nablamessagingui.NablaInboxActivity"
+            android:exported="false"
+            android:theme="@style/NablaInboxActivityTheme" />
     </application>
 
 </manifest>

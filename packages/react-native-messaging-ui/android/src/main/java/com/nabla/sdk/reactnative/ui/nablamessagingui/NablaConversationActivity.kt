@@ -1,4 +1,4 @@
-package com.nabla.sdk.reactnative.ui
+package com.nabla.sdk.reactnative.ui.nablamessagingui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,8 +6,9 @@ import com.benasher44.uuid.Uuid
 import com.nabla.sdk.messaging.core.domain.entity.toConversationId
 import com.nabla.sdk.messaging.ui.scene.messages.ConversationFragment
 import androidx.fragment.app.commit
+import com.nabla.sdk.reactnative.ui.R
 
-class NablaConversationActivity : AppCompatActivity() {
+internal class NablaConversationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_nabla_conversation)
@@ -23,7 +24,7 @@ class NablaConversationActivity : AppCompatActivity() {
                     setShowComposer(showComposer)
                 }
 
-                add(R.id.fragmentContainer, conversationFragment, "tag")
+                add(R.id.fragmentContainer, conversationFragment, "conversationFragmentTag")
             }
         }
     }

@@ -5,7 +5,7 @@ import com.facebook.react.bridge.NativeModule
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.uimanager.ViewManager
 import com.nabla.sdk.reactnative.ui.nablaconversationlistview.NablaConversationListViewManager
-import com.nabla.sdk.reactnative.ui.nablamessaginguiclient.NablaMessagingUIModule
+import com.nabla.sdk.reactnative.ui.nablamessagingui.NablaMessagingUIModule
 
 class NablaMessagingUIPackage : ReactPackage {
 

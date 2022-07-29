@@ -2,6 +2,7 @@
 
 @interface RCT_EXTERN_MODULE(NablaMessagingUIModule, NSObject)
 
+RCT_EXTERN_METHOD(navigateToInbox)
 RCT_EXTERN_METHOD(navigateToConversation: (NSString *)conversationId
                             showComposer: (BOOL)showComposer)
 
