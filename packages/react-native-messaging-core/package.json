@@ -17,13 +17,12 @@
   ],
   "scripts": {
     "compile": "rm -rf lib && tsc -p .",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint": "yarn lint-ci --fix",
+    "lint-ci": "eslint . --ext .js,.jsx,.ts,.tsx",
     "prettier": "yarn prettier-ci --write",
     "prettier-ci": "prettier --ignore-path .gitignore --check src/**/*.ts",
     "prepare": "yarn compile",
-    "test": "jest",
-    "run-example-ios": "cd example; yarn ios",
-    "run-example-android": "cd example; yarn android"
+    "test": "jest"
   },
   "devDependencies": {
     "@babel/core": "^7.16.12",

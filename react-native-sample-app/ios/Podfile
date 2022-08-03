@@ -26,6 +26,7 @@ target 'ReactNativeSampleApp' do
   # you should disable the next line.
   use_flipper!()
 
+  pod 'nabla-react-native-core', :path => '../../Packages/react-native-core'
   pod 'nabla-react-native-messaging-core', :path => '../../Packages/react-native-messaging-core'
   pod 'nabla-react-native-messaging-ui', :path => '../../Packages/react-native-messaging-ui'
 

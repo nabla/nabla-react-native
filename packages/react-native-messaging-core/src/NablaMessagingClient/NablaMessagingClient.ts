@@ -1,14 +1,15 @@
-import { ConversationList, NablaError } from '../types';
+import { ConversationList } from '../types';
 import { ConversationsEventSubscription } from './types/ConversationsEventSubscription';
-import { MessageInput } from "../types";
-import { NativeError } from './types/NativeError';
-import { mapError } from './types/ErrorMapper';
+import { MessageInput } from '../types';
+import { NativeError } from '@nabla/react-native-core/lib/internal';
 import { NativeEventEmitter } from 'react-native';
 import { nablaMessagingClientModule } from './NablaMessagingClientModule';
 import {
   mapConversationList,
   NativeConversationList,
 } from './types/NativeConversationList';
+import { NablaError } from '@nabla/react-native-core';
+import { mapError } from './types/errorMapper';
 
 const emitter = new NativeEventEmitter(nablaMessagingClientModule);
 

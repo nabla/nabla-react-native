@@ -1,5 +1,5 @@
 import { NativeModule, NativeModules, Platform } from 'react-native';
-import { NativeError } from './types/NativeError';
+import { NativeError } from '@nabla/react-native-core/lib/internal';
 
 const LINKING_ERROR =
   `The package '@nabla/react-native-messaging-core' doesn't seem to be linked. Make sure: \n\n` +

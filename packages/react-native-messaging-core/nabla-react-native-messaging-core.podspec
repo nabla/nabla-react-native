@@ -13,8 +13,13 @@ Pod::Spec.new do |s|
   s.platform     = :ios, "13.0"
 
   s.source       = { :git => "https://github.com/nabla/nabla-react-native.git", :tag => "v#{s.version}" }
-  s.source_files  = "ios/**/*.{h,m,swift}"
+  s.source_files  = "ios/Sources/**/*.{h,m,swift}"
 
   s.dependency 'React-Core'
+  s.dependency 'nabla-react-native-core'
   s.dependency 'NablaMessagingCore', '1.0.0-alpha10'
+
+  s.test_spec 'Tests' do |test_spec|
+    test_spec.source_files= "ios/Tests/**/*.{h,m,swift}"
+  end
 end

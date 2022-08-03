@@ -1,6 +1,8 @@
-# @nabla/react-native-messaging-core
+# Nabla Messaging UI SDK
 
-Nabla Messaging Core
+## Documentation
+
+Check our [documentation portal](https://docs.nabla.com/) for in depth documentation about integrating and using the SDK.
 
 ## Installation
 
@@ -8,17 +10,23 @@ Nabla Messaging Core
 npm install --save '@nabla/react-native-messaging-ui'
 ```
 
+Or
+
+```sh
+yarn add '@nabla/react-native-messaging-ui'
+```
+
 ## Usage
 
 ### NablaMessagingUIClient
 
 ```ts
-import { NablaMessagingUIClient } from '@nabla/react-native-messaging-ui';
+import { NablaMessagingUI } from '@nabla/react-native-messaging-ui';
 
-const nablaMessagingUIClient = NablaMessagingUIClient.getInstance();
+NablaMessagingUI.navigateToInbox();
 
 // You can use retrieve the `conversationId` from using `watchConversations` in mnessaging core using your server API.
-nablaMessagingUIClient.navigateToConversation(conversationId);
+NablaMessagingUI.navigateToConversation(conversationId);
 ```
 
 ## License

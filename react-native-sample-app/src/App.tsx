@@ -3,9 +3,9 @@ import { Platform, StyleSheet, Text, View } from 'react-native';
 
 import { Appbar } from 'react-native-paper';
 import { NablaConversationListView } from '@nabla/react-native-messaging-ui';
+import { NablaClient } from '@nabla/react-native-core';
 import {
   AuthTokens,
-  NablaClient,
   NablaMessagingClient,
 } from '@nabla/react-native-messaging-core';
 import { NablaMessagingUI } from '@nabla/react-native-messaging-ui';
@@ -23,6 +23,10 @@ nablaClient.authenticate(dummyUserId, async () => {
 });
 
 const nablaMessagingClient = NablaMessagingClient.getInstance();
+
+const createConversationIcon = () => (
+  <Text style={styles.appbarButtonTextStyle}>+</Text>
+);
 
 export default function App() {
   const createConversation = () => {
@@ -45,7 +49,7 @@ export default function App() {
             title="Medical chat"
           />
           <Appbar.Action
-            icon={() => <Text style={styles.appbarButtonTextStyle}>+</Text>}
+            icon={createConversationIcon}
             onPress={createConversation}
           />
         </Appbar.Header>

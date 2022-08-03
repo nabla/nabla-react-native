@@ -2,12 +2,16 @@
   "name": "nabla-react-native",
   "private": true,
   "scripts": {
-    "prepare": "yarn compile-messaging-core & yarn compile-messaging-ui",
+    "prepare": "yarn compile",
+    "compile": "yarn compile-core && yarn compile-messaging-core && yarn compile-messaging-ui",
+    "compile-core": "yarn --cwd packages/react-native-core compile",
     "compile-messaging-core": "yarn --cwd packages/react-native-messaging-core compile",
     "compile-messaging-ui": "yarn --cwd packages/react-native-messaging-ui compile",
-    "test": "yarn test-messaging-core && yarn test-messaging-ui",
+    "test": "yarn test-core && yarn test-messaging-core && yarn test-messaging-ui",
+    "test-core": "yarn --cwd packages/react-native-core test",
     "test-messaging-core": "yarn --cwd packages/react-native-messaging-core test",
-    "test-messaging-ui": "yarn --cwd packages/react-native-messaging-ui test"
+    "test-messaging-ui": "yarn --cwd packages/react-native-messaging-ui test",
+    "clean": "find . -name \"node_modules\" -type d -prune -exec rm -rf '{}' +"
   },
   "workspaces": {
     "packages": [

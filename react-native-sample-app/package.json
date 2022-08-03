@@ -7,7 +7,8 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint": "yarn lint-ci --fix",
+    "lint-ci": "eslint . --ext .js,.jsx,.ts,.tsx",
     "compile-packages": "./scripts/compile_packages.sh",
     "upgrade-packages": "./scripts/upgrade_packages.sh",
     "refresh-packages": "yarn compile-packages && yarn upgrade-packages",
@@ -16,6 +17,7 @@
     "clean": "rm -rf ./node_modules"
   },
   "dependencies": {
+    "@nabla/react-native-core": "./../packages/react-native-core",
     "@nabla/react-native-messaging-core": "./../packages/react-native-messaging-core",
     "@nabla/react-native-messaging-ui": "./../packages/react-native-messaging-ui",
     "react": "17.0.2",
@@ -41,6 +43,7 @@
   },
   "resolutions": {
     "@types/react": "^17",
+    "@nabla/react-native-core": "./../packages/react-native-core",
     "@nabla/react-native-messaging-core": "./../packages/react-native-messaging-core"
   },
   "jest": {
