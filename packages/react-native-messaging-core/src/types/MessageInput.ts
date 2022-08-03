@@ -1,3 +1,6 @@
+/**
+ * Representation of a message to give to ``NablaMessagingClient.sendMessage``
+ */
 export interface MessageInput {
   serialize(): any;
 }
@@ -7,6 +10,9 @@ export interface MediaMessageInput extends MessageInput {
   filename: string;
 }
 
+/**
+ * Input for a text message, containing only the text to send.
+ */
 export class TextMessageInput implements MessageInput {
   text: string;
 
@@ -30,6 +36,9 @@ export enum ImageMimeType {
   other = 'other',
 }
 
+/**
+ * Input for an image message, containing the image uri to send.
+ */
 export class ImageMessageInput implements MediaMessageInput {
   uri: string;
   filename: string;
@@ -59,6 +68,9 @@ export enum VideoMimeType {
   other = 'other',
 }
 
+/**
+ * Input for a video message, containing the video uri to send.
+ */
 export class VideoMessageInput implements MediaMessageInput {
   uri: string;
   filename: string;
@@ -87,6 +99,9 @@ export enum DocumentMimeType {
   other = 'other',
 }
 
+/**
+ * Input for a document message, containing the document uri to send.
+ */
 export class DocumentMessageInput implements MediaMessageInput {
   uri: string;
   filename: string;
@@ -115,6 +130,9 @@ export enum AudioMimeType {
   other = 'other',
 }
 
+/**
+ * Input for an audio message, containing the audio uri to send.
+ */
 export class AudioMessageInput implements MediaMessageInput {
   uri: string;
   filename: string;
