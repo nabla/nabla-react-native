@@ -105,7 +105,7 @@ class NablaMessagingClientModule(
                     providerUuids
                 )
                 .onSuccess {
-                    callback(null, it.id.value.toString())
+                    callback(null, it.id.stableId.toString())
                 }
                 .onFailure {
                     callback((it as NablaException).toMap())
@@ -158,7 +158,7 @@ class NablaMessagingClientModule(
             NablaMessagingClient.getInstance()
                 .sendMessage(
                     messageInput,
-                    ConversationId(conversationUuid),
+                    ConversationId.Remote(remoteId = conversationUuid),
                     replyToUuid,
                 )
                 .onSuccess {

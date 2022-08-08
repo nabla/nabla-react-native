@@ -7,7 +7,7 @@ import com.nabla.sdk.messaging.core.domain.entity.Conversation
 
 internal fun Conversation.toMap(): ReadableMap {
     return Arguments.createMap().apply {
-        putString("id", id.value.toString())
+        putString("id", id.stableId.toString())
         putString("title", title)
         putString("inboxPreviewTitle", inboxPreviewTitle)
         putString("lastMessagePreview", lastMessagePreview)

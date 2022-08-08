@@ -31,7 +31,7 @@ internal class NablaConversationListViewManager : SimpleViewManager<NativeViewWr
             viewModel = viewModel,
             onConversationClicked = { conversationId ->
                 val event = Arguments.createMap().apply {
-                    putString("conversationId", conversationId.value.toString())
+                    putString("conversationId", conversationId.stableId.toString())
                 }
                 reactContext
                     .getJSModule(RCTEventEmitter::class.java)

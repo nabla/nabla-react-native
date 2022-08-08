@@ -34,7 +34,7 @@ final class NablaClientModule: RCTEventEmitter {
 
     @objc(willAuthenticateUser:)
     func willAuthenticateUser(userId: String) {
-        currentUserId = UUID(uuidString: userId)
+        currentUserId = userId
     }
 
     @objc(provideTokens:accessToken:)
@@ -73,7 +73,7 @@ final class NablaClientModule: RCTEventEmitter {
 
     // MARK: - Private
 
-    private var currentUserId: UUID?
+    private var currentUserId: String?
     private var provideTokensCompletion: ((AuthTokens?) -> Void)?
 
     private enum Event: String, CaseIterable {
@@ -82,7 +82,7 @@ final class NablaClientModule: RCTEventEmitter {
 }
 
 extension NablaClientModule: SessionTokenProvider {
-    func provideTokens(forUserId userId: UUID, completion: @escaping (AuthTokens?) -> Void) {
+    func provideTokens(forUserId _: String, completion: @escaping (AuthTokens?) -> Void) {
         provideTokensCompletion = completion
         sendEvent(withName: Event.needProvideTokens.rawValue, body: [:])
     }
