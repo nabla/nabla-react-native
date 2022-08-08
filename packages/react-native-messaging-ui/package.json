@@ -8,6 +8,7 @@
   "types": "lib/index.d.ts",
   "author": "Nabla",
   "license": "MIT",
+  "private": false,
   "files": [
     "android/src",
     "android/build.gradle",
