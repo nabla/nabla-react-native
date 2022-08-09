@@ -24,7 +24,7 @@ or
 npm install --save '@nabla/react-native-messaging-ui' 
 ```
 
-And then you need to run `pod install` in your `ios` directory in order to install the native dependencies.
+And then run `pod install` in your `ios` directory, in order to install the native dependencies.
 
 You can find the latest version available in the [release page](https://github.com/nabla/nabla-react-native/releases).
 
