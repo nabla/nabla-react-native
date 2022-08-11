@@ -76,14 +76,14 @@ PODS:
   - fmt (6.2.1)
   - glog (0.3.5)
   - libevent (2.1.12)
-  - nabla-react-native-core (1.0.0-alpha01):
+  - nabla-react-native-core (1.0.0-alpha02):
     - NablaCore (= 1.0.0-alpha14)
     - React-Core
-  - nabla-react-native-messaging-core (1.0.0-alpha01):
+  - nabla-react-native-messaging-core (1.0.0-alpha02):
     - nabla-react-native-core
     - NablaMessagingCore (= 1.0.0-alpha14)
     - React-Core
-  - nabla-react-native-messaging-ui (1.0.0-alpha01):
+  - nabla-react-native-messaging-ui (1.0.0-alpha02):
     - NablaMessagingUI (= 1.0.0-alpha14)
     - React-Core
   - NablaCore (1.0.0-alpha14):
@@ -528,9 +528,9 @@ SPEC CHECKSUMS:
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 85ecdd10ee8d8ec362ef519a6a45ff9aa27b2e85
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
-  nabla-react-native-core: 9092746f3943c8ad95606a13dd36d07396b8574f
-  nabla-react-native-messaging-core: 77c43b27c1ed1f339c8e770d1c9db9d670f8e9e6
-  nabla-react-native-messaging-ui: bafa8d545d72da1ea603ef8aaa37186ca2325300
+  nabla-react-native-core: fbf6ee158dec755c722bcf962924e4adcac643a2
+  nabla-react-native-messaging-core: 5d039d54c5d14f4c5496b5f5edd7b2e2a33bc65c
+  nabla-react-native-messaging-ui: bb3e5f93819b1ff470763100b5036208752efec8
   NablaCore: 05e5e7add1200f929b5ff51df0741763aec91814
   NablaMessagingCore: 9837ed958937def5e84853cd44657f9a39c346d0
   NablaMessagingUI: d1cc08ccc420502b75786915edc32e5310f7d34f
