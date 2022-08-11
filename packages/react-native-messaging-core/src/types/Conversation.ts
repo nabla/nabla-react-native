@@ -1,7 +1,8 @@
 import { ProviderInConversation } from './ProviderInConversation';
+import { ConversationId } from './ConversationId';
 
 export class Conversation {
-  id: string;
+  id: ConversationId;
   title?: string;
   inboxPreviewTitle: string;
   lastMessagePreview?: string;
@@ -10,7 +11,7 @@ export class Conversation {
   providers: ProviderInConversation[];
 
   constructor(
-    id: string,
+    id: ConversationId,
     inboxPreviewTitle: string,
     lastModified: Date,
     patientUnreadMessageCount: number,

@@ -1,4 +1,5 @@
 import { NativeModule, NativeModules, Platform } from 'react-native';
+import { ConversationId } from '@nabla/react-native-messaging-core';
 
 const LINKING_ERROR =
   `The package '@nabla/react-native-messaging-ui' doesn't seem to be linked. Make sure: \n\n` +
@@ -8,7 +9,10 @@ const LINKING_ERROR =
 
 interface NablaMessagingUIModule extends NativeModule {
   navigateToInbox(): void;
-  navigateToConversation(conversationId: string, showComposer: boolean): void;
+  navigateToConversation(
+    conversationId: ConversationId,
+    showComposer: boolean,
+  ): void;
 }
 
 export const nablaMessagingUIModule: NablaMessagingUIModule =

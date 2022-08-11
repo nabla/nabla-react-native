@@ -6,6 +6,7 @@ import { NablaConversationListView } from '@nabla/react-native-messaging-ui';
 import { NablaClient } from '@nabla/react-native-core';
 import {
   AuthTokens,
+  getStableId,
   NablaMessagingClient,
 } from '@nabla/react-native-messaging-core';
 import { NablaMessagingUI } from '@nabla/react-native-messaging-ui';
@@ -35,7 +36,7 @@ export default function App() {
         console.log({ ...error });
       },
       (conversationId) => {
-        console.log(`createConversationSuccess id: ${conversationId}`);
+        console.log(`createConversationSuccess id: ${getStableId(conversationId)}`);
       },
     );
   };
@@ -46,7 +47,7 @@ export default function App() {
         <Appbar.Header style={styles.appbarHeaderStyle}>
           <Appbar.Content
             color={Platform.OS === 'ios' ? 'black' : 'white'}
-            title="Medical chat"
+            title='Medical chat'
           />
           <Appbar.Action
             icon={createConversationIcon}

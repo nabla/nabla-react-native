@@ -6,6 +6,8 @@
 
 ### Changed
 
+- `Conversation.id` is now a `ConversationId` type instead of a `string` type. 
+
 ### Fixed
 
 ### Versions

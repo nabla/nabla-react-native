@@ -1,14 +1,12 @@
 #!/bin/bash
 set -euo pipefail
 
-cd ../packages/react-native-core && yarn install
+pushd ..
+yarn install
 
-cd ../react-native-messaging-core && yarn install
+pushd packages
+rm -rf react-native-core/node_modules react-native-core/android/build
+rm -rf react-native-messaging-core/node_modules react-native-messaging-core/android/build
+rm -rf react-native-messaging-ui/node_modules react-native-messaging-ui/android/build
 
-cd ../react-native-messaging-ui && yarn install
-
-cd ../react-native-core && rm -rf node_modules android/build
-
-cd ../react-native-messaging-core && rm -rf node_modules android/build
-
-cd ../react-native-messaging-ui && rm -rf node_modules android/build
+popd && popd

@@ -1,4 +1,4 @@
-import { ConversationList } from '../types';
+import { ConversationList, ConversationId, MessageId } from '../types';
 import { ConversationsEventSubscription } from './types/ConversationsEventSubscription';
 import { MessageInput } from '../types';
 import { NativeError } from '@nabla/react-native-core/lib/internal';
@@ -85,7 +85,7 @@ export class NablaMessagingClient {
    */
   public createConversation(
     errorCallback: (error: NablaError) => void,
-    successCallback: (conversationId: string) => void,
+    successCallback: (conversationId: ConversationId) => void,
     title?: string,
     providerIds?: string[],
   ) {
@@ -114,8 +114,8 @@ export class NablaMessagingClient {
     errorCallback: (error: NablaError) => void,
     successCallback: () => void,
     input: MessageInput,
-    conversationId: string,
-    replyTo?: string,
+    conversationId: ConversationId,
+    replyTo?: MessageId,
   ) {
     nablaMessagingClientModule.sendMessage(
       input.serialize(),

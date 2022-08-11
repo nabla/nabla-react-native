@@ -10,8 +10,8 @@ RCT_EXTERN_METHOD(createConversation: (NSString *)title
                             callback: (RCTResponseSenderBlock)callback)
 
 RCT_EXTERN_METHOD(sendMessage: (id)input
-               conversationId: (NSString *)conversationId
-                      replyTo: (NSString *)replyTo
+               conversationId: (id)conversationIdMap
+                      replyTo: (id)replyToMap
                      callback: (RCTResponseSenderBlock)callback)
 
 @end

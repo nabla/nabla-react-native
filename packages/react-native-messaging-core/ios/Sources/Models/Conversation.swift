@@ -4,7 +4,7 @@ import NablaMessagingCore
 extension Conversation {
     var dictionaryRepresentation: [String: Any] {
         var result = [String: Any]()
-        result["id"] = id.uuidString
+        result["id"] = ["type": "Remote", "remoteId": id.uuidString]
         result["title"] = title
         result["inboxPreviewTitle"] = inboxPreviewTitle
         result["lastMessagePreview"] = lastMessagePreview

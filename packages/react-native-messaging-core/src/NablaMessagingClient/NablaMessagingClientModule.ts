@@ -1,5 +1,6 @@
 import { NativeModule, NativeModules, Platform } from 'react-native';
 import { NativeError } from '@nabla/react-native-core/lib/internal';
+import { ConversationId, MessageId } from '../types';
 
 const LINKING_ERROR =
   `The package '@nabla/react-native-messaging-core' doesn't seem to be linked. Make sure: \n\n` +
@@ -17,14 +18,14 @@ interface NablaMessagingClientModule extends NativeModule {
     providerIds: String[] | undefined,
     callback: (
       error: NativeError | undefined,
-      conversationId: string | undefined,
+      conversationId: ConversationId | undefined,
     ) => void,
   ): void;
 
   sendMessage(
     input: any,
-    conversationId: string,
-    replyTo: string | undefined,
+    conversationId: ConversationId,
+    replyTo: MessageId | undefined,
     callback: (error: NativeError | undefined) => void,
   ): void;
 }

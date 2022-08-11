@@ -1,8 +1,8 @@
 package com.nabla.sdk.reactnative.messaging.ui.nablamessagingui
 
 import android.content.Intent
-import com.benasher44.uuid.Uuid
 import com.facebook.react.bridge.*
+import com.nabla.sdk.reactnative.messaging.core.models.toConversationId
 
 class NablaMessagingUIModule(
     reactContext: ReactApplicationContext
@@ -19,12 +19,12 @@ class NablaMessagingUIModule(
     }
 
     @ReactMethod
-    fun navigateToConversation(conversationId: String, showComposer: Boolean) {
+    fun navigateToConversation(conversationIdMap: ReadableMap, showComposer: Boolean) {
         currentActivity?.let {
             it.startActivity(
                 Intent(it, NablaConversationActivity::class.java)
                     .apply {
-                        putExtra(CONVERSATION_ID_EXTRA, Uuid.fromString(conversationId))
+                        putExtra(CONVERSATION_ID_EXTRA, conversationIdMap.toConversationId())
                         putExtra(SHOW_COMPOSER_EXTRA, showComposer)
                     }
             )

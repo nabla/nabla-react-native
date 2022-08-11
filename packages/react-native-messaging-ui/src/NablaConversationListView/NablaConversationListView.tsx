@@ -5,13 +5,14 @@ import {
 } from 'react-native';
 
 import React from 'react';
+import { ConversationId } from '@nabla/react-native-messaging-core';
 
 export const NativeConversationListView = requireNativeComponent(
   'NablaConversationListView',
 );
 
 type NablaConversationListViewProps = ViewProps & {
-  onConversationSelected: (conversationId: string) => void;
+  onConversationSelected: (conversationId: ConversationId) => void;
 };
 
 export const NablaConversationListView: React.FC<
@@ -20,7 +21,7 @@ export const NablaConversationListView: React.FC<
   const nativeProps = {
     ...props,
     onConversationSelected: (
-      event: NativeSyntheticEvent<{ conversationId: string }>,
+      event: NativeSyntheticEvent<{ conversationId: ConversationId }>,
     ) => {
       props.onConversationSelected(event.nativeEvent.conversationId);
     },

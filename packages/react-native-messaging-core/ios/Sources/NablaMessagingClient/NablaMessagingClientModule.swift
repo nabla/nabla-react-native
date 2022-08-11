@@ -77,8 +77,8 @@ final class NablaMessagingClientModule: RCTEventEmitter {
     @objc(sendMessage:conversationId:replyTo:callback:)
     func sendMessage(
         input: Dictionary<String, Any>,
-        conversationId: String,
-        replyTo: String?,
+        conversationIdMap: Dictionary<String, Any>,
+        replyToMap: Dictionary<String, Any>?,
         callback: @escaping RCTResponseSenderBlock
     ) {
         guard let messageInput = input.messageInput else {
@@ -86,14 +86,14 @@ final class NablaMessagingClientModule: RCTEventEmitter {
             return
         }
         
-        guard let conversationId = UUID.init(uuidString: conversationId) else {
+        guard let conversationId = conversationIdMap.asConversationId else {
             callback([InternalError.createDictionaryRepresentation(message: "Unable to parse conversationId")])
             return
         }
         
         sendMessageCancellable = NablaMessagingClient.shared.sendMessage(
             messageInput,
-            replyingToMessageWithId: UUID.init(uuidString: replyTo ?? ""),
+            replyingToMessageWithId: replyToMap?.asMessageId,
             inConversationWithId: conversationId,
             handler: { result in
                 switch result {

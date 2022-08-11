@@ -14,8 +14,7 @@ import com.facebook.react.modules.core.DeviceEventManagerModule
 import com.nabla.sdk.core.domain.entity.InternalException
 import com.nabla.sdk.core.domain.entity.NablaException
 import com.nabla.sdk.messaging.core.NablaMessagingClient
-import com.nabla.sdk.messaging.core.domain.entity.ConversationId
-import com.nabla.sdk.messaging.core.domain.entity.MessageId
+import com.nabla.sdk.reactnative.messaging.core.models.*
 import com.nabla.sdk.reactnative.messaging.core.models.audioMessageInputOrThrow
 import com.nabla.sdk.reactnative.messaging.core.models.documentMessageInputOrThrow
 import com.nabla.sdk.reactnative.messaging.core.models.imageMessageInputOrThrow
@@ -35,7 +34,8 @@ import kotlinx.coroutines.launch
 
 class NablaMessagingClientModule(
     reactContext: ReactApplicationContext,
-) : ReactContextBaseJavaModule(reactContext), CoroutineScope by CoroutineScope(SupervisorJob() + Dispatchers.Default) {
+) : ReactContextBaseJavaModule(reactContext),
+    CoroutineScope by CoroutineScope(SupervisorJob() + Dispatchers.Default) {
     private var loadMoreConversationsCallback: (@CheckResult suspend () -> Result<Unit>)? = null
     private var watchConversationJob: Job? = null
 
@@ -105,7 +105,7 @@ class NablaMessagingClientModule(
                     providerUuids
                 )
                 .onSuccess {
-                    callback(null, it.id.stableId.toString())
+                    callback(null, it.id.toMap())
                 }
                 .onFailure {
                     callback((it as NablaException).toMap())
@@ -117,8 +117,8 @@ class NablaMessagingClientModule(
     @ReactMethod
     fun sendMessage(
         input: ReadableMap,
-        conversationId: String,
-        replyTo: String?,
+        conversationIdMap: ReadableMap,
+        replyToMap: ReadableMap?,
         callback: Callback,
     ) {
         val messageType = input.getString("type") ?: kotlin.run {
@@ -126,22 +126,22 @@ class NablaMessagingClientModule(
             return
         }
 
-        val conversationUuid = try {
-            Uuid.fromString(conversationId)
+        val conversationId = try {
+            conversationIdMap.toConversationId()
         } catch (e: Exception) {
             callback(InternalException(e).toMap())
             return
         }
 
         val replyToUuid = try {
-            replyTo?.let { MessageId.Remote(null, Uuid.fromString(it)) }
+            replyToMap?.toRemoteMessageId()
         } catch (e: Exception) {
             callback(InternalException(e).toMap())
             return
         }
 
         val messageInput = try {
-            when(messageType) {
+            when (messageType) {
                 "text" -> input.textMessageInpuOrThrow()
                 "image" -> input.imageMessageInputOrThrow()
                 "video" -> input.videoMessageInputOrThrow()
@@ -158,7 +158,7 @@ class NablaMessagingClientModule(
             NablaMessagingClient.getInstance()
                 .sendMessage(
                     messageInput,
-                    ConversationId.Remote(remoteId = conversationUuid),
+                    conversationId,
                     replyToUuid,
                 )
                 .onSuccess {

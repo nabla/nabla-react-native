@@ -46,6 +46,7 @@ repositories {
 dependencies {
     //noinspection GradleDynamicVersion
     implementation 'com.facebook.react:react-native:+'
+    implementation project(path: ':nabla_react-native-messaging-core')
 
     implementation 'com.nabla.nabla-android:messaging-ui:1.0.0-alpha09'
     implementation 'androidx.appcompat:appcompat:1.4.2'

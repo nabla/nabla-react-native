@@ -16,12 +16,12 @@ internal class NablaConversationActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
 
             val conversationId =
-                ConversationId.Remote(remoteId = intent.getSerializableExtra(CONVERSATION_ID_EXTRA) as Uuid)
+                intent.getParcelableExtra<ConversationId>(CONVERSATION_ID_EXTRA)
             val showComposer =
-                (intent.getSerializableExtra(SHOW_COMPOSER_EXTRA) as Boolean)
+                intent.getSerializableExtra(SHOW_COMPOSER_EXTRA) as Boolean
 
             supportFragmentManager.commit {
-                val conversationFragment = ConversationFragment.newInstance(conversationId) {
+                val conversationFragment = ConversationFragment.newInstance(conversationId!!) {
                     setShowComposer(showComposer)
                 }
 

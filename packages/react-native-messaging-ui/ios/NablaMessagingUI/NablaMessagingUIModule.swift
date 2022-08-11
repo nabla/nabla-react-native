@@ -1,6 +1,7 @@
 import Foundation
 import NablaMessagingCore
 import NablaMessagingUI
+import nabla_react_native_messaging_core
 import UIKit
 
 @objc(NablaMessagingUIModule)
@@ -16,8 +17,8 @@ final class NablaMessagingUIModule: NSObject {
     }
     
     @objc(navigateToConversation:showComposer:)
-    func navigateToConversation(_ conversationId: String, showComposer: Bool) {
-        guard let conversationId = UUID(uuidString: conversationId) else {
+    func navigateToConversation(_ conversationIdMap: Dictionary<String, Any>, showComposer: Bool) {
+        guard let conversationId = conversationIdMap.asConversationId else {
             return
         }
         DispatchQueue.main.async {

@@ -1,11 +1,11 @@
-import { Conversation } from '../../types';
+import { Conversation, ConversationId } from '../../types';
 import {
   mapProviderInConversation,
   NativeProviderInConversation,
 } from './NativeProviderInConversation';
 
 export interface NativeConversation {
-  id: string;
+  id: ConversationId;
   title?: string;
   inboxPreviewTitle: string;
   lastMessagePreview?: string;

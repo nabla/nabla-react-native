@@ -1,4 +1,5 @@
 import { nablaMessagingUIModule } from './NablaMessagingUIModule';
+import { ConversationId } from '@nabla/react-native-messaging-core';
 
 /**
  * Main entry-point for Messaging UI features.
@@ -20,7 +21,7 @@ export class NablaMessagingUI {
    * @param showComposer optional flag to show or hide the composer.
    */
   public static navigateToConversation(
-    conversationId: string,
+    conversationId: ConversationId,
     showComposer: boolean = true,
   ) {
     nablaMessagingUIModule.navigateToConversation(conversationId, showComposer);
