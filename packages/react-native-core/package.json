@@ -14,7 +14,7 @@
     "android/build.gradle",
     "ios",
     "lib",
-    "nabla-react-native-messaging-core.podspec"
+    "nabla-react-native-core.podspec"
   ],
   "scripts": {
     "compile": "rm -rf lib && tsc -p .",

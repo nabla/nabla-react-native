@@ -1068,11 +1068,11 @@
 
 "@nabla/react-native-core@./../packages/react-native-core", "@nabla/react-native-core@1.0.0-alpha01":
   version "1.0.0-alpha01"
-  dependencies:
-    "@nabla/react-native-core" "1.0.0-alpha01"
 
 "@nabla/react-native-messaging-core@./../packages/react-native-messaging-core", "@nabla/react-native-messaging-core@1.0.0-alpha01":
   version "1.0.0-alpha01"
+  dependencies:
+    "@nabla/react-native-core" "1.0.0-alpha01"
 
 "@nabla/react-native-messaging-ui@./../packages/react-native-messaging-ui":
   version "1.0.0-alpha01"

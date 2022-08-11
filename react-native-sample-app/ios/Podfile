@@ -26,10 +26,6 @@ target 'ReactNativeSampleApp' do
   # you should disable the next line.
   use_flipper!()
 
-  pod 'nabla-react-native-core', :path => '../../Packages/react-native-core'
-  pod 'nabla-react-native-messaging-core', :path => '../../Packages/react-native-messaging-core'
-  pod 'nabla-react-native-messaging-ui', :path => '../../Packages/react-native-messaging-ui'
-
   post_install do |installer|
     react_native_post_install(installer)
     __apply_Xcode_12_5_M1_post_install_workaround(installer)

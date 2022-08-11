@@ -77,22 +77,22 @@ PODS:
   - glog (0.3.5)
   - libevent (2.1.12)
   - nabla-react-native-core (1.0.0-alpha01):
-    - NablaCore (= 1.0.0-alpha13)
+    - NablaCore (= 1.0.0-alpha14)
     - React-Core
   - nabla-react-native-messaging-core (1.0.0-alpha01):
     - nabla-react-native-core
-    - NablaMessagingCore (= 1.0.0-alpha13)
+    - NablaMessagingCore (= 1.0.0-alpha14)
     - React-Core
   - nabla-react-native-messaging-ui (1.0.0-alpha01):
-    - NablaMessagingUI (= 1.0.0-alpha13)
+    - NablaMessagingUI (= 1.0.0-alpha14)
     - React-Core
-  - NablaCore (1.0.0-alpha13):
+  - NablaCore (1.0.0-alpha14):
     - Apollo/WebSocket (~> 0.50)
-  - NablaMessagingCore (1.0.0-alpha13):
-    - NablaCore (= 1.0.0-alpha13)
-  - NablaMessagingUI (1.0.0-alpha13):
-    - NablaCore (= 1.0.0-alpha13)
-    - NablaMessagingCore (= 1.0.0-alpha13)
+  - NablaMessagingCore (1.0.0-alpha14):
+    - NablaCore (= 1.0.0-alpha14)
+  - NablaMessagingUI (1.0.0-alpha14):
+    - NablaCore (= 1.0.0-alpha14)
+    - NablaMessagingCore (= 1.0.0-alpha14)
   - OpenSSL-Universal (1.1.180)
   - RCT-Folly (2021.06.28.00-v2):
     - boost
@@ -388,9 +388,9 @@ DEPENDENCIES:
   - FlipperKit/FlipperKitUserDefaultsPlugin (= 0.99.0)
   - FlipperKit/SKIOSNetworkPlugin (= 0.99.0)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
-  - nabla-react-native-core (from `../../Packages/react-native-core`)
-  - nabla-react-native-messaging-core (from `../../Packages/react-native-messaging-core`)
-  - nabla-react-native-messaging-ui (from `../../Packages/react-native-messaging-ui`)
+  - "nabla-react-native-core (from `../node_modules/@nabla/react-native-core`)"
+  - "nabla-react-native-messaging-core (from `../node_modules/@nabla/react-native-messaging-core`)"
+  - "nabla-react-native-messaging-ui (from `../node_modules/@nabla/react-native-messaging-ui`)"
   - OpenSSL-Universal (= 1.1.180)
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
@@ -453,11 +453,11 @@ EXTERNAL SOURCES:
   glog:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
   nabla-react-native-core:
-    :path: "../../Packages/react-native-core"
+    :path: "../node_modules/@nabla/react-native-core"
   nabla-react-native-messaging-core:
-    :path: "../../Packages/react-native-messaging-core"
+    :path: "../node_modules/@nabla/react-native-messaging-core"
   nabla-react-native-messaging-ui:
-    :path: "../../Packages/react-native-messaging-ui"
+    :path: "../node_modules/@nabla/react-native-messaging-ui"
   RCT-Folly:
     :podspec: "../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec"
   RCTRequired:
@@ -528,12 +528,12 @@ SPEC CHECKSUMS:
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 85ecdd10ee8d8ec362ef519a6a45ff9aa27b2e85
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
-  nabla-react-native-core: 8a22bc633470e940c5e2fed7149e8007c9965a8e
-  nabla-react-native-messaging-core: 1ade06c36296a3e580454cb26abeb7d0b8d39e60
-  nabla-react-native-messaging-ui: 48d03a1994f8ad2be492bfe64143408d56aadff0
-  NablaCore: 950dc86697104f3abea4a681eecbeb8923e48a95
-  NablaMessagingCore: 6209a2a59db08599a89beb831d1effcd01525e46
-  NablaMessagingUI: 9abae4e68404a5053c658c6b977bb0ca8037b3fe
+  nabla-react-native-core: 9092746f3943c8ad95606a13dd36d07396b8574f
+  nabla-react-native-messaging-core: 77c43b27c1ed1f339c8e770d1c9db9d670f8e9e6
+  nabla-react-native-messaging-ui: bafa8d545d72da1ea603ef8aaa37186ca2325300
+  NablaCore: 05e5e7add1200f929b5ff51df0741763aec91814
+  NablaMessagingCore: 9837ed958937def5e84853cd44657f9a39c346d0
+  NablaMessagingUI: d1cc08ccc420502b75786915edc32e5310f7d34f
   OpenSSL-Universal: 1aa4f6a6ee7256b83db99ec1ccdaa80d10f9af9b
   RCT-Folly: 803a9cfd78114b2ec0f140cfa6fa2a6bafb2d685
   RCTRequired: e5dc0c44cb366fc93383a2bffbc190fe821e7293
@@ -562,6 +562,6 @@ SPEC CHECKSUMS:
   Yoga: 5cbf25add73edb290e1067017690f7ebf56c5468
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 29616bc524bd1a7d4dae13625800bee124c3a135
+PODFILE CHECKSUM: b547b0416bc6bafa280ce825989ba76537ef42dd
 
 COCOAPODS: 1.11.3
