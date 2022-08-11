@@ -17,11 +17,11 @@ The Nabla Messaging UI SDK is compatible:
 Install the SDK by running:
 
 ```sh
-yarn add '@nabla/react-native-messaging-ui'
+yarn add @nabla/react-native-messaging-ui @nabla/react-native-messaging-core @nabla/react-native-core
 ```
 or
 ```sh
-npm install --save '@nabla/react-native-messaging-ui' 
+npm install --save @nabla/react-native-messaging-ui @nabla/react-native-messaging-core @nabla/react-native-core 
 ```
 
 And then run `pod install` in your `ios` directory, in order to install the native dependencies.
