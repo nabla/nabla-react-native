@@ -272,4 +272,30 @@ export class NablaMessagingClient {
       },
     );
   }
+
+  /**
+   * Delete a message in the conversation referenced by its identifier.
+   * @param messageId The id of the `Message`.
+   * @param conversationId The id of the `Conversation`.
+   * @param errorCallback The callback called in case of error.
+   * @param successCallback The callback called when message deletion succeeds.
+   */
+  public deleteMessage(
+    messageId: MessageId,
+    conversationId: ConversationId,
+    errorCallback: (error: NablaError) => void,
+    successCallback: () => void,
+  ) {
+    nablaMessagingClientModule.deleteMessage(
+      messageId,
+      conversationId,
+      (error) => {
+        if (error) {
+          errorCallback(mapError(error));
+        } else {
+          successCallback();
+        }
+      },
+    );
+  }
 }

@@ -109,4 +109,36 @@ internal class NablaMessagingClientModule(
                 }
         }
     }
+
+    @ReactMethod
+    fun deleteMessage(
+        messageIdMap: ReadableMap,
+        conversationIdMap: ReadableMap,
+        callback: Callback,
+    ) {
+        val messageId = try {
+            messageIdMap.toMessageId()
+        } catch (e: Exception) {
+            callback(InternalException(e).toMap())
+            return
+        }
+
+        val conversationId = try {
+            conversationIdMap.toConversationId()
+        } catch (e: Exception) {
+            callback(InternalException(e).toMap())
+            return
+        }
+
+        launch {
+            NablaMessagingClient.getInstance()
+                .deleteMessage(conversationId, messageId)
+                .onSuccess {
+                    callback(null)
+                }
+                .onFailure {
+                    callback((it as NablaException).toMap())
+                }
+        }
+    }
 }

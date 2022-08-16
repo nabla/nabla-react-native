@@ -24,6 +24,12 @@ interface NablaMessagingClientModule extends NativeModule {
     replyTo: MessageId | undefined,
     callback: (error: NativeError | undefined) => void,
   ): void;
+
+  deleteMessage(
+    messageId: MessageId,
+    conversationId: ConversationId,
+    callback: (error: NativeError | undefined) => void,
+  ): void;
 }
 
 export const nablaMessagingClientModule: NablaMessagingClientModule =

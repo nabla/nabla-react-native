@@ -8,6 +8,7 @@ final class NablaMessagingClientModule: NSObject {
 
     private var createConversationCancellable: Cancellable?
     private var sendMessageCancellable: Cancellable?
+    private var deleteMessageCancellable: Cancellable?
 
     @objc(createConversation:providerIds:callback:)
     func createConversation(
@@ -30,9 +31,9 @@ final class NablaMessagingClientModule: NSObject {
 
     @objc(sendMessage:conversationId:replyTo:callback:)
     func sendMessage(
-        input: Dictionary<String, Any>,
-        conversationIdMap: Dictionary<String, Any>,
-        replyToMap: Dictionary<String, Any>?,
+        input: [String: Any],
+        conversationIdMap: [String: Any],
+        replyToMap: [String: Any]?,
         callback: @escaping RCTResponseSenderBlock
     ) {
         guard let messageInput = input.messageInput else {
@@ -49,6 +50,40 @@ final class NablaMessagingClientModule: NSObject {
             messageInput,
             replyingToMessageWithId: replyToMap?.asMessageId,
             inConversationWithId: conversationId,
+            handler: { result in
+                switch result {
+                case .success:
+                    callback([NSNull()])
+                case .failure(let error):
+                    callback([error.dictionaryRepresentation])
+                }
+            }
+        )
+    }
+
+    @objc(deleteMessage:conversationId:callback:)
+    func deleteMessage(
+        messageIdMap: [String: Any],
+        conversationIdMap: [String: Any],
+        callback: @escaping RCTResponseSenderBlock
+    ) {
+        guard let conversationId = conversationIdMap.asConversationId else {
+            callback([
+                InternalError.createDictionaryRepresentation(message: "Bad conversationId `\(conversationIdMap)`")
+            ])
+            return
+        }
+
+        guard let messageId = messageIdMap.asMessageId else {
+            callback([
+                InternalError.createDictionaryRepresentation(message: "Bad messageId `\(messageIdMap)`")
+            ])
+            return
+        }
+
+        deleteMessageCancellable = NablaMessagingClient.shared.deleteMessage(
+            withId: messageId,
+            conversationId: conversationId,
             handler: { result in
                 switch result {
                 case .success:
