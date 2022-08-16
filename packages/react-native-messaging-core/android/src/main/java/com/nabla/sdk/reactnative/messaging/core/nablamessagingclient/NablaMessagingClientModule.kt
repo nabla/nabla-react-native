@@ -163,4 +163,28 @@ internal class NablaMessagingClientModule(
                 }
         }
     }
+
+    @ReactMethod
+    fun setIsTyping(
+        isTyping: Boolean,
+        conversationIdMap: ReadableMap,
+        callback: Callback,
+    ) {
+        val conversationId = try {
+            conversationIdMap.toConversationId()
+        } catch (e: Exception) {
+            callback(InternalException(e).toMap())
+            return
+        }
+        
+        launch {
+            NablaMessagingClient.getInstance().setTyping(conversationId, isTyping)
+                .onSuccess {
+                    callback(null)
+                }
+                .onFailure {
+                    callback((it as NablaException).toMap())
+                }
+        }
+    }
 }

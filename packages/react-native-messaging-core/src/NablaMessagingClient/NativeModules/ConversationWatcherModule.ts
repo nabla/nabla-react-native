@@ -1,6 +1,6 @@
 import { NativeModule, NativeModules, Platform } from 'react-native';
-import { NativeError } from '@nabla/react-native-core/lib/internal';
 import { ConversationId } from '../../types';
+import { Callback } from './Callback';
 
 const LINKING_ERROR =
   `The package '@nabla/react-native-messaging-core' doesn't seem to be linked. Make sure: \n\n` +
@@ -11,7 +11,7 @@ const LINKING_ERROR =
 interface ConversationWatcherModule extends NativeModule {
   watchConversation(
     conversationId: ConversationId,
-    callback: (error: NativeError | undefined) => void,
+    callback: Callback<void>,
   ): void;
 
   unsubscribeFromConversation(conversationId: ConversationId): void;

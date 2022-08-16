@@ -1,17 +1,12 @@
 import { NativeModule, NativeModules, Platform } from 'react-native';
-import { NativeError } from '@nabla/react-native-core/lib/internal';
 import { ConversationId, MessageId } from '../../types';
+import { Callback } from './Callback';
 
 const LINKING_ERROR =
   `The package '@nabla/react-native-messaging-core' doesn't seem to be linked. Make sure: \n\n` +
   Platform.select({ ios: '- You have run \'pod install\'\n', default: '' }) +
   '- You rebuilt the app after installing the package\n' +
   '- You are not using Expo managed workflow\n';
-
-type Callback<T> = (
-  error: NativeError | undefined,
-  result: T | undefined,
-) => void;
 
 interface NablaMessagingClientModule extends NativeModule {
   createConversation(
@@ -34,6 +29,12 @@ interface NablaMessagingClientModule extends NativeModule {
   ): void;
 
   markConversationAsSeen(
+    conversationId: ConversationId,
+    callback: Callback<void>,
+  ): void;
+
+  setIsTyping(
+    isTyping: boolean,
     conversationId: ConversationId,
     callback: Callback<void>,
   ): void;

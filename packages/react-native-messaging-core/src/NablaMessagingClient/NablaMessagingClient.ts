@@ -3,6 +3,7 @@ import equal from 'fast-deep-equal/es6';
 import { NablaError } from '@nabla/react-native-core';
 import { NativeError } from '@nabla/react-native-core/lib/internal';
 import {
+  Callback,
   conversationItemsWatcherModule,
   conversationListWatcherModule,
   conversationWatcherModule,
@@ -34,6 +35,19 @@ const conversationItemsEmitter = new NativeEventEmitter(
   conversationItemsWatcherModule,
 );
 const conversationEmitter = new NativeEventEmitter(conversationWatcherModule);
+
+function merge<T>(
+  errorCallback: (error: NablaError) => void,
+  successCallback: (result: T) => void,
+): Callback<T> {
+  return (error, result) => {
+    if (error) {
+      errorCallback(mapError(error));
+    } else if (result) {
+      successCallback(result);
+    }
+  };
+}
 
 /**
  * Main entry-point for Messaging SDK features.
@@ -93,13 +107,7 @@ export class NablaMessagingClient {
     errorCallback: (error: NablaError) => void,
     successCallback: () => void,
   ): void {
-    conversationListWatcherModule.loadMoreConversations((error) => {
-      if (error) {
-        errorCallback(mapError(error));
-      } else {
-        successCallback();
-      }
-    });
+    conversationListWatcherModule.loadMoreConversations(merge(errorCallback, successCallback));
   }
 
   /**
@@ -118,13 +126,7 @@ export class NablaMessagingClient {
     nablaMessagingClientModule.createConversation(
       title,
       providerIds,
-      (error, conversationId) => {
-        if (error) {
-          errorCallback(mapError(error));
-        } else if (conversationId) {
-          successCallback(conversationId);
-        }
-      },
+      merge(errorCallback, successCallback),
     );
   }
 
@@ -235,13 +237,7 @@ export class NablaMessagingClient {
   ) {
     conversationItemsWatcherModule.loadMoreItemsInConversation(
       conversationId,
-      (error) => {
-        if (error) {
-          errorCallback(mapError(error));
-        } else {
-          successCallback();
-        }
-      },
+      merge(errorCallback, successCallback),
     );
   }
 
@@ -264,13 +260,7 @@ export class NablaMessagingClient {
       input.serialize(),
       conversationId,
       replyTo,
-      (error) => {
-        if (error) {
-          errorCallback(mapError(error));
-        } else {
-          successCallback();
-        }
-      },
+      merge(errorCallback, successCallback),
     );
   }
 
@@ -290,13 +280,7 @@ export class NablaMessagingClient {
     nablaMessagingClientModule.deleteMessage(
       messageId,
       conversationId,
-      (error) => {
-        if (error) {
-          errorCallback(mapError(error));
-        } else {
-          successCallback();
-        }
-      },
+      merge(errorCallback, successCallback)
     );
   }
 
@@ -313,13 +297,27 @@ export class NablaMessagingClient {
   ) {
     nablaMessagingClientModule.markConversationAsSeen(
       conversationId,
-      (error) => {
-        if (error) {
-          errorCallback(mapError(error));
-        } else {
-          successCallback();
-        }
-      },
+      merge(errorCallback, successCallback),
+    );
+  }
+
+  /**
+   * Notify the server that the patient is typing in the conversation.
+   * @param isTyping Whether the patient is typing.
+   * @param conversationId The id of the `Conversation`.
+   * @param errorCallback The callback called in case of error.
+   * @param successCallback The callback called when call succeeds.
+   */
+  public setIsTyping(
+    isTyping: boolean,
+    conversationId: ConversationId,
+    errorCallback: (error: NablaError) => void,
+    successCallback: () => void,
+  ) {
+    nablaMessagingClientModule.setIsTyping(
+      isTyping,
+      conversationId,
+      merge(errorCallback, successCallback),
     );
   }
 }

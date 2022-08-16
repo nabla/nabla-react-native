@@ -17,4 +17,8 @@ RCT_EXTERN_METHOD(deleteMessage: (id)messageIdMap
 
 RCT_EXTERN_METHOD(markConversationAsSeen: (id)conversationIdMap
                                 callback: (RCTResponseSenderBlock)callback)
+
+RCT_EXTERN_METHOD(setIsTyping: (BOOL)isTyping
+               conversationId: (id)conversationIdMap
+                     callback: (RCTResponseSenderBlock)callback)
 @end
