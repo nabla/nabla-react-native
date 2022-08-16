@@ -14,4 +14,7 @@ RCT_EXTERN_METHOD(sendMessage: (id)input
 RCT_EXTERN_METHOD(deleteMessage: (id)messageIdMap
                  conversationId: (id)conversationIdMap
                        callback: (RCTResponseSenderBlock)callback)
+
+RCT_EXTERN_METHOD(markConversationAsSeen: (id)conversationIdMap
+                                callback: (RCTResponseSenderBlock)callback)
 @end

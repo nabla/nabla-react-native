@@ -44,7 +44,8 @@ const conversationEmitter = new NativeEventEmitter(conversationWatcherModule);
 export class NablaMessagingClient {
   private static instance: NablaMessagingClient;
 
-  private constructor() {}
+  private constructor() {
+  }
 
   /**
    * Shared Instance to use for all interactions with the messaging SDK.
@@ -288,6 +289,29 @@ export class NablaMessagingClient {
   ) {
     nablaMessagingClientModule.deleteMessage(
       messageId,
+      conversationId,
+      (error) => {
+        if (error) {
+          errorCallback(mapError(error));
+        } else {
+          successCallback();
+        }
+      },
+    );
+  }
+
+  /**
+   * Notify the server that the patient has seen the conversation.
+   * @param conversationId The id of the `Conversation`.
+   * @param errorCallback The callback called in case of error.
+   * @param successCallback The callback called when call succeeds.
+   */
+  public markConversationAsSeen(
+    conversationId: ConversationId,
+    errorCallback: (error: NablaError) => void,
+    successCallback: () => void,
+  ) {
+    nablaMessagingClientModule.markConversationAsSeen(
       conversationId,
       (error) => {
         if (error) {

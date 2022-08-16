@@ -9,6 +9,7 @@ final class NablaMessagingClientModule: NSObject {
     private var createConversationCancellable: Cancellable?
     private var sendMessageCancellable: Cancellable?
     private var deleteMessageCancellable: Cancellable?
+    private var markConversationAsSeenCancellable: Cancellable?
 
     @objc(createConversation:providerIds:callback:)
     func createConversation(
@@ -93,6 +94,29 @@ final class NablaMessagingClientModule: NSObject {
                 }
             }
         )
+    }
+
+    @objc(markConversationAsSeen:callback:)
+    func markConversationAsSeen(
+        conversationIdMap: [String: Any],
+        callback: @escaping RCTResponseSenderBlock
+    ) {
+
+        guard let conversationId = conversationIdMap.asConversationId else {
+            callback([
+                InternalError.createDictionaryRepresentation(message: "Bad conversationId `\(conversationIdMap)`")
+            ])
+            return
+        }
+
+        markConversationAsSeenCancellable = NablaMessagingClient.shared.markConversationAsSeen(conversationId, handler: { result in
+            switch result {
+            case .success:
+                callback([NSNull()])
+            case .failure(let error):
+                callback([error.dictionaryRepresentation])
+            }
+        })
     }
 
     @objc class func requiresMainQueueSetup() -> Bool {

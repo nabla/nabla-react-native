@@ -4,6 +4,7 @@
 
 ### Added
 
+- `NablaMessagingClient.markConversationAsSeen` to notify the server that the patient has seen the conversation.
 - `NablaMessagingClient.deleteMessage` to delete a message in a conversation.
 - `NablaMessagingClient.watchItemsOfConversation` to watch conversation items with a given `conversationId`.
 - `NablaMessagingClient.watchConversation` to watch a conversation with a given id.

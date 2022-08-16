@@ -141,4 +141,26 @@ internal class NablaMessagingClientModule(
                 }
         }
     }
+
+    @ReactMethod
+    fun markConversationAsSeen(
+        conversationIdMap: ReadableMap,
+        callback: Callback,
+    ) {
+        val conversationId = try {
+            conversationIdMap.toConversationId()
+        } catch (e: Exception) {
+            callback(InternalException(e).toMap())
+            return
+        }
+        launch {
+            NablaMessagingClient.getInstance().markConversationAsRead(conversationId)
+                .onSuccess {
+                    callback(null)
+                }
+                .onFailure {
+                    callback((it as NablaException).toMap())
+                }
+        }
+    }
 }
