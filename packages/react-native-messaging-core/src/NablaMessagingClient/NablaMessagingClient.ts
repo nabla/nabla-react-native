@@ -1,4 +1,15 @@
+import { NativeEventEmitter } from 'react-native';
+import equal from 'fast-deep-equal/es6';
+import { NablaError } from '@nabla/react-native-core';
+import { NativeError } from '@nabla/react-native-core/lib/internal';
 import {
+  conversationItemsWatcherModule,
+  conversationListWatcherModule,
+  conversationWatcherModule,
+  nablaMessagingClientModule,
+} from './NativeModules';
+import {
+  Conversation,
   ConversationId,
   ConversationItems,
   ConversationList,
@@ -6,22 +17,15 @@ import {
   MessageInput,
   NablaEventSubscription,
 } from '../types';
-import { NativeError } from '@nabla/react-native-core/lib/internal';
-import { NativeEventEmitter } from 'react-native';
-import { nablaMessagingClientModule } from './NativeModules/NablaMessagingClientModule';
 import {
-  mapConversationList,
-  NativeConversationList,
-} from './types/NativeConversationList';
-import { NablaError } from '@nabla/react-native-core';
-import { mapError } from './types/errorMapper';
-import { conversationListWatcherModule } from './NativeModules/ConversationListWatcherModule';
-import { conversationItemsWatcherModule } from './NativeModules/ConversationItemsWatcherModule';
-import {
+  mapConversation,
   mapConversationItems,
+  mapConversationList,
+  mapError,
+  NativeConversation,
   NativeConversationItems,
-} from './types/NativeConversationItems';
-import equal from 'fast-deep-equal/es6';
+  NativeConversationList,
+} from './types';
 
 const conversationListEmitter = new NativeEventEmitter(
   conversationListWatcherModule,
@@ -29,6 +33,7 @@ const conversationListEmitter = new NativeEventEmitter(
 const conversationItemsEmitter = new NativeEventEmitter(
   conversationItemsWatcherModule,
 );
+const conversationEmitter = new NativeEventEmitter(conversationWatcherModule);
 
 /**
  * Main entry-point for Messaging SDK features.
@@ -123,6 +128,50 @@ export class NablaMessagingClient {
   }
 
   /**
+   * Watch the conversation referenced by its identifier.
+   * @param conversationId The id of the `Conversation`.
+   * @param errorCallback The callback called in case of error.
+   * @param successCallback The callback called when the conversation is updated.
+   */
+  public async watchConversation(
+    conversationId: ConversationId,
+    errorCallback: (error: NablaError) => void,
+    successCallback: (conversation: Conversation) => void,
+  ): Promise<NablaEventSubscription> {
+    return new Promise((resolve, reject) => {
+      const subscription = new NablaEventSubscription(
+        conversationEmitter.addListener(
+          'watchConversationError',
+          (error: NativeError & { id: ConversationId }) => {
+            if (error.id === conversationId) {
+              errorCallback(mapError(error));
+            }
+          },
+        ),
+        conversationEmitter.addListener(
+          'watchConversationUpdated',
+          (data: NativeConversation) => {
+            if (equal(data.id, conversationId)) {
+              successCallback(mapConversation(data));
+            }
+          },
+        ),
+        () => {
+          conversationWatcherModule.unsubscribeFromConversation(conversationId);
+        },
+      );
+      conversationWatcherModule.watchConversation(conversationId, (error) => {
+        if (error) {
+          subscription.remove();
+          reject(mapError(error));
+        } else {
+          resolve(subscription);
+        }
+      });
+    });
+  }
+
+  /**
    * Watch the list of items in the conversation referenced by its identifier.
    * @param conversationId The id of the `Conversation`.
    * @param errorCallback The callback called in case of error.
@@ -182,7 +231,7 @@ export class NablaMessagingClient {
     conversationId: ConversationId,
     errorCallback: (error: NablaError) => void,
     successCallback: () => void,
-  ): void {
+  ) {
     conversationItemsWatcherModule.loadMoreItemsInConversation(
       conversationId,
       (error) => {

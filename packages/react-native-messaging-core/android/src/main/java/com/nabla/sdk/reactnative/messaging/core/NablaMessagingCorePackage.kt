@@ -6,6 +6,7 @@ import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.uimanager.ViewManager
 import com.nabla.sdk.reactnative.messaging.core.nablamessagingclient.ConversationItemsWatcherModule
 import com.nabla.sdk.reactnative.messaging.core.nablamessagingclient.ConversationListWatcherModule
+import com.nabla.sdk.reactnative.messaging.core.nablamessagingclient.ConversationWatcherModule
 import com.nabla.sdk.reactnative.messaging.core.nablamessagingclient.NablaMessagingClientModule
 
 class NablaMessagingCorePackage : ReactPackage {
@@ -21,6 +22,7 @@ class NablaMessagingCorePackage : ReactPackage {
             NablaMessagingClientModule(reactContext),
             ConversationListWatcherModule(reactContext),
             ConversationItemsWatcherModule(reactContext),
+            ConversationWatcherModule(reactContext),
         )
     }
 }

@@ -111,8 +111,8 @@ internal class ConversationItemsWatcherModule(
         if (count == 0) {
             conversationItemsWatchersJobs.forEach {
                 it.value.first.cancel()
-                conversationItemsWatchersJobs.remove(it.key)
             }
+            conversationItemsWatchersJobs.clear()
         }
     }
 
