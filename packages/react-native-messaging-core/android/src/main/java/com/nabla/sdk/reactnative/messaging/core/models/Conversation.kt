@@ -6,11 +6,9 @@ import com.facebook.react.bridge.ReadableMap
 import com.nabla.sdk.messaging.core.domain.entity.Conversation
 
 @JvmName("toConversationMapArray")
-internal fun List<Conversation>.toMapArray(): ReadableArray {
-    return Arguments.createArray().apply {
-        forEach { conversation ->
-            pushMap(conversation.toMap())
-        }
+internal fun List<Conversation>.toMapArray(): ReadableArray = Arguments.createArray().apply {
+    forEach { conversation ->
+        pushMap(conversation.toMap())
     }
 }
 

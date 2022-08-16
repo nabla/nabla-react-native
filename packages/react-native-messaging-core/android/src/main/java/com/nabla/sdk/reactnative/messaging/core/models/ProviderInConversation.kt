@@ -14,10 +14,8 @@ internal fun List<ProviderInConversation>.toMapArray(): ReadableArray {
     }
 }
 
-internal fun ProviderInConversation.toMap(): ReadableMap {
-    return Arguments.createMap().apply {
-        putMap("provider", provider.toMap())
-        putString("typingAt", typingAt?.toString())
-        putString("seenUntil", seenUntil?.toString())
-    }
+internal fun ProviderInConversation.toMap(): ReadableMap = Arguments.createMap().apply {
+    putMap("provider", provider.toMap())
+    putString("typingAt", typingAt?.toString())
+    putString("seenUntil", seenUntil?.toString())
 }

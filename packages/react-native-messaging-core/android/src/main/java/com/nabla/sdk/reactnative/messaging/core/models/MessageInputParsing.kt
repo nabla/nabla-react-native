@@ -7,7 +7,7 @@ import com.nabla.sdk.messaging.core.domain.entity.FileLocal
 import com.nabla.sdk.messaging.core.domain.entity.FileSource
 import com.nabla.sdk.messaging.core.domain.entity.MessageInput
 
-internal fun ReadableMap.textMessageInpuOrThrow(): MessageInput.Text {
+internal fun ReadableMap.textMessageInputOrThrow(): MessageInput.Text {
     val text = getString("value") ?: throw IllegalStateException("Missing text value")
 
     return MessageInput.Text(text)

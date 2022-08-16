@@ -4,6 +4,8 @@ import com.facebook.react.ReactPackage
 import com.facebook.react.bridge.NativeModule
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.uimanager.ViewManager
+import com.nabla.sdk.reactnative.messaging.core.nablamessagingclient.ConversationItemsWatcherModule
+import com.nabla.sdk.reactnative.messaging.core.nablamessagingclient.ConversationListWatcherModule
 import com.nabla.sdk.reactnative.messaging.core.nablamessagingclient.NablaMessagingClientModule
 
 class NablaMessagingCorePackage : ReactPackage {
@@ -17,6 +19,8 @@ class NablaMessagingCorePackage : ReactPackage {
             MutableList<NativeModule> {
         return mutableListOf(
             NablaMessagingClientModule(reactContext),
+            ConversationListWatcherModule(reactContext),
+            ConversationItemsWatcherModule(reactContext),
         )
     }
 }

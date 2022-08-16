@@ -4,6 +4,8 @@
 
 ### Added
 
+- `NablaMessagingClient.watchItemsOfConversation` to watch conversation items with a given `conversationId`.
+
 ### Changed
 
 - `Conversation.id` is now a `ConversationId` type instead of a `string` type. 
@@ -43,7 +45,7 @@
 - `@nabla/react-native-core`
   - Android: `com.nabla.nabla-android:core:1.0.0-alpha09`
   - iOS: `spec.dependency 'NablaCore', '1.0.0-alpha14'`
-  
+
 ## [1.0.0-alpha01] - 2022-08-08
 
 ### Added

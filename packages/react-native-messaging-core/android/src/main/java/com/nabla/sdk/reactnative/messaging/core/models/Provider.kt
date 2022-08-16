@@ -4,12 +4,10 @@ import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReadableMap
 import com.nabla.sdk.core.domain.entity.Provider
 
-internal fun Provider.toMap(): ReadableMap {
-    return Arguments.createMap().apply {
-        putString("id", id.toString())
-        putString("prefix", prefix)
-        putString("firstName", firstName)
-        putString("lastName", lastName)
-        putString("avatarUrl", avatar?.url.toString())
-    }
+internal fun Provider.toMap(): ReadableMap = Arguments.createMap().apply {
+    putString("id", id.toString())
+    putString("prefix", prefix)
+    putString("firstName", firstName)
+    putString("lastName", lastName)
+    avatar?.let {  putString("avatarURL", it.url.toString())}
 }

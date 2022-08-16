@@ -1,6 +1,6 @@
 import { NativeModule, NativeModules, Platform } from 'react-native';
 import { NativeError } from '@nabla/react-native-core/lib/internal';
-import { ConversationId, MessageId } from '../types';
+import { ConversationId, MessageId } from '../../types';
 
 const LINKING_ERROR =
   `The package '@nabla/react-native-messaging-core' doesn't seem to be linked. Make sure: \n\n` +
@@ -9,10 +9,6 @@ const LINKING_ERROR =
   '- You are not using Expo managed workflow\n';
 
 interface NablaMessagingClientModule extends NativeModule {
-  loadMoreConversations(
-    callback: (error: NativeError | undefined) => void,
-  ): void;
-
   createConversation(
     title: String | undefined,
     providerIds: String[] | undefined,

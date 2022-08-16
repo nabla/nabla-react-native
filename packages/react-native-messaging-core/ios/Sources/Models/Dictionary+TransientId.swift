@@ -3,11 +3,11 @@ import NablaMessagingCore
 import NablaCore
 
 extension Dictionary where Key == String, Value: Any {
-    public var asConversationId: UUID? {
+    public var asConversationId: ConversationId? {
         asTransientId
     }
 
-    var asMessageId: UUID? {
+    var asMessageId: MessageId? {
         asTransientId
     }
 

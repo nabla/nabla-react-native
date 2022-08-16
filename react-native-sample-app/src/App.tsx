@@ -2,14 +2,15 @@ import * as React from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 
 import { Appbar } from 'react-native-paper';
-import { NablaConversationListView } from '@nabla/react-native-messaging-ui';
-import { NablaClient } from '@nabla/react-native-core';
 import {
-  AuthTokens,
+  NablaConversationListView,
+  NablaMessagingUI,
+} from '@nabla/react-native-messaging-ui';
+import { AuthTokens, NablaClient } from '@nabla/react-native-core';
+import {
   getStableId,
   NablaMessagingClient,
 } from '@nabla/react-native-messaging-core';
-import { NablaMessagingUI } from '@nabla/react-native-messaging-ui';
 
 const apiKey = 'YOUR_API_KEY';
 const accessToken = 'yourAccessToken';
@@ -36,7 +37,9 @@ export default function App() {
         console.log({ ...error });
       },
       (conversationId) => {
-        console.log(`createConversationSuccess id: ${getStableId(conversationId)}`);
+        console.log(
+          `createConversationSuccess id: ${getStableId(conversationId)}`,
+        );
       },
     );
   };
@@ -47,7 +50,7 @@ export default function App() {
         <Appbar.Header style={styles.appbarHeaderStyle}>
           <Appbar.Content
             color={Platform.OS === 'ios' ? 'black' : 'white'}
-            title='Medical chat'
+            title="Medical chat"
           />
           <Appbar.Action
             icon={createConversationIcon}
