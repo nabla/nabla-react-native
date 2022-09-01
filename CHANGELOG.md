@@ -16,6 +16,8 @@
 
 ### Fixed
 
+- Fixed `ConversationItem` type definition by adding `createdAt` property to `ConversationMessage`.
+
 ### Versions
 
 - `@nabla/react-native-messaging-ui`

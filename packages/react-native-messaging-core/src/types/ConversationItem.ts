@@ -83,8 +83,7 @@ export type ConversationMessage = {
   content: ConversationMessageContent;
 };
 
-export type ConversationItem =
-  | ({
-      createdAt: Date;
-    } & ConversationActivity)
-  | ConversationMessage;
+export type ConversationItem = { createdAt: Date } & (
+  | ConversationActivity
+  | ConversationMessage
+);
