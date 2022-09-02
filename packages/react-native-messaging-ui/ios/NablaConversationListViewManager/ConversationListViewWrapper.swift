@@ -28,6 +28,6 @@ final class ConversationListViewWrapper: UIView {
 
 extension ConversationListViewWrapper: ConversationListDelegate {
     func conversationList(didSelect conversation: Conversation) {
-        onConversationSelected?(["conversationId": conversation.id.uuidString])
+        onConversationSelected?(["conversationId": conversation.id.dictionaryRepresentation])
     }
 }

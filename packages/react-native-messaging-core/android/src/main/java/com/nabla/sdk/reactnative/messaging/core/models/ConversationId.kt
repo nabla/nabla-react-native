@@ -5,7 +5,7 @@ import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReadableMap
 import com.nabla.sdk.messaging.core.domain.entity.ConversationId
 
-internal fun ConversationId.toMap(): ReadableMap {
+fun ConversationId.toMap(): ReadableMap {
     return Arguments.createMap().also {
         when (this) {
             is ConversationId.Local -> {

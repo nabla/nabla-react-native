@@ -11,6 +11,7 @@ import com.nabla.sdk.messaging.ui.helper.ConversationListViewModelFactory
 import com.nabla.sdk.messaging.ui.scene.conversations.ConversationListView
 import com.nabla.sdk.messaging.ui.scene.conversations.ConversationListViewModel
 import com.nabla.sdk.messaging.ui.scene.conversations.bindViewModel
+import com.nabla.sdk.reactnative.messaging.core.models.toMap
 import com.nabla.sdk.reactnative.messaging.ui.utils.NativeViewWrapper
 
 internal class NablaConversationListViewManager : SimpleViewManager<NativeViewWrapper>() {
@@ -31,7 +32,7 @@ internal class NablaConversationListViewManager : SimpleViewManager<NativeViewWr
             viewModel = viewModel,
             onConversationClicked = { conversationId ->
                 val event = Arguments.createMap().apply {
-                    putString("conversationId", conversationId.stableId.toString())
+                    putMap("conversationId", conversationId.toMap())
                 }
                 reactContext
                     .getJSModule(RCTEventEmitter::class.java)

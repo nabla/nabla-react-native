@@ -3,7 +3,7 @@ import NablaMessagingCore
 
 public typealias ConversationId = UUID
 
-extension ConversationId {
+public extension ConversationId {
     var dictionaryRepresentation: [String: Any] {
         ["type": "Remote", "remoteId": uuidString]
     }

@@ -16,6 +16,7 @@
 
 ### Fixed
 
+- Fixed `onConversationSelected` callback param in `ConversationListView` to send a `ConversationId` instead of a `string`.
 - Fixed `ConversationItem` type definition by adding `createdAt` property to `ConversationMessage`.
 
 ### Versions
