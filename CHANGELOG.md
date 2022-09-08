@@ -4,6 +4,29 @@
 
 ### Added
 
+### Changed
+
+### Fixed
+
+### Versions
+
+- `@nabla/react-native-video-call`
+  - Android: `com.nabla.nabla-android:video-call:1.0.0-alpha10`
+  - iOS: `spec.dependency 'NablaVideoCall', '1.0.0-alpha16'`
+- `@nabla/react-native-messaging-ui`
+  - Android: `com.nabla.nabla-android:messaging-ui:1.0.0-alpha10`
+  - iOS: `spec.dependency 'NablaMessagingUI', '1.0.0-alpha16'`
+- `@nabla/react-native-messaging-core`
+  - Android: `com.nabla.nabla-android:messaging-core:1.0.0-alpha10`
+  - iOS: `spec.dependency 'NablaMessagingCore', '1.0.0-alpha16'`
+- `@nabla/react-native-core`
+  - Android: `com.nabla.nabla-android:core:1.0.0-alpha10`
+  - iOS: `spec.dependency 'NablaCore', '1.0.0-alpha16'`
+
+## [1.0.0-alpha03] - 2022-09-08
+
+### Added
+
 - Created `@nabla/react-native-video-call` package
 - `NablaMessagingClient.setIsTyping` to notify the server that the patient is typing in the conversation.
 - `NablaMessagingClient.markConversationAsSeen` to notify the server that the patient has seen the conversation.
