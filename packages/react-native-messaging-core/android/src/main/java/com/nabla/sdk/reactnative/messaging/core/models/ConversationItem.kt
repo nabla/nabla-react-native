@@ -23,6 +23,26 @@ private fun ConversationItem.toMap(): ReadableMap {
                 it.putString("id", id.value.toString())
                 it.putMap("activity", content.toMap())
             }
+            is Message.LivekitRoom -> {
+                id.remoteId?.let { id -> it.putString("id", id.toString()) }
+                it.putString("type", "VideoCallActionRequest")
+                it.putMap("sender", author.toMap())
+                it.putMap("videoCallActionRequest", Arguments.createMap().also { videoCallActionRequestMap ->
+                when (livekitRoomStatus) {
+                    LivekitRoomStatus.Closed -> {
+                        videoCallActionRequestMap.putString("status", "closed")
+                    }
+                    is LivekitRoomStatus.Open -> {
+                        videoCallActionRequestMap.putString("status", "open")
+                        videoCallActionRequestMap.putMap("room", Arguments.createMap().also { roomMap ->
+                            roomMap.putString("id", livekitRoomId.toString())
+                            roomMap.putString("token", (livekitRoomStatus as LivekitRoomStatus.Open).token)
+                            roomMap.putString("url", (livekitRoomStatus as LivekitRoomStatus.Open).url)
+                        })
+                    }
+                }
+                })
+            }
             is Message -> {
                 it.putString("type", "ConversationMessage")
                 it.putMap("id", id.toMap())

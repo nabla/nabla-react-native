@@ -1,9 +1,8 @@
 import { NativeEventEmitter } from 'react-native';
 import equal from 'fast-deep-equal/es6';
 import { NablaError } from '@nabla/react-native-core';
-import { NativeError } from '@nabla/react-native-core/lib/internal';
+import { NativeError, merge } from '@nabla/react-native-core/lib/internal';
 import {
-  Callback,
   conversationItemsWatcherModule,
   conversationListWatcherModule,
   conversationWatcherModule,
@@ -36,19 +35,6 @@ const conversationItemsEmitter = new NativeEventEmitter(
 );
 const conversationEmitter = new NativeEventEmitter(conversationWatcherModule);
 
-function merge<T>(
-  errorCallback: (error: NablaError) => void,
-  successCallback: (result: T) => void,
-): Callback<T> {
-  return (error, result) => {
-    if (error) {
-      errorCallback(mapError(error));
-    } else if (result) {
-      successCallback(result);
-    }
-  };
-}
-
 /**
  * Main entry-point for Messaging SDK features.
  *
@@ -58,8 +44,7 @@ function merge<T>(
 export class NablaMessagingClient {
   private static instance: NablaMessagingClient;
 
-  private constructor() {
-  }
+  private constructor() {}
 
   /**
    * Shared Instance to use for all interactions with the messaging SDK.
@@ -70,6 +55,10 @@ export class NablaMessagingClient {
     }
 
     return NablaMessagingClient.instance;
+  }
+
+  public static async initializeMessagingModule() {
+    await nablaMessagingClientModule.initializeMessagingModule();
   }
 
   /**
@@ -107,7 +96,9 @@ export class NablaMessagingClient {
     errorCallback: (error: NablaError) => void,
     successCallback: () => void,
   ): void {
-    conversationListWatcherModule.loadMoreConversations(merge(errorCallback, successCallback));
+    conversationListWatcherModule.loadMoreConversations(
+      merge(mapError, errorCallback, successCallback),
+    );
   }
 
   /**
@@ -126,7 +117,7 @@ export class NablaMessagingClient {
     nablaMessagingClientModule.createConversation(
       title,
       providerIds,
-      merge(errorCallback, successCallback),
+      merge(mapError, errorCallback, successCallback),
     );
   }
 
@@ -237,7 +228,7 @@ export class NablaMessagingClient {
   ) {
     conversationItemsWatcherModule.loadMoreItemsInConversation(
       conversationId,
-      merge(errorCallback, successCallback),
+      merge(mapError, errorCallback, successCallback),
     );
   }
 
@@ -260,7 +251,7 @@ export class NablaMessagingClient {
       input.serialize(),
       conversationId,
       replyTo,
-      merge(errorCallback, successCallback),
+      merge(mapError, errorCallback, successCallback),
     );
   }
 
@@ -280,7 +271,7 @@ export class NablaMessagingClient {
     nablaMessagingClientModule.deleteMessage(
       messageId,
       conversationId,
-      merge(errorCallback, successCallback)
+      merge(mapError, errorCallback, successCallback),
     );
   }
 
@@ -297,7 +288,7 @@ export class NablaMessagingClient {
   ) {
     nablaMessagingClientModule.markConversationAsSeen(
       conversationId,
-      merge(errorCallback, successCallback),
+      merge(mapError, errorCallback, successCallback),
     );
   }
 
@@ -317,7 +308,7 @@ export class NablaMessagingClient {
     nablaMessagingClientModule.setIsTyping(
       isTyping,
       conversationId,
-      merge(errorCallback, successCallback),
+      merge(mapError, errorCallback, successCallback),
     );
   }
 }

@@ -13,6 +13,26 @@ export type ConversationActivity = {
   };
 };
 
+export type VideoCallRoom = {
+  id: string;
+  token: string;
+  url: string;
+};
+
+export type VideoCallActionRequest = {
+  id: string;
+  type: 'VideoCallActionRequest';
+  sender: ConversationItemSender;
+  videoCallActionRequest:
+    | {
+    status: 'closed';
+  }
+    | {
+    status: 'open';
+    room: VideoCallRoom;
+  };
+};
+
 type DeletedMessageItemContent = {
   type: 'DeletedMessageItem';
 };
@@ -67,7 +87,7 @@ type ConversationMessageContent =
   | AudioMessageItemContent
   | DocumentMessageItemContent;
 
-export type ConversationMessageSender =
+export type ConversationItemSender =
   | { type: 'Patient' }
   | { type: 'Provider'; provider: Provider }
   | { type: 'System'; system: { name: string; avatarURL: string | undefined } }
@@ -77,7 +97,7 @@ export type ConversationMessageSender =
 export type ConversationMessage = {
   id: MessageId;
   type: 'ConversationMessage';
-  sender: ConversationMessageSender;
+  sender: ConversationItemSender;
   sendingState: 'sent' | 'toBeSent' | 'sending' | 'failed';
   replyTo: ConversationMessage | undefined;
   content: ConversationMessageContent;
@@ -86,4 +106,5 @@ export type ConversationMessage = {
 export type ConversationItem = { createdAt: Date } & (
   | ConversationActivity
   | ConversationMessage
-);
+  | VideoCallActionRequest
+  );

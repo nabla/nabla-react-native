@@ -8,7 +8,7 @@ const LINKING_ERROR =
   '- You are not using Expo managed workflow\n';
 
 interface NablaClientModule extends NativeModule {
-  initialize(apiKey: string, networkConfiguration?: NetworkConfiguration): void;
+  initialize(apiKey: string, networkConfiguration?: NetworkConfiguration): Promise<void>;
   willAuthenticateUser(userId: string): void;
   provideTokens(refreshToken: string, accessToken: string): void;
 }

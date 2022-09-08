@@ -1,12 +1,12 @@
 package com.nabla.sdk.reactnative.messaging.core.nablamessagingclient
 
-import com.benasher44.uuid.Uuid
 import com.facebook.react.bridge.*
 import com.facebook.react.modules.core.DeviceEventManagerModule
+import com.nabla.sdk.core.NablaClient
 import com.nabla.sdk.core.domain.entity.InternalException
 import com.nabla.sdk.core.domain.entity.NablaException
-import com.nabla.sdk.messaging.core.NablaMessagingClient
 import com.nabla.sdk.messaging.core.domain.entity.ConversationId
+import com.nabla.sdk.messaging.core.messagingClient
 import com.nabla.sdk.reactnative.messaging.core.models.toConversationId
 import com.nabla.sdk.reactnative.messaging.core.models.toMap
 import kotlinx.coroutines.*
@@ -37,7 +37,7 @@ internal class ConversationWatcherModule(
             return
         }
         val watchConversationJob =
-            NablaMessagingClient.getInstance().watchConversation(conversationId)
+            NablaClient.getInstance().messagingClient.watchConversation(conversationId)
                 .onEach {
                     sendUpdate(it.toMap())
                 }

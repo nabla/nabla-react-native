@@ -9,16 +9,29 @@ struct SharedNetworkConfiguration: NetworkConfiguration {
     let session: URLSession = .shared
 }
 
+public enum NablaModules {
+    static var modules: [Module] = []
+    
+    public static func addModule(_ module: Module) {
+        modules.append(module)
+    }
+}
+
 @objc(NablaClientModule)
 final class NablaClientModule: RCTEventEmitter {
 
-    @objc(initialize:networkConfiguration:)
-    func initialize(apiKey: String, networkConfiguration: Dictionary<String, Any>?) {
+    @objc(initialize:networkConfiguration:resolver:rejecter:)
+    func initialize(
+        apiKey: String,
+        networkConfiguration: [String: Any]?,
+        resolver: RCTPromiseResolveBlock,
+        rejecter _: RCTPromiseRejectBlock
+    ) {
 
         if let networkConfiguration = networkConfiguration,
-            let scheme = networkConfiguration["scheme"] as? String,
-            let domain = networkConfiguration["domain"] as? String,
-            let path = networkConfiguration["path"] as? String {
+           let scheme = networkConfiguration["scheme"] as? String,
+           let domain = networkConfiguration["domain"] as? String,
+           let path = networkConfiguration["path"] as? String {
 
             let configuration = SharedNetworkConfiguration(
                 domain: domain,
@@ -26,10 +39,11 @@ final class NablaClientModule: RCTEventEmitter {
                 port: networkConfiguration["port"] as? Int,
                 path: path
             )
-            NablaClient.initialize(apiKey: apiKey, networkConfiguration: configuration)
+            NablaClient.initialize(apiKey: apiKey, networkConfiguration: configuration, modules: NablaModules.modules)
         } else {
-            NablaClient.initialize(apiKey: apiKey)
+            NablaClient.initialize(apiKey: apiKey, modules: NablaModules.modules)
         }
+        resolver(NSNull())
     }
 
     @objc(willAuthenticateUser:)

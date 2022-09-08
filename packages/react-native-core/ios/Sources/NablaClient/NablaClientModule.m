@@ -4,7 +4,9 @@
 @interface RCT_EXTERN_MODULE(NablaClientModule, RCTEventEmitter)
 
 RCT_EXTERN_METHOD(initialize: (NSString *)apiKey
-        networkConfiguration: (NSDictionary *)networkConfiguration)
+        networkConfiguration: (NSDictionary *)networkConfiguration
+                    resolver: (RCTPromiseResolveBlock)resolve
+                    rejecter: (RCTPromiseRejectBlock)reject)
 
 RCT_EXTERN_METHOD(willAuthenticateUser: (NSString *)userId)
 

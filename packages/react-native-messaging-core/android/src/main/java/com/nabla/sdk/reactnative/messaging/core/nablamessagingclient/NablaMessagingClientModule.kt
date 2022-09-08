@@ -2,20 +2,14 @@ package com.nabla.sdk.reactnative.messaging.core.nablamessagingclient
 
 import com.benasher44.uuid.Uuid
 import com.facebook.react.bridge.*
+import com.nabla.sdk.core.NablaClient
 import com.nabla.sdk.core.domain.entity.InternalException
 import com.nabla.sdk.core.domain.entity.NablaException
-import com.nabla.sdk.messaging.core.NablaMessagingClient
+import com.nabla.sdk.messaging.core.NablaMessagingModule
+import com.nabla.sdk.messaging.core.messagingClient
+import com.nabla.sdk.reactnative.core.nablaclient.NablaClientModule
 import com.nabla.sdk.reactnative.messaging.core.models.*
-import com.nabla.sdk.reactnative.messaging.core.models.audioMessageInputOrThrow
-import com.nabla.sdk.reactnative.messaging.core.models.documentMessageInputOrThrow
-import com.nabla.sdk.reactnative.messaging.core.models.imageMessageInputOrThrow
-import com.nabla.sdk.reactnative.messaging.core.models.toMap
-import com.nabla.sdk.reactnative.messaging.core.models.videoMessageInputOrThrow
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 internal class NablaMessagingClientModule(
     reactContext: ReactApplicationContext,
@@ -30,6 +24,12 @@ internal class NablaMessagingClientModule(
     }
 
     @ReactMethod
+    fun initializeMessagingModule(promise: Promise) {
+        NablaClientModule.addModule(NablaMessagingModule())
+        promise.resolve(null)
+    }
+
+    @ReactMethod
     fun createConversation(
         title: String?,
         providerIds: ReadableArray?,
@@ -39,7 +39,7 @@ internal class NablaMessagingClientModule(
             (0 until it.size()).map { index -> Uuid.fromString(it.getString(index)) }
         }
         this.launch {
-            NablaMessagingClient.getInstance()
+            NablaClient.getInstance().messagingClient
                 .createConversation(
                     title,
                     providerUuids
@@ -95,7 +95,7 @@ internal class NablaMessagingClientModule(
         }
 
         launch {
-            NablaMessagingClient.getInstance()
+            NablaClient.getInstance().messagingClient
                 .sendMessage(
                     messageInput,
                     conversationId,
@@ -131,7 +131,7 @@ internal class NablaMessagingClientModule(
         }
 
         launch {
-            NablaMessagingClient.getInstance()
+            NablaClient.getInstance().messagingClient
                 .deleteMessage(conversationId, messageId)
                 .onSuccess {
                     callback(null)
@@ -154,7 +154,8 @@ internal class NablaMessagingClientModule(
             return
         }
         launch {
-            NablaMessagingClient.getInstance().markConversationAsRead(conversationId)
+            NablaClient.getInstance().messagingClient
+                .markConversationAsRead(conversationId)
                 .onSuccess {
                     callback(null)
                 }
@@ -176,9 +177,10 @@ internal class NablaMessagingClientModule(
             callback(InternalException(e).toMap())
             return
         }
-        
+
         launch {
-            NablaMessagingClient.getInstance().setTyping(conversationId, isTyping)
+            NablaClient.getInstance().messagingClient
+                .setTyping(conversationId, isTyping)
                 .onSuccess {
                     callback(null)
                 }

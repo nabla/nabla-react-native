@@ -2,6 +2,9 @@
 
 @interface RCT_EXTERN_MODULE(NablaMessagingClientModule, NSObject)
 
+RCT_EXTERN_METHOD(initializeMessagingModule: (RCTPromiseResolveBlock)resolve
+                                   rejecter: (RCTPromiseRejectBlock)reject)
+
 RCT_EXTERN_METHOD(createConversation: (NSString *)title
                          providerIds: (NSArray<NSString *> *)providerIds
                             callback: (RCTResponseSenderBlock)callback)

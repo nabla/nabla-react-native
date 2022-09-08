@@ -14,6 +14,14 @@ extension ConversationItem {
             return result
         }
 
+        if let videoCallActionRequest = self as? VideoCallActionRequest {
+            result["id"] = id.uuidString
+            result["type"] = "VideoCallActionRequest"
+            result["sender"] = videoCallActionRequest.sender.dictionaryRepresentation
+            result["videoCallActionRequest"] = videoCallActionRequest.status.dictionaryRepresentation
+            return result
+        }
+
         if let conversationMessage = self as? ConversationMessage {
             result["id"] = id.dictionaryRepresentation
             result["type"] = "ConversationMessage"

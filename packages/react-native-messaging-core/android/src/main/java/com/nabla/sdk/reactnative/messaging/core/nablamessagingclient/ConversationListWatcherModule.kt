@@ -3,8 +3,9 @@ package com.nabla.sdk.reactnative.messaging.core.nablamessagingclient
 import androidx.annotation.CheckResult
 import com.facebook.react.bridge.*
 import com.facebook.react.modules.core.DeviceEventManagerModule
+import com.nabla.sdk.core.NablaClient
 import com.nabla.sdk.core.domain.entity.NablaException
-import com.nabla.sdk.messaging.core.NablaMessagingClient
+import com.nabla.sdk.messaging.core.messagingClient
 import com.nabla.sdk.reactnative.messaging.core.models.toMap
 import com.nabla.sdk.reactnative.messaging.core.models.toMapArray
 import kotlinx.coroutines.*
@@ -31,7 +32,7 @@ internal class ConversationListWatcherModule(
     @ReactMethod
     fun addListener(eventName: String) {
         if (eventName == WATCH_CONVERSATIONS_UPDATED || eventName == WATCH_CONVERSATIONS_ERROR) {
-            watchConversationJob = NablaMessagingClient.getInstance().watchConversations()
+            watchConversationJob = NablaClient.getInstance().messagingClient.watchConversations()
                 .onEach {
                     loadMoreConversationsCallback = it.loadMore
                     val params = Arguments.createMap().apply {

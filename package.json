@@ -3,10 +3,11 @@
   "private": true,
   "scripts": {
     "prepare": "yarn compile",
-    "compile": "yarn compile-core && yarn compile-messaging-core && yarn compile-messaging-ui",
+    "compile": "yarn compile-core && yarn compile-messaging-core && yarn compile-messaging-ui && yarn compile-video-call",
     "compile-core": "yarn --cwd packages/react-native-core compile",
     "compile-messaging-core": "yarn --cwd packages/react-native-messaging-core compile",
     "compile-messaging-ui": "yarn --cwd packages/react-native-messaging-ui compile",
+    "compile-video-call": "yarn --cwd packages/react-native-video-call compile",
     "test": "yarn test-core && yarn test-messaging-core && yarn test-messaging-ui",
     "test-core": "yarn --cwd packages/react-native-core test",
     "test-messaging-core": "yarn --cwd packages/react-native-messaging-core test",

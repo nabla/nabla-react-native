@@ -1,4 +1,5 @@
 import Foundation
+import NablaCore
 import NablaMessagingCore
 import NablaMessagingUI
 import UIKit
@@ -6,7 +7,7 @@ import UIKit
 final class ConversationListViewWrapper: UIView {
     init() {
         super.init(frame: .zero)
-        let view = NablaViewFactory.createConversationListView(delegate: self)
+        let view = NablaClient.shared.messaging.views.createConversationListView(delegate: self)
         addSubview(view)
         view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([

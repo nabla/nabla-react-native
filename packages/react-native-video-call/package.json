@@ -1,0 +1,93 @@
+{
+  "name": "@nabla/react-native-video-call",
+  "version": "1.0.0-alpha02",
+  "description": "Nabla Video Call SDK",
+  "repository": "https://github.com/nabla/nabla-react-native",
+  "main": "lib/index.js",
+  "devMain": "src/index.ts",
+  "types": "lib/index.d.ts",
+  "author": "Nabla",
+  "license": "MIT",
+  "private": false,
+  "files": [
+    "android/src",
+    "android/build.gradle",
+    "ios",
+    "lib",
+    "nabla-react-native-video-call.podspec"
+  ],
+  "scripts": {
+    "compile": "rm -rf lib && tsc -p .",
+    "lint": "yarn lint-ci --fix",
+    "lint-ci": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "prettier": "yarn prettier-ci --write",
+    "prettier-ci": "prettier --ignore-path .gitignore --check src/**/*.ts",
+    "prepare": "yarn compile",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.16.12",
+    "@babel/runtime": "^7.16.7",
+    "@react-native-community/eslint-config": "^3.0.1",
+    "@types/jest": "^27.4.0",
+    "@types/react-native": "^0.66.15",
+    "@types/react-test-renderer": "^17.0.1",
+    "babel-jest": "^27.4.6",
+    "eslint": "^7.32.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "jest": "^27.4.7",
+    "metro-react-native-babel-preset": "^0.67.0",
+    "prettier": "^2.3.2",
+    "react": "^17.0.2",
+    "react-native": "^0.67.1",
+    "react-test-renderer": "^17.0.2",
+    "typescript": "^4.5.5"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*"
+  },
+  "jest": {
+    "preset": "react-native",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "@react-native-community",
+      "prettier"
+    ],
+    "rules": {
+      "no-shadow": "off",
+      "@typescript-eslint/no-shadow": [
+        "error"
+      ],
+      "prettier/prettier": [
+        "error",
+        {
+          "quoteProps": "consistent",
+          "singleQuote": true,
+          "tabWidth": 2,
+          "trailingComma": "all",
+          "useTabs": false
+        }
+      ]
+    }
+  },
+  "eslintIgnore": [
+    "node_modules/",
+    "lib/",
+    "dist/"
+  ],
+  "prettier": {
+    "quoteProps": "consistent",
+    "trailingComma": "all",
+    "singleQuote": true
+  }
+}

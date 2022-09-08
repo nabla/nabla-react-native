@@ -1,4 +1,5 @@
 import Foundation
+import NablaCore
 import NablaMessagingCore
 import NablaMessagingUI
 import nabla_react_native_messaging_core
@@ -12,7 +13,9 @@ final class NablaMessagingUIModule: NSObject {
     @objc(navigateToInbox)
     func navigateToInbox() {
         DispatchQueue.main.async {
-            self.presentNavigationController(rootViewController: NablaViewFactory.createInboxViewController(delegate: self))
+            self.presentNavigationController(
+                rootViewController: NablaClient.shared.messaging.views.createInboxViewController(delegate: self)
+            )
         }
     }
     
@@ -22,7 +25,7 @@ final class NablaMessagingUIModule: NSObject {
             return
         }
         DispatchQueue.main.async {
-            let conversationViewController = NablaViewFactory
+            let conversationViewController = NablaClient.shared.messaging.views
                 .createConversationViewController(
                     conversationId,
                     showComposer: showComposer
@@ -74,7 +77,7 @@ extension NablaMessagingUIModule: InboxDelegate {
     }
     
     private func pushConversationViewController(conversation: Conversation) {
-        let conversationViewController = NablaViewFactory.createConversationViewController(conversation.id)
+        let conversationViewController = NablaClient.shared.messaging.views.createConversationViewController(conversation.id)
         conversationViewController.navigationItem.largeTitleDisplayMode = .never
         nablaNavigationController?.pushViewController(
             conversationViewController,

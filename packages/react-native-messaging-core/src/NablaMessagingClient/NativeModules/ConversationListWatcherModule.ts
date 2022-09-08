@@ -1,5 +1,5 @@
 import { NativeModule, NativeModules, Platform } from 'react-native';
-import { Callback } from './Callback';
+import { Callback } from '@nabla/react-native-core/lib/internal';
 
 const LINKING_ERROR =
   `The package '@nabla/react-native-messaging-core' doesn't seem to be linked. Make sure: \n\n` +
@@ -8,9 +8,7 @@ const LINKING_ERROR =
   '- You are not using Expo managed workflow\n';
 
 interface ConversationListWatcherModule extends NativeModule {
-  loadMoreConversations(
-    callback: Callback<void>,
-  ): void;
+  loadMoreConversations(callback: Callback<void>): void;
 }
 
 export const conversationListWatcherModule: ConversationListWatcherModule =

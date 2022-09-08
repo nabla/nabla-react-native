@@ -5,6 +5,7 @@ import com.facebook.react.modules.core.DeviceEventManagerModule
 import com.nabla.sdk.core.Configuration
 import com.nabla.sdk.core.NablaClient
 import com.nabla.sdk.core.NetworkConfiguration
+import com.nabla.sdk.core.domain.boundary.Module
 import com.nabla.sdk.core.domain.boundary.SessionTokenProvider
 import com.nabla.sdk.core.domain.entity.AuthTokens
 import com.nabla.sdk.core.domain.entity.StringId
@@ -21,7 +22,7 @@ class NablaClientModule(
     private var currentUserId: String? = null
 
     @ReactMethod
-    fun initialize(apiKey: String, networkConfiguration: ReadableMap?) {
+    fun initialize(apiKey: String, networkConfiguration: ReadableMap?, promise: Promise) {
         if (networkConfiguration != null) {
             val scheme = networkConfiguration.getString("scheme")
             val domain = networkConfiguration.getString("domain")
@@ -29,22 +30,27 @@ class NablaClientModule(
             val port = networkConfiguration.getInt("port")
 
             if (scheme != null && domain != null && path != null) {
-                val baseUrl = if (port != 0) "$scheme://$domain:$port$path" else "$scheme://$domain$path"
+                val baseUrl =
+                    if (port != 0) "$scheme://$domain:$port$path" else "$scheme://$domain$path"
 
                 NablaClient.initialize(
-                    Configuration(publicApiKey = apiKey),
-                    NetworkConfiguration(baseUrl = baseUrl)
+                    modules = MODULES,
+                    configuration = Configuration(publicApiKey = apiKey),
+                    networkConfiguration = NetworkConfiguration(baseUrl = baseUrl)
                 )
             } else {
                 NablaClient.initialize(
-                    Configuration(publicApiKey = apiKey)
+                    modules = MODULES,
+                    configuration = Configuration(publicApiKey = apiKey)
                 )
             }
         } else {
             NablaClient.initialize(
-                Configuration(publicApiKey = apiKey)
+                modules = MODULES,
+                configuration = Configuration(publicApiKey = apiKey)
             )
         }
+        promise.resolve(null)
     }
 
     @ReactMethod
@@ -97,5 +103,10 @@ class NablaClientModule(
 
     companion object {
         private const val NEED_PROVIDE_TOKENS = "needProvideTokens"
+        private var MODULES: MutableList<Module.Factory<out Module>> = mutableListOf()
+
+        fun addModule(module: Module.Factory<out Module>) {
+            MODULES.add(module)
+        }
     }
 }

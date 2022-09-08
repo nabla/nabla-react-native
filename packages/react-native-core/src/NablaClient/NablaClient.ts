@@ -31,11 +31,11 @@ export class NablaClient {
    * @param apiKey Your organisation's API key (created online on Nabla dashboard).
    * @param networkConfiguration optional network configuration, exposed for internal tests purposes and should not be used in your app.
    */
-  public initialize(
+  public async initialize(
     apiKey: string,
     networkConfiguration: NetworkConfiguration | undefined = undefined,
   ) {
-    nablaClientModule.initialize(apiKey, networkConfiguration);
+    await nablaClientModule.initialize(apiKey, networkConfiguration);
   }
 
   /**

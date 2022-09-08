@@ -12,6 +12,12 @@ final class NablaMessagingClientModule: NSObject {
     private var markConversationAsSeenCancellable: Cancellable?
     private var setIsTypingCancellable: Cancellable?
 
+    @objc(initializeMessagingModule:rejecter:)
+    func initializeMessagingModule(resolver: RCTPromiseResolveBlock, rejecter _: RCTPromiseRejectBlock) {
+        NablaModules.addModule(NablaMessagingModule())
+        resolver(NSNull())
+    }
+
     @objc(createConversation:providerIds:callback:)
     func createConversation(
         title: String?,
