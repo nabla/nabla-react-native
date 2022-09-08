@@ -39,7 +39,8 @@ const conversationEmitter = new NativeEventEmitter(conversationWatcherModule);
  * Main entry-point for Messaging SDK features.
  *
  * Mandatory: before any interaction with messaging features make sure you
- * successfully authenticated your user by calling `NablaClient.getInstance().authenticate`.
+ * - called `NablaMessagingClient.initializeMessagingModule`
+ * - successfully authenticated your user by calling `NablaClient.getInstance().authenticate`.
  */
 export class NablaMessagingClient {
   private static instance: NablaMessagingClient;
@@ -57,6 +58,10 @@ export class NablaMessagingClient {
     return NablaMessagingClient.instance;
   }
 
+  /**
+   * Initializes the Messaging module and register it on `NablaClient`
+   * Must be called before `NablaClient.getInstance().initialize()`
+   */
   public static async initializeMessagingModule() {
     await nablaMessagingClientModule.initializeMessagingModule();
   }
