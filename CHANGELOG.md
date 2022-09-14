@@ -6,22 +6,26 @@
 
 ### Changed
 
+- Updated native dependencies to latest versions.
+
 ### Fixed
+
+- Fixed `NablaMessagingClient.createConversation` success callback parameter being undefined 
 
 ### Versions
 
 - `@nabla/react-native-video-call`
-  - Android: `com.nabla.nabla-android:video-call:1.0.0-alpha10`
-  - iOS: `spec.dependency 'NablaVideoCall', '1.0.0-alpha16'`
+  - Android: `com.nabla.nabla-android:video-call:1.0.0-alpha12"`
+  - iOS: `spec.dependency 'NablaVideoCall', '1.0.0-alpha17'`
 - `@nabla/react-native-messaging-ui`
-  - Android: `com.nabla.nabla-android:messaging-ui:1.0.0-alpha10`
-  - iOS: `spec.dependency 'NablaMessagingUI', '1.0.0-alpha16'`
+  - Android: `com.nabla.nabla-android:messaging-ui:1.0.0-alpha12`
+  - iOS: `spec.dependency 'NablaMessagingUI', '1.0.0-alpha17'`
 - `@nabla/react-native-messaging-core`
-  - Android: `com.nabla.nabla-android:messaging-core:1.0.0-alpha10`
-  - iOS: `spec.dependency 'NablaMessagingCore', '1.0.0-alpha16'`
+  - Android: `com.nabla.nabla-android:messaging-core:1.0.0-alpha12`
+  - iOS: `spec.dependency 'NablaMessagingCore', '1.0.0-alpha17'`
 - `@nabla/react-native-core`
-  - Android: `com.nabla.nabla-android:core:1.0.0-alpha10`
-  - iOS: `spec.dependency 'NablaCore', '1.0.0-alpha16'`
+  - Android: `com.nabla.nabla-android:core:1.0.0-alpha12`
+  - iOS: `spec.dependency 'NablaCore', '1.0.0-alpha17'`
 
 ## [1.0.0-alpha03] - 2022-09-08
 

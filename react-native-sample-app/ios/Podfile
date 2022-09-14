@@ -20,9 +20,6 @@ target 'ReactNativeSampleApp' do
     # Pods for testing
   end
 
-  pod 'NablaVideoCall', git: 'git@github.com:nabla/nabla-ios.git', tag: '1.0.0-alpha16'
-  pod 'LiveKit', git: 'git@github.com:livekit/client-sdk-swift.git'
-
   # Enables Flipper.
   #
   # Note that if you have use_frameworks! enabled, Flipper will not work and

@@ -9,6 +9,7 @@ import com.nabla.sdk.messaging.core.domain.entity.ConversationId
 import com.nabla.sdk.messaging.core.messagingClient
 import com.nabla.sdk.reactnative.messaging.core.models.toConversationId
 import com.nabla.sdk.reactnative.messaging.core.models.toMap
+import com.nabla.sdk.reactnative.messaging.core.models.toMapArray
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
@@ -43,9 +44,11 @@ internal class ConversationItemsWatcherModule(
                 .onEach {
                     loadMoreItemsCallback = it.loadMore
                     sendUpdate(
-                        it.content
-                            .toMap(it.loadMore != null)
-                            .apply { putMap("id", conversationId.toMap()) }
+                        Arguments.createMap().apply {
+                            putMap("id", conversationId.toMap())
+                            putArray("items", it.content.toMapArray())
+                            putBoolean("hasMore", it.loadMore != null)
+                        }
                     )
                 }
                 .catch { exception: Throwable ->

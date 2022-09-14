@@ -30,7 +30,7 @@ final class NablaMessagingClientModule: NSObject {
         ) { result in
             switch result {
             case .success(let conversation):
-                callback([NSNull(), conversation.id.uuidString])
+                callback([NSNull(), conversation.id.dictionaryRepresentation])
             case .failure(let error):
                 callback([error.dictionaryRepresentation])
             }

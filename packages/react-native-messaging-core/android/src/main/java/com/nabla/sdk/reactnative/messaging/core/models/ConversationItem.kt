@@ -3,6 +3,7 @@ package com.nabla.sdk.reactnative.messaging.core.models
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
+import com.nabla.sdk.core.domain.entity.LivekitRoomStatus
 import com.nabla.sdk.messaging.core.domain.entity.*
 
 @JvmName("toConversationItemMapArray")
@@ -28,16 +29,16 @@ private fun ConversationItem.toMap(): ReadableMap {
                 it.putString("type", "VideoCallActionRequest")
                 it.putMap("sender", author.toMap())
                 it.putMap("videoCallActionRequest", Arguments.createMap().also { videoCallActionRequestMap ->
-                when (livekitRoomStatus) {
+                when (livekitRoom.status) {
                     LivekitRoomStatus.Closed -> {
                         videoCallActionRequestMap.putString("status", "closed")
                     }
                     is LivekitRoomStatus.Open -> {
                         videoCallActionRequestMap.putString("status", "open")
                         videoCallActionRequestMap.putMap("room", Arguments.createMap().also { roomMap ->
-                            roomMap.putString("id", livekitRoomId.toString())
-                            roomMap.putString("token", (livekitRoomStatus as LivekitRoomStatus.Open).token)
-                            roomMap.putString("url", (livekitRoomStatus as LivekitRoomStatus.Open).url)
+                            roomMap.putString("id", livekitRoom.id.toString())
+                            roomMap.putString("token", (livekitRoom.status as LivekitRoomStatus.Open).token)
+                            roomMap.putString("url", (livekitRoom.status as LivekitRoomStatus.Open).url)
                         })
                     }
                 }
