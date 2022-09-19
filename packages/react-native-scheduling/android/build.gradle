@@ -1,0 +1,51 @@
+buildscript {
+    ext.safeExtGet = { prop, fallback ->
+        return rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
+    }
+
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.2.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${safeExtGet('kotlinVersion', '1.6.21')}"
+    }
+}
+
+def safeExtGet(prop, fallback) {
+    rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
+}
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion safeExtGet('compileSdkVersion', 32)
+    buildToolsVersion safeExtGet('buildToolsVersion', '32.0.0')
+
+    defaultConfig {
+        minSdkVersion safeExtGet('minSdkVersion', 23)
+        targetSdkVersion safeExtGet('targetSdkVersion', 32)
+    }
+
+    kotlinOptions {
+        freeCompilerArgs += ["-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi", "-Xopt-in=kotlin.RequiresOptIn"]
+    }
+}
+
+repositories {
+    google()
+    mavenCentral()
+}
+
+dependencies {
+    //noinspection GradleDynamicVersion
+    implementation 'com.facebook.react:react-native:+'
+
+    implementation project(path: ':nabla_react-native-core')
+    implementation 'androidx.fragment:fragment-ktx:1.5.2'
+
+    implementation 'com.nabla.nabla-android:scheduling:1.0.0-alpha12'
+}

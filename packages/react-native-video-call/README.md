@@ -23,7 +23,7 @@ yarn add '@nabla/react-native-video-call'
 ```ts
 import { NablaVideoCallClient } from '@nabla/react-native-video-call';
 
-// To initialize the video call module, ypou will need to call this method before `NablaClient.getInstance.initialize`:
+// To initialize the video call module, you will need to call this method before `NablaClient.getInstance.initialize`:
 await NablaVideoCallClient.initializeVideoCallModule()
 
 // To join a video call room `VideoCallRoom`
