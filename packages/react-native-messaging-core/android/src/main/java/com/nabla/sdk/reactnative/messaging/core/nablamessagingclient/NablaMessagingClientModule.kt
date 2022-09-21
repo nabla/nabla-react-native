@@ -6,6 +6,9 @@ import com.nabla.sdk.core.NablaClient
 import com.nabla.sdk.core.domain.entity.InternalException
 import com.nabla.sdk.core.domain.entity.NablaException
 import com.nabla.sdk.messaging.core.NablaMessagingModule
+import com.nabla.sdk.messaging.core.domain.entity.ConversationId
+import com.nabla.sdk.messaging.core.domain.entity.MessageId
+import com.nabla.sdk.messaging.core.domain.entity.MessageInput
 import com.nabla.sdk.messaging.core.messagingClient
 import com.nabla.sdk.reactnative.core.nablaclient.NablaClientModule
 import com.nabla.sdk.reactnative.messaging.core.models.*
@@ -33,16 +36,24 @@ internal class NablaMessagingClientModule(
     fun createConversation(
         title: String?,
         providerIds: ReadableArray?,
+        initialMessageInput: ReadableMap?,
         callback: Callback,
     ) {
         val providerUuids = providerIds?.let {
             (0 until it.size()).map { index -> Uuid.fromString(it.getString(index)) }
         }
+        val initialMessage = try {
+            initialMessageInput?.messageInputOrThrow()
+        } catch (e: Exception) {
+            callback(InternalException(e).toMap())
+            return
+        }
         this.launch {
             NablaClient.getInstance().messagingClient
                 .createConversation(
                     title,
-                    providerUuids
+                    providerUuids,
+                    initialMessage
                 )
                 .onSuccess {
                     callback(null, it.id.toMap())
@@ -78,34 +89,13 @@ internal class NablaMessagingClientModule(
         replyToMap: ReadableMap?,
         callback: Callback,
     ) {
-        val messageType = input.getString("type") ?: kotlin.run {
-            callback(InternalException(IllegalStateException("Missing type of message")).toMap())
-            return
-        }
-
-        val conversationId = try {
-            conversationIdMap.toConversationId()
-        } catch (e: Exception) {
-            callback(InternalException(e).toMap())
-            return
-        }
-
-        val replyToUuid = try {
-            replyToMap?.toRemoteMessageId()
-        } catch (e: Exception) {
-            callback(InternalException(e).toMap())
-            return
-        }
-
-        val messageInput = try {
-            when (messageType) {
-                "text" -> input.textMessageInputOrThrow()
-                "image" -> input.imageMessageInputOrThrow()
-                "video" -> input.videoMessageInputOrThrow()
-                "document" -> input.documentMessageInputOrThrow()
-                "audio" -> input.audioMessageInputOrThrow()
-                else -> throw IllegalStateException("Unknown message type: $messageType")
-            }
+        val messageInput: MessageInput
+        val conversationId: ConversationId
+        val replyToUuid: MessageId.Remote?
+        try {
+            messageInput = input.messageInputOrThrow()
+            conversationId = conversationIdMap.toConversationId()
+            replyToUuid = replyToMap?.toRemoteMessageId()
         } catch (e: Exception) {
             callback(InternalException(e).toMap())
             return

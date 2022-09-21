@@ -18,15 +18,28 @@ final class NablaMessagingClientModule: NSObject {
         resolver(NSNull())
     }
 
-    @objc(createConversation:providerIds:callback:)
+    @objc(createConversation:providerIds:initialMessage:callback:)
     func createConversation(
         title: String?,
         providerIds: [String]?,
+        initialMessageInput: [String: Any]?,
         callback: @escaping RCTResponseSenderBlock
     ) {
+        let initialMessage: MessageInput?
+        if let initialMessageInput = initialMessageInput {
+            guard let messageInput = initialMessageInput.messageInput else {
+                callback([InternalError.createDictionaryRepresentation(message: "Unable to parse initial message input")])
+                return
+            }
+            initialMessage = messageInput
+        } else {
+            initialMessage = nil
+        }
+
         createConversationCancellable = NablaMessagingClient.shared.createConversation(
             title: title,
-            providerIds: providerIds?.compactMap(UUID.init)
+            providerIds: providerIds?.compactMap(UUID.init),
+            initialMessage: initialMessage
         ) { result in
             switch result {
             case .success(let conversation):

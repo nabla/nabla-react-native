@@ -7,6 +7,7 @@ RCT_EXTERN_METHOD(initializeMessagingModule: (RCTPromiseResolveBlock)resolve
 
 RCT_EXTERN_METHOD(createConversation: (NSString *)title
                          providerIds: (NSArray<NSString *> *)providerIds
+                      initialMessage: (id)initialMessage
                             callback: (RCTResponseSenderBlock)callback)
 
 RCT_EXTERN_METHOD(createDraftConversation: (NSString *)title

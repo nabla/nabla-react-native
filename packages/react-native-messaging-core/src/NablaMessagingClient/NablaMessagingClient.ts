@@ -112,17 +112,20 @@ export class NablaMessagingClient {
    * @param successCallback The callback called when conversation creation succeeds.
    * @param title optional title for the conversation.
    * @param providerIds optional providers ids list that will participate in the conversation. Make sure the specified providers have enough rights to participate in a conversation. See [Roles and Permissions](https://docs.nabla.com/docs/roles-and-permissions).
+   * @param initialMessage optional initial message to be sent in the conversation.
    */
   public createConversation(
     errorCallback: (error: NablaError) => void,
     successCallback: (conversationId: ConversationId) => void,
     title?: string,
     providerIds?: string[],
+    initialMessage?: MessageInput
   ) {
     nablaMessagingClientModule.createConversation(
       title,
       providerIds,
-      merge(mapError, errorCallback, successCallback),
+      initialMessage?.serialize(),
+      merge(mapError, errorCallback, successCallback)
     );
   }
 
