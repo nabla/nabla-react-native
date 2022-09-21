@@ -17,6 +17,12 @@ interface NablaMessagingClientModule extends NativeModule {
     callback: Callback<ConversationId>,
   ): void;
 
+  createDraftConversation(
+    title: String | undefined,
+    providerIds: String[] | undefined,
+    callback: Callback<ConversationId>,
+  ): void;
+
   sendMessage(
     input: any,
     conversationId: ConversationId,

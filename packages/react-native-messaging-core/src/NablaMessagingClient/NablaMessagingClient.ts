@@ -127,6 +127,25 @@ export class NablaMessagingClient {
   }
 
   /**
+   * Create a new draft conversation on behalf of the current user.
+   * This conversation will not be created server-side nor visible from the console until a first message is sent in it.
+   * @param successCallback The callback called when conversation creation succeeds.
+   * @param title optional title for the conversation.
+   * @param providerIds optional providers ids list that will participate in the conversation. Make sure the specified providers have enough rights to participate in a conversation. See [Roles and Permissions](https://docs.nabla.com/docs/roles-and-permissions).
+   */
+  public createDraftConversation(
+    successCallback: (conversationId: ConversationId) => void,
+    title?: string,
+    providerIds?: string[],
+  ) {
+    nablaMessagingClientModule.createDraftConversation(
+      title,
+      providerIds,
+      merge(mapError, () => {}, successCallback),
+    );
+  }
+
+  /**
    * Watch the conversation referenced by its identifier.
    * @param conversationId The id of the `Conversation`.
    * @param errorCallback The callback called in case of error.

@@ -53,6 +53,23 @@ internal class NablaMessagingClientModule(
         }
     }
 
+    @ReactMethod
+    fun createDraftConversation(
+        title: String?,
+        providerIds: ReadableArray?,
+        callback: Callback,
+    ) {
+        val providerUuids = providerIds?.let {
+            (0 until it.size()).map { index -> Uuid.fromString(it.getString(index)) }
+        }
+        val conversationId = NablaClient.getInstance().messagingClient
+            .createDraftConversation(
+                title,
+                providerUuids
+            )
+        callback(null, conversationId.toMap())
+    }
+
     @Suppress("ThrowableNotThrown")
     @ReactMethod
     fun sendMessage(

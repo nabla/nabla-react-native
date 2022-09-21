@@ -4,6 +4,8 @@
 
 ### Added
 
+- Added `NablaMessagingClient.createDraftConversation` to `NablaMessagingCore`
+
 ### Changed
 
 ### Fixed

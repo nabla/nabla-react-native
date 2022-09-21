@@ -37,6 +37,19 @@ final class NablaMessagingClientModule: NSObject {
         }
     }
 
+    @objc(createDraftConversation:providerIds:callback:)
+    func createDraftConversation(
+        title: String?,
+        providerIds: [String]?,
+        callback: @escaping RCTResponseSenderBlock
+    ) {
+         let conversation = NablaMessagingClient.shared.createDraftConversation(
+            title: title,
+            providerIds: providerIds?.compactMap(UUID.init)
+        )
+        callback([NSNull(), conversation.id.dictionaryRepresentation])
+    }
+
     @objc(sendMessage:conversationId:replyTo:callback:)
     func sendMessage(
         input: [String: Any],
