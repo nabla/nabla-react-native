@@ -8,6 +8,7 @@ final class NablaMessagingClientModule: NSObject {
 
     private var createConversationCancellable: Cancellable?
     private var sendMessageCancellable: Cancellable?
+    private var retrySendingMessageCancellable: Cancellable?
     private var deleteMessageCancellable: Cancellable?
     private var markConversationAsSeenCancellable: Cancellable?
     private var setIsTypingCancellable: Cancellable?
@@ -56,7 +57,7 @@ final class NablaMessagingClientModule: NSObject {
         providerIds: [String]?,
         callback: @escaping RCTResponseSenderBlock
     ) {
-         let conversation = NablaMessagingClient.shared.createDraftConversation(
+        let conversation = NablaMessagingClient.shared.createDraftConversation(
             title: title,
             providerIds: providerIds?.compactMap(UUID.init)
         )
@@ -93,6 +94,39 @@ final class NablaMessagingClientModule: NSObject {
                 }
             }
         )
+    }
+
+    @objc(retrySendingMessage:conversationId:callback:)
+    func retrySendingMessage(
+        messageIdMap: [String: Any],
+        conversationIdMap: [String: Any],
+        callback: @escaping RCTResponseSenderBlock
+    ) {
+        guard let conversationId = conversationIdMap.asConversationId else {
+            callback([
+                InternalError.createDictionaryRepresentation(message: "Bad conversationId `\(conversationIdMap)`")
+            ])
+            return
+        }
+
+        guard let messageId = messageIdMap.asMessageId else {
+            callback([
+                InternalError.createDictionaryRepresentation(message: "Bad messageId `\(messageIdMap)`")
+            ])
+            return
+        }
+
+        retrySendingMessageCancellable = NablaMessagingClient.shared.retrySending(
+            itemWithId: messageId,
+            inConversationWithId: conversationId,
+            handler: { result in
+                switch result {
+                case .success:
+                    callback([NSNull()])
+                case .failure(let error):
+                    callback([error.dictionaryRepresentation])
+                }
+            })
     }
 
     @objc(deleteMessage:conversationId:callback:)

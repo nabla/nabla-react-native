@@ -3,6 +3,7 @@ package com.nabla.sdk.reactnative.messaging.core.nablamessagingclient
 import com.benasher44.uuid.Uuid
 import com.facebook.react.bridge.*
 import com.nabla.sdk.core.NablaClient
+import com.nabla.sdk.core.annotation.NablaInternal
 import com.nabla.sdk.core.domain.entity.InternalException
 import com.nabla.sdk.core.domain.entity.NablaException
 import com.nabla.sdk.messaging.core.NablaMessagingModule
@@ -117,21 +118,46 @@ internal class NablaMessagingClientModule(
         }
     }
 
+    @OptIn(NablaInternal::class)
+    @ReactMethod
+    fun retrySendingMessage(
+        messageIdMap: ReadableMap,
+        conversationIdMap: ReadableMap,
+        callback: Callback,
+    ) {
+        val messageId: MessageId.Local
+        val conversationId: ConversationId
+        try {
+            messageId = messageIdMap.toMessageId().requireLocal()
+            conversationId = conversationIdMap.toConversationId()
+        } catch (e: Exception) {
+            callback(InternalException(e).toMap())
+            return
+        }
+
+        launch {
+            NablaClient.getInstance().messagingClient
+                .retrySendingMessage(messageId, conversationId)
+                .onSuccess {
+                    callback(null)
+                }
+                .onFailure {
+                    callback((it as NablaException).toMap())
+                }
+        }
+    }
+
     @ReactMethod
     fun deleteMessage(
         messageIdMap: ReadableMap,
         conversationIdMap: ReadableMap,
         callback: Callback,
     ) {
-        val messageId = try {
-            messageIdMap.toMessageId()
-        } catch (e: Exception) {
-            callback(InternalException(e).toMap())
-            return
-        }
-
-        val conversationId = try {
-            conversationIdMap.toConversationId()
+        val messageId: MessageId
+        val conversationId: ConversationId
+        try {
+            messageId = messageIdMap.toMessageId()
+            conversationId = conversationIdMap.toConversationId()
         } catch (e: Exception) {
             callback(InternalException(e).toMap())
             return

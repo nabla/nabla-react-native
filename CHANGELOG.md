@@ -4,6 +4,7 @@
 
 ### Added
 
+- Added `NablaMessagingClient.retrySendingMessage` in `NablaMessagingCore`
 - Added `initialMessage` param to `NablaMessagingClient.createConversation` in `NablaMessagingCore`
 - Added `NablaMessagingClient.createDraftConversation` to `NablaMessagingCore`
 

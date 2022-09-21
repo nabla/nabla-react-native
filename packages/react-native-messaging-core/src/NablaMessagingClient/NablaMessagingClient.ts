@@ -283,6 +283,26 @@ export class NablaMessagingClient {
   }
 
   /**
+   * Retries sending a failed message in the conversation referenced by its identifier.
+   * @param messageId The id of the `Message`.
+   * @param conversationId The id of the `Conversation`.
+   * @param errorCallback The callback called in case of error.
+   * @param successCallback The callback called when the retry sending succeeds.
+   */
+  public retrySendingMessage(
+    messageId: MessageId,
+    conversationId: ConversationId,
+    errorCallback: (error: NablaError) => void,
+    successCallback: () => void,
+  ) {
+    nablaMessagingClientModule.retrySendingMessage(
+      messageId,
+      conversationId,
+      merge(mapError, errorCallback, successCallback),
+    );
+  }
+
+  /**
    * Delete a message in the conversation referenced by its identifier.
    * @param messageId The id of the `Message`.
    * @param conversationId The id of the `Conversation`.

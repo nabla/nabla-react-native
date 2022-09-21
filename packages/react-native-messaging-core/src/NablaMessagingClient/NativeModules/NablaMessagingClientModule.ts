@@ -31,6 +31,12 @@ interface NablaMessagingClientModule extends NativeModule {
     callback: Callback<void>,
   ): void;
 
+  retrySendingMessage(
+    messageId: MessageId,
+    conversationId: ConversationId,
+    callback: Callback<void>,
+  ): void;
+
   deleteMessage(
     messageId: MessageId,
     conversationId: ConversationId,
