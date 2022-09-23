@@ -83,31 +83,30 @@ PODS:
     - WebRTC-SDK (~> 104.5112.02)
   - Logging (1.4.0)
   - nabla-react-native-core (1.0.0-alpha04):
-    - NablaCore (= 1.0.0-alpha17)
+    - NablaCore (= 1.0.0-alpha18)
     - React-Core
   - nabla-react-native-messaging-core (1.0.0-alpha04):
     - nabla-react-native-core
-    - NablaMessagingCore (= 1.0.0-alpha17)
+    - NablaMessagingCore (= 1.0.0-alpha18)
     - React-Core
   - nabla-react-native-messaging-ui (1.0.0-alpha04):
     - nabla-react-native-messaging-core
-    - NablaMessagingUI (= 1.0.0-alpha17)
+    - NablaMessagingUI (= 1.0.0-alpha18)
     - React-Core
   - nabla-react-native-video-call (1.0.0-alpha04):
     - nabla-react-native-core
-    - NablaCore (= 1.0.0-alpha17)
-    - NablaVideoCall (= 1.0.0-alpha17)
+    - NablaVideoCall (= 1.0.0-alpha18)
     - React-Core
-  - NablaCore (1.0.0-alpha17):
+  - NablaCore (1.0.0-alpha18):
     - Apollo/WebSocket (~> 0.50)
-  - NablaMessagingCore (1.0.0-alpha17):
-    - NablaCore (= 1.0.0-alpha17)
-  - NablaMessagingUI (1.0.0-alpha17):
-    - NablaCore (= 1.0.0-alpha17)
-    - NablaMessagingCore (= 1.0.0-alpha17)
-  - NablaVideoCall (1.0.0-alpha17):
+  - NablaMessagingCore (1.0.0-alpha18):
+    - NablaCore (= 1.0.0-alpha18)
+  - NablaMessagingUI (1.0.0-alpha18):
+    - NablaCore (= 1.0.0-alpha18)
+    - NablaMessagingCore (= 1.0.0-alpha18)
+  - NablaVideoCall (1.0.0-alpha18):
     - LiveKitClient (~> 1.0.3)
-    - NablaCore (= 1.0.0-alpha17)
+    - NablaCore (= 1.0.0-alpha18)
   - OpenSSL-Universal (1.1.180)
   - PromisesObjC (2.1.1)
   - PromisesSwift (2.1.1):
@@ -560,14 +559,14 @@ SPEC CHECKSUMS:
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   LiveKitClient: 0a1dba2b9ce62555dfa4bd984af66b921802bce5
   Logging: beeb016c9c80cf77042d62e83495816847ef108b
-  nabla-react-native-core: 851302da99c6ca7109a422daadd22a34a072737c
-  nabla-react-native-messaging-core: 9b4094a61e76b96990b3c380a0a34c6b72d79f70
-  nabla-react-native-messaging-ui: 7d22f2290c16f5c296d3850355bce1696872dcec
-  nabla-react-native-video-call: 40e876bb202d30832be0c40e3826c97cd16724b6
-  NablaCore: 00964da0ce727839912ff19ebbcd7d0e24406db6
-  NablaMessagingCore: aec9c03903ed203fa57a413c5345b8be007f358a
-  NablaMessagingUI: 8087d58bacd045f4eb1e58bfcc298492c41dfe9c
-  NablaVideoCall: d1b25544af539ed1c4fa60de668022291e09526e
+  nabla-react-native-core: 766049ddabd23f303bc17600af6835e8696bdb0f
+  nabla-react-native-messaging-core: 0a7476f6d87ed52cde5a7a73f86b072ae8f86569
+  nabla-react-native-messaging-ui: 9581a47ed65bd195df5faa7c3dd5a2a2e0026d26
+  nabla-react-native-video-call: a12ea7fef4fed2a969be51610a32f2e0638427db
+  NablaCore: 6df50ad3e91303ec9faa2f71b2c0f6ffea543655
+  NablaMessagingCore: f9f59023ccffaf198371187b9f19a6b4a6039050
+  NablaMessagingUI: 3bde8c475bdaf00a98383da75363ee0572a6f914
+  NablaVideoCall: daf0180024e267355a3453c0dc7484429a3acc0a
   OpenSSL-Universal: 1aa4f6a6ee7256b83db99ec1ccdaa80d10f9af9b
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
   PromisesSwift: 99fddfe4a0ec88a56486644c0da106694c92a604
@@ -600,6 +599,6 @@ SPEC CHECKSUMS:
   Yoga: 5cbf25add73edb290e1067017690f7ebf56c5468
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: b547b0416bc6bafa280ce825989ba76537ef42dd
+PODFILE CHECKSUM: 0d3f5e1bdffaa145f4905bb8c55467a1a458d745
 
 COCOAPODS: 1.11.3

@@ -48,7 +48,7 @@ dependencies {
     implementation 'com.facebook.react:react-native:+'
     implementation project(path: ':nabla_react-native-messaging-core')
 
-    implementation 'com.nabla.nabla-android:messaging-ui:1.0.0-alpha12'
+    implementation 'com.nabla.nabla-android:messaging-ui:1.0.0-alpha13'
     implementation 'androidx.appcompat:appcompat:1.4.2'
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.fragment:fragment-ktx:1.5.0'

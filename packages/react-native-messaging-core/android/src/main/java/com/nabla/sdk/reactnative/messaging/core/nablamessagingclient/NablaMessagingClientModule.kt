@@ -5,6 +5,7 @@ import com.facebook.react.bridge.*
 import com.nabla.sdk.core.NablaClient
 import com.nabla.sdk.core.annotation.NablaInternal
 import com.nabla.sdk.core.domain.entity.InternalException
+import com.nabla.sdk.core.domain.entity.InternalException.Companion.asNablaInternal
 import com.nabla.sdk.core.domain.entity.NablaException
 import com.nabla.sdk.messaging.core.NablaMessagingModule
 import com.nabla.sdk.messaging.core.domain.entity.ConversationId
@@ -15,6 +16,7 @@ import com.nabla.sdk.reactnative.core.nablaclient.NablaClientModule
 import com.nabla.sdk.reactnative.messaging.core.models.*
 import kotlinx.coroutines.*
 
+@OptIn(NablaInternal::class)
 internal class NablaMessagingClientModule(
     reactContext: ReactApplicationContext,
 ) : ReactContextBaseJavaModule(reactContext),
@@ -46,7 +48,7 @@ internal class NablaMessagingClientModule(
         val initialMessage = try {
             initialMessageInput?.messageInputOrThrow()
         } catch (e: Exception) {
-            callback(InternalException(e).toMap())
+            callback(e.asNablaInternal().toMap())
             return
         }
         this.launch {
@@ -98,7 +100,7 @@ internal class NablaMessagingClientModule(
             conversationId = conversationIdMap.toConversationId()
             replyToUuid = replyToMap?.toRemoteMessageId()
         } catch (e: Exception) {
-            callback(InternalException(e).toMap())
+            callback(e.asNablaInternal().toMap())
             return
         }
 
@@ -131,7 +133,7 @@ internal class NablaMessagingClientModule(
             messageId = messageIdMap.toMessageId().requireLocal()
             conversationId = conversationIdMap.toConversationId()
         } catch (e: Exception) {
-            callback(InternalException(e).toMap())
+            callback(e.asNablaInternal().toMap())
             return
         }
 
@@ -159,7 +161,7 @@ internal class NablaMessagingClientModule(
             messageId = messageIdMap.toMessageId()
             conversationId = conversationIdMap.toConversationId()
         } catch (e: Exception) {
-            callback(InternalException(e).toMap())
+            callback(e.asNablaInternal().toMap())
             return
         }
 
@@ -183,7 +185,7 @@ internal class NablaMessagingClientModule(
         val conversationId = try {
             conversationIdMap.toConversationId()
         } catch (e: Exception) {
-            callback(InternalException(e).toMap())
+            callback(e.asNablaInternal().toMap())
             return
         }
         launch {
@@ -207,7 +209,7 @@ internal class NablaMessagingClientModule(
         val conversationId = try {
             conversationIdMap.toConversationId()
         } catch (e: Exception) {
-            callback(InternalException(e).toMap())
+            callback(e.asNablaInternal().toMap())
             return
         }
 

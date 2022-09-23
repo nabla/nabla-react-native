@@ -3,7 +3,9 @@ package com.nabla.sdk.reactnative.messaging.core.nablamessagingclient
 import com.facebook.react.bridge.*
 import com.facebook.react.modules.core.DeviceEventManagerModule
 import com.nabla.sdk.core.NablaClient
+import com.nabla.sdk.core.annotation.NablaInternal
 import com.nabla.sdk.core.domain.entity.InternalException
+import com.nabla.sdk.core.domain.entity.InternalException.Companion.asNablaInternal
 import com.nabla.sdk.core.domain.entity.NablaException
 import com.nabla.sdk.messaging.core.domain.entity.ConversationId
 import com.nabla.sdk.messaging.core.messagingClient
@@ -14,6 +16,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
+@OptIn(NablaInternal::class)
 internal class ConversationWatcherModule(
     reactContext: ReactApplicationContext,
 ) : ReactContextBaseJavaModule(reactContext),
@@ -33,7 +36,7 @@ internal class ConversationWatcherModule(
         val conversationId = try {
             conversationIdMap.toConversationId()
         } catch (e: Exception) {
-            callback(InternalException(e).toMap())
+            callback(e.asNablaInternal().toMap())
             return
         }
         val watchConversationJob =

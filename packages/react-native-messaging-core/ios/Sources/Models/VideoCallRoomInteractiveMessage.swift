@@ -1,7 +1,7 @@
 import Foundation
 import NablaMessagingCore
 
-extension VideoCallActionRequest.Status {
+extension VideoCallRoomInteractiveMessage.Status {
     var dictionaryRepresentation: [String: Any] {
         switch self {
         case .closed:

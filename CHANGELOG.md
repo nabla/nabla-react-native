@@ -15,20 +15,20 @@
 ### Versions
 
 - `@nabla/react-native-scheduling`
-  - Android: `com.nabla.nabla-android:scheduling:1.0.0-alpha12"`
-  - iOS: `pod 'NablaScheduling', '1.0.0-alpha17'`
+  - Android: `com.nabla.nabla-android:scheduling:1.0.0-alpha13"`
+  - iOS: `pod 'NablaScheduling', '1.0.0-alpha18'`
 - `@nabla/react-native-video-call`
-  - Android: `com.nabla.nabla-android:video-call:1.0.0-alpha12"`
-  - iOS: `pod 'NablaVideoCall', '1.0.0-alpha17'`
+  - Android: `com.nabla.nabla-android:video-call:1.0.0-alpha13"`
+  - iOS: `pod 'NablaVideoCall', '1.0.0-alpha18'`
 - `@nabla/react-native-messaging-ui`
-  - Android: `com.nabla.nabla-android:messaging-ui:1.0.0-alpha12`
-  - iOS: `pod 'NablaMessagingUI', '1.0.0-alpha17'`
+  - Android: `com.nabla.nabla-android:messaging-ui:1.0.0-alpha13`
+  - iOS: `pod 'NablaMessagingUI', '1.0.0-alpha18'`
 - `@nabla/react-native-messaging-core`
-  - Android: `com.nabla.nabla-android:messaging-core:1.0.0-alpha12`
-  - iOS: `pod 'NablaMessagingCore', '1.0.0-alpha17'`
+  - Android: `com.nabla.nabla-android:messaging-core:1.0.0-alpha13`
+  - iOS: `pod 'NablaMessagingCore', '1.0.0-alpha18'`
 - `@nabla/react-native-core`
-  - Android: `com.nabla.nabla-android:core:1.0.0-alpha12`
-  - iOS: `pod 'NablaCore', '1.0.0-alpha17'`
+  - Android: `com.nabla.nabla-android:core:1.0.0-alpha13`
+  - iOS: `pod 'NablaCore', '1.0.0-alpha18'`
 
 ## [1.0.0-alpha04] - 2022-09-19
 

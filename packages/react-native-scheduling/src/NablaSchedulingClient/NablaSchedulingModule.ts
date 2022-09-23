@@ -8,6 +8,7 @@ const LINKING_ERROR =
 
 interface NablaSchedulingClientModule extends NativeModule {
   initializeSchedulingModule(): Promise<void>;
+  openScheduleAppointmentScreen(): void;
 }
 
 export const nablaSchedulingClientModule: NablaSchedulingClientModule =

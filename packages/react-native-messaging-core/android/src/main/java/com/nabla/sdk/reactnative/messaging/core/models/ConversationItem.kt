@@ -3,7 +3,7 @@ package com.nabla.sdk.reactnative.messaging.core.models
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.bridge.ReadableMap
-import com.nabla.sdk.core.domain.entity.LivekitRoomStatus
+import com.nabla.sdk.core.domain.entity.VideoCallRoomStatus
 import com.nabla.sdk.messaging.core.domain.entity.*
 
 @JvmName("toConversationItemMapArray")
@@ -24,21 +24,21 @@ private fun ConversationItem.toMap(): ReadableMap {
                 it.putString("id", id.value.toString())
                 it.putMap("activity", content.toMap())
             }
-            is Message.LivekitRoom -> {
+            is Message.VideoCallRoom -> {
                 id.remoteId?.let { id -> it.putString("id", id.toString()) }
-                it.putString("type", "VideoCallActionRequest")
+                it.putString("type", "VideoCallRoomInteractiveMessage")
                 it.putMap("sender", author.toMap())
-                it.putMap("videoCallActionRequest", Arguments.createMap().also { videoCallActionRequestMap ->
-                when (livekitRoom.status) {
-                    LivekitRoomStatus.Closed -> {
-                        videoCallActionRequestMap.putString("status", "closed")
+                it.putMap("videoCallRoomInteractiveMessage", Arguments.createMap().also { videoCallRoomInteractiveMessageMap ->
+                when (videoCallRoom.status) {
+                    VideoCallRoomStatus.Closed -> {
+                        videoCallRoomInteractiveMessageMap.putString("status", "closed")
                     }
-                    is LivekitRoomStatus.Open -> {
-                        videoCallActionRequestMap.putString("status", "open")
-                        videoCallActionRequestMap.putMap("room", Arguments.createMap().also { roomMap ->
-                            roomMap.putString("id", livekitRoom.id.toString())
-                            roomMap.putString("token", (livekitRoom.status as LivekitRoomStatus.Open).token)
-                            roomMap.putString("url", (livekitRoom.status as LivekitRoomStatus.Open).url)
+                    is VideoCallRoomStatus.Open -> {
+                        videoCallRoomInteractiveMessageMap.putString("status", "open")
+                        videoCallRoomInteractiveMessageMap.putMap("room", Arguments.createMap().also { roomMap ->
+                            roomMap.putString("id", videoCallRoom.id.toString())
+                            roomMap.putString("token", (videoCallRoom.status as VideoCallRoomStatus.Open).token)
+                            roomMap.putString("url", (videoCallRoom.status as VideoCallRoomStatus.Open).url)
                         })
                     }
                 }

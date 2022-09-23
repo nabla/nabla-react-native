@@ -4,6 +4,7 @@ import com.facebook.react.bridge.*
 import com.nabla.sdk.core.NablaClient
 import com.nabla.sdk.core.annotation.NablaInternal
 import com.nabla.sdk.core.domain.entity.InternalException
+import com.nabla.sdk.core.domain.entity.InternalException.Companion.asNablaInternal
 import com.nabla.sdk.reactnative.core.models.toCoreMap
 import com.nabla.sdk.reactnative.core.nablaclient.NablaClientModule
 import com.nabla.sdk.videocall.NablaVideoCallModule
@@ -25,15 +26,15 @@ class NablaVideoCallClientModule(
     @ReactMethod
     fun joinVideoCall(roomMap: ReadableMap, callback: Callback) {
         val roomId = roomMap.getString("id") ?: kotlin.run {
-            callback(InternalException(IllegalArgumentException("Missing room id")).toCoreMap())
+            callback(IllegalArgumentException("Missing room id").asNablaInternal().toCoreMap())
             return
         }
         val url = roomMap.getString("url") ?: kotlin.run {
-            callback(InternalException(IllegalArgumentException("Missing room url")).toCoreMap())
+            callback(IllegalArgumentException("Missing room url").asNablaInternal().toCoreMap())
             return
         }
         val token = roomMap.getString("token") ?: kotlin.run {
-            callback(InternalException(IllegalArgumentException("Missing room token")).toCoreMap())
+            callback(IllegalArgumentException("Missing room token").asNablaInternal().toCoreMap())
             return
         }
         currentActivity?.let {

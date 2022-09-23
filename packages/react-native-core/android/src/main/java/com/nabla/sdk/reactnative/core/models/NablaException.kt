@@ -2,8 +2,10 @@ package com.nabla.sdk.reactnative.core.models
 
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReadableMap
+import com.nabla.sdk.core.annotation.NablaInternal
 import com.nabla.sdk.core.domain.entity.*
 
+@OptIn(NablaInternal::class)
 val NablaException.coreCode: Int
     get() {
         return when (this) {

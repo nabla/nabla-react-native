@@ -19,11 +19,11 @@ export type VideoCallRoom = {
   url: string;
 };
 
-export type VideoCallActionRequest = {
+export type VideoCallRoomInteractiveMessage = {
   id: string;
-  type: 'VideoCallActionRequest';
+  type: 'VideoCallRoomInteractiveMessage';
   sender: ConversationItemSender;
-  videoCallActionRequest:
+  videoCallRoomInteractiveMessage:
     | {
     status: 'closed';
   }
@@ -106,5 +106,5 @@ export type ConversationMessage = {
 export type ConversationItem = { createdAt: Date } & (
   | ConversationActivity
   | ConversationMessage
-  | VideoCallActionRequest
+  | VideoCallRoomInteractiveMessage
   );

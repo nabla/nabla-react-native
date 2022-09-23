@@ -12,4 +12,8 @@ export class NablaSchedulingClient {
   public static async initializeSchedulingModule() {
     await nablaSchedulingClientModule.initializeSchedulingModule();
   }
+
+  public static openScheduleAppointmentScreen() {
+    nablaSchedulingClientModule.openScheduleAppointmentScreen()
+  }
 }
