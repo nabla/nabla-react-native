@@ -16,6 +16,7 @@ final class NablaSchedulingClientModule: NSObject {
     func openScheduleAppointmentScreen() {
         DispatchQueue.main.async {
             guard let rootViewController = UIApplication.shared.delegate?.window??.rootViewController else {
+                CoreLogger.sharedInstance.error(message: "Missing Application window rootViewController")
                 return
             }
             NablaClient.shared.scheduling.views.presentScheduleAppointmentViewController(from: rootViewController)

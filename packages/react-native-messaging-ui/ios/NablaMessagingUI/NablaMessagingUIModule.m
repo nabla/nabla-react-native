@@ -4,6 +4,7 @@
 
 RCT_EXTERN_METHOD(navigateToInbox)
 RCT_EXTERN_METHOD(navigateToConversation: (id)conversationIdMap
-                            showComposer: (BOOL)showComposer)
+                            showComposer: (BOOL)showComposer
+                                callback: (RCTResponseSenderBlock)callback)
 
 @end

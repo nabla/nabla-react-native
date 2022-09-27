@@ -5,6 +5,7 @@ import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
 import com.nabla.sdk.core.NablaClient
+import com.nabla.sdk.reactnative.core.nablaclient.CoreLogger
 import com.nabla.sdk.reactnative.core.nablaclient.NablaClientModule
 import com.nabla.sdk.scheduling.NablaSchedulingModule
 import com.nabla.sdk.scheduling.schedulingModule
@@ -23,8 +24,10 @@ class NablaSchedulingClientModule(
 
     @ReactMethod
     fun openScheduleAppointmentScreen() {
-        currentActivity?.let {
-            NablaClient.getInstance().schedulingModule.openScheduleAppointmentActivity(it)
+        if (currentActivity == null) {
+            CoreLogger.warn("Missing current activity in `NablaSchedulingClientModule`")
+            return
         }
+        NablaClient.getInstance().schedulingModule.openScheduleAppointmentActivity(currentActivity!!)
     }
 }

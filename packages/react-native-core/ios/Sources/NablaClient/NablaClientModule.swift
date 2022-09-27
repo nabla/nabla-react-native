@@ -27,7 +27,6 @@ final class NablaClientModule: RCTEventEmitter {
         resolver: RCTPromiseResolveBlock,
         rejecter _: RCTPromiseRejectBlock
     ) {
-
         if let networkConfiguration = networkConfiguration,
            let scheme = networkConfiguration["scheme"] as? String,
            let domain = networkConfiguration["domain"] as? String,
@@ -39,9 +38,18 @@ final class NablaClientModule: RCTEventEmitter {
                 port: networkConfiguration["port"] as? Int,
                 path: path
             )
-            NablaClient.initialize(apiKey: apiKey, networkConfiguration: configuration, modules: NablaModules.modules)
+            NablaClient.initialize(
+                apiKey: apiKey,
+                logger: CoreLogger.sharedInstance,
+                networkConfiguration: configuration,
+                modules: NablaModules.modules
+            )
         } else {
-            NablaClient.initialize(apiKey: apiKey, modules: NablaModules.modules)
+            NablaClient.initialize(
+                apiKey: apiKey,
+                logger: CoreLogger.sharedInstance,
+                modules: NablaModules.modules
+            )
         }
         resolver(NSNull())
     }

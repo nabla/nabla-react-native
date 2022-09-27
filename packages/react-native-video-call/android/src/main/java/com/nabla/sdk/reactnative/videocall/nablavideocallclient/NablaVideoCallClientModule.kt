@@ -3,7 +3,6 @@ package com.nabla.sdk.reactnative.videocall.nablavideocallclient
 import com.facebook.react.bridge.*
 import com.nabla.sdk.core.NablaClient
 import com.nabla.sdk.core.annotation.NablaInternal
-import com.nabla.sdk.core.domain.entity.InternalException
 import com.nabla.sdk.core.domain.entity.InternalException.Companion.asNablaInternal
 import com.nabla.sdk.reactnative.core.models.toCoreMap
 import com.nabla.sdk.reactnative.core.nablaclient.NablaClientModule

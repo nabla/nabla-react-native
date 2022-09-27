@@ -2,52 +2,73 @@ import Foundation
 import NablaCore
 import NablaMessagingCore
 import NablaMessagingUI
+import nabla_react_native_core
 import nabla_react_native_messaging_core
 import UIKit
 
 @objc(NablaMessagingUIModule)
 final class NablaMessagingUIModule: NSObject {
-    
+
     private var nablaNavigationController: UINavigationController?
-    
+
     @objc(navigateToInbox)
     func navigateToInbox() {
         DispatchQueue.main.async {
-            self.presentNavigationController(
-                rootViewController: NablaClient.shared.messaging.views.createInboxViewController(delegate: self)
-            )
+            if let appRootViewController = UIApplication.shared.delegate?.window??.rootViewController {
+                self.presentNavigationController(
+                    rootViewController: NablaClient.shared.messaging.views.createInboxViewController(delegate: self),
+                    from: appRootViewController
+                )
+            } else {
+                CoreLogger.sharedInstance.error(message: "Missing Application window rootViewController")
+            }
         }
     }
-    
-    @objc(navigateToConversation:showComposer:)
-    func navigateToConversation(_ conversationIdMap: Dictionary<String, Any>, showComposer: Bool) {
+
+    @objc(navigateToConversation:showComposer:callback:)
+    func navigateToConversation(
+        _ conversationIdMap: [String: Any],
+        showComposer: Bool,
+        callback: @escaping RCTResponseSenderBlock
+    ) {
         guard let conversationId = conversationIdMap.asConversationId else {
+            let message = "Unable to parse conversationId: `\(conversationIdMap)`"
+            CoreLogger.sharedInstance.warning(message: message)
+            callback([InternalError.createDictionaryRepresentation(message: message)])
             return
         }
         DispatchQueue.main.async {
             let conversationViewController = NablaClient.shared.messaging.views
-                .createConversationViewController(
-                    conversationId,
-                    showComposer: showComposer
-                )
-            self.presentNavigationController(rootViewController: conversationViewController)
+                    .createConversationViewController(
+                        conversationId,
+                        showComposer: showComposer
+                    )
+            if let appRootViewController = UIApplication.shared.delegate?.window??.rootViewController {
+                self.presentNavigationController(rootViewController: conversationViewController, from: appRootViewController)
+                callback([NSNull()])
+            } else {
+                let message = "Missing Application window rootViewController"
+                CoreLogger.sharedInstance.warning(message: message)
+                callback([InternalError.createDictionaryRepresentation(message: message)])
+                return
+            }
         }
     }
-    
-    @objc func dismissNavigationController() {
-        nablaNavigationController?.dismiss(animated: true)
-        nablaNavigationController = nil
-    }
-    
+
     @objc(requiresMainQueueSetup)
     static func requiresMainQueueSetup() -> Bool {
         false
     }
-    
-    private func presentNavigationController(rootViewController viewController: UIViewController) {
-        guard let rootViewController = UIApplication.shared.delegate?.window??.rootViewController else {
-            return
-        }
+
+    @objc private func dismissNavigationController() {
+        nablaNavigationController?.dismiss(animated: true)
+        nablaNavigationController = nil
+    }
+
+    private func presentNavigationController(
+        rootViewController viewController: UIViewController,
+        from presentingViewController: UIViewController
+    ) {
         nablaNavigationController = UINavigationController(
             rootViewController: viewController
         )
@@ -62,7 +83,7 @@ final class NablaMessagingUIModule: NSObject {
         nablaNavigationController?.navigationBar.scrollEdgeAppearance = appearance
         nablaNavigationController?.modalPresentationStyle = .fullScreen
         nablaNavigationController.map {
-            rootViewController.present($0, animated: true)
+            presentingViewController.present($0, animated: true)
         }
     }
 }
@@ -71,11 +92,11 @@ extension NablaMessagingUIModule: InboxDelegate {
     func inbox(didCreate conversation: Conversation) {
         pushConversationViewController(conversation: conversation)
     }
-    
+
     func inbox(didSelect conversation: Conversation) {
         pushConversationViewController(conversation: conversation)
     }
-    
+
     private func pushConversationViewController(conversation: Conversation) {
         let conversationViewController = NablaClient.shared.messaging.views.createConversationViewController(conversation.id)
         conversationViewController.navigationItem.largeTitleDisplayMode = .never

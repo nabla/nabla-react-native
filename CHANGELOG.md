@@ -4,6 +4,8 @@
 
 ### Added
 
+- Added `Logger` interface with a default `ConsoleLogger` implementation to display react native and native logs.
+- Added optional error and success callbacks in `NablaMessagingUI.navigateToConversation`
 - Added `NablaMessagingClient.retrySendingMessage` in `NablaMessagingCore`
 - Added `initialMessage` param to `NablaMessagingClient.createConversation` in `NablaMessagingCore`
 - Added `NablaMessagingClient.createDraftConversation` to `NablaMessagingCore`

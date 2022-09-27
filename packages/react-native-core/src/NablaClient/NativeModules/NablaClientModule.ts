@@ -1,5 +1,5 @@
 import { NativeModule, NativeModules, Platform } from 'react-native';
-import { NetworkConfiguration } from '../types';
+import { NetworkConfiguration } from '../../types';
 
 const LINKING_ERROR =
   `The package '@nabla/react-native-messaging-core' doesn't seem to be linked. Make sure: \n\n` +

@@ -14,7 +14,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.suspendCancellableCoroutine
 
 class NablaClientModule(
-    reactContext: ReactApplicationContext,
+    reactContext: ReactApplicationContext
 ) : ReactContextBaseJavaModule(reactContext), SessionTokenProvider {
 
     override fun getName() = "NablaClientModule"
@@ -22,7 +22,11 @@ class NablaClientModule(
     private var currentUserId: String? = null
 
     @ReactMethod
-    fun initialize(apiKey: String, networkConfiguration: ReadableMap?, promise: Promise) {
+    fun initialize(
+        apiKey: String,
+        networkConfiguration: ReadableMap?,
+        promise: Promise,
+    ) {
         if (networkConfiguration != null) {
             val scheme = networkConfiguration.getString("scheme")
             val domain = networkConfiguration.getString("domain")
@@ -35,19 +39,27 @@ class NablaClientModule(
 
                 NablaClient.initialize(
                     modules = MODULES,
-                    configuration = Configuration(publicApiKey = apiKey),
+                    configuration = Configuration(
+                        publicApiKey = apiKey,
+                        logger = CoreLogger),
                     networkConfiguration = NetworkConfiguration(baseUrl = baseUrl)
                 )
             } else {
                 NablaClient.initialize(
                     modules = MODULES,
-                    configuration = Configuration(publicApiKey = apiKey)
+                    configuration = Configuration(
+                        publicApiKey = apiKey,
+                        logger = CoreLogger
+                    )
                 )
             }
         } else {
             NablaClient.initialize(
                 modules = MODULES,
-                configuration = Configuration(publicApiKey = apiKey)
+                configuration = Configuration(
+                    publicApiKey = apiKey,
+                    logger = CoreLogger
+                )
             )
         }
         promise.resolve(null)
