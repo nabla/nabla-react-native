@@ -12,11 +12,11 @@ You'll also need to have the React Native environment setup to build the app.
 
 1. Clone the repository
 2. Head to [https://`your_organisation_id`.pro.nabla.com/developers/sdk-setup-guide]()
-3. Follow the setup guide to create a test patient and get your public API key and temporary `access_token` and `refresh_token` to use for the demo
+3. Follow the setup guide to create a test patient and get your mobile SDK API key and temporary `access_token` and `refresh_token` to use for the demo
 
 > At this stage, you should have a public API key and 2 tokens
 
-4. Open the `src/App.tsx` file and replace the value of `apiKey` with the public API key, and the `accessToken` and `refreshToken` values with the 2 tokens.
+4. Open the `src/App.tsx` file and replace the value of `apiKey` with the mobile SDK API key, and the `accessToken` and `refreshToken` values with the 2 tokens.
 5. ```sh
    yarn install
    cd ios && pod install && cd ..
