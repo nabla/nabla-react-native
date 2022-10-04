@@ -14,6 +14,8 @@
 
 ### Fixed
 
+- [_iOS_] Fixed some colors when the phone is in Dark appearance
+
 ### Versions
 
 - `@nabla/react-native-scheduling`
