@@ -14,6 +14,7 @@
 
 ### Fixed
 
+- [_Android_] Fixed sample app backward compatibility by enabling desugaring
 - [_iOS_] Fixed some colors when the phone is in Dark appearance
 
 ### Versions

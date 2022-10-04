@@ -137,6 +137,10 @@ android {
         versionCode 1
         versionName "1.0"
     }
+    compileOptions {
+        // Flag to enable support for the new language APIs
+        coreLibraryDesugaringEnabled true
+    }
     splits {
         abi {
             reset()
@@ -216,6 +220,8 @@ dependencies {
     } else {
         implementation jscFlavor
     }
+
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 }
 
 // Run this once to be able to run the application with BUCK
