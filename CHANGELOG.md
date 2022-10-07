@@ -4,6 +4,19 @@
 
 ### Added
 
+### Changed
+
+### Fixed
+
+### Versions
+
+- Android: `1.0.0-alpha13`
+- iOS: `1.0.0-alpha19`
+
+## [1.0.0-alpha05] - 2022-10-07
+
+### Added
+
 - Added `Logger` interface with a default `ConsoleLogger` implementation to display react native and native logs.
 - Added optional error and success callbacks in `NablaMessagingUI.navigateToConversation`
 - Added `NablaMessagingClient.retrySendingMessage` in `NablaMessagingCore`
