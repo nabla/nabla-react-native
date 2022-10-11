@@ -1,0 +1,82 @@
+{
+  "name": "@nabla/messaging-sample-app",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
+    "test": "jest",
+    "lint": "yarn lint-ci --fix",
+    "lint-ci": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "compile-packages": "./scripts/compile_packages.sh",
+    "upgrade-packages": "./scripts/upgrade_packages.sh",
+    "refresh-packages": "yarn compile-packages && yarn upgrade-packages",
+    "preinstall": "yarn compile-packages",
+    "postinstall": "yarn upgrade-packages",
+    "clean": "rm -rf ./node_modules"
+  },
+  "dependencies": {
+    "@nabla/react-native-core": "./../packages/react-native-core",
+    "@nabla/react-native-messaging-core": "./../packages/react-native-messaging-core",
+    "@nabla/react-native-messaging-ui": "./../packages/react-native-messaging-ui",
+    "@nabla/react-native-video-call": "./../packages/react-native-video-call",
+    "react": "17.0.2",
+    "react-native": "0.67.1",
+    "react-native-paper": "^4.12.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.16.12",
+    "@babel/runtime": "^7.16.7",
+    "@react-native-community/eslint-config": "^3.0.1",
+    "@types/jest": "^27.4.0",
+    "@types/react-native": "^0.66.15",
+    "@types/react-test-renderer": "^17.0.1",
+    "@typescript-eslint/eslint-plugin": "^5.7.0",
+    "@typescript-eslint/parser": "^5.7.0",
+    "babel-jest": "^27.4.6",
+    "eslint": "^7.32.0",
+    "jest": "^27.4.7",
+    "metro-react-native-babel-preset": "^0.67.0",
+    "prettier": "^2.3.2",
+    "react-test-renderer": "17.0.2",
+    "typescript": "^4.5.5"
+  },
+  "resolutions": {
+    "@types/react": "^17",
+    "@nabla/react-native-core": "./../packages/react-native-core",
+    "@nabla/react-native-messaging-core": "./../packages/react-native-messaging-core"
+  },
+  "jest": {
+    "preset": "react-native",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "@react-native-community"
+    ],
+    "rules": {
+      "no-shadow": "off",
+      "@typescript-eslint/no-shadow": [
+        "error"
+      ]
+    }
+  },
+  "eslintIgnore": [
+    "node_modules/",
+    "lib/",
+    "dist/"
+  ],
+  "prettier": {
+    "quoteProps": "consistent",
+    "trailingComma": "all",
+    "singleQuote": true
+  }
+}

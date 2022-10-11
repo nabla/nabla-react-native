@@ -9,6 +9,7 @@
 ### Changed
 
 - Optional `successCallback` in `navigateToConversation` is now `dismissCallback` in `NablaMessagingUI`.
+- ReactNativeSampleApp app has been renamed to `Messaging Sample App` to better reflect what it showcases.
 
 ### Fixed
 
