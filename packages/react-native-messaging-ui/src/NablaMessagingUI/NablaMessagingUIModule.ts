@@ -9,7 +9,7 @@ const LINKING_ERROR =
   '- You are not using Expo managed workflow\n';
 
 interface NablaMessagingUIModule extends NativeModule {
-  navigateToInbox(): void;
+  navigateToInbox(callback: Callback<void>): void;
   navigateToConversation(
     conversationId: ConversationId,
     showComposer: boolean,

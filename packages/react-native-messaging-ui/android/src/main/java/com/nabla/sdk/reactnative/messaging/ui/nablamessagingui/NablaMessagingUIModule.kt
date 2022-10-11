@@ -1,27 +1,45 @@
 package com.nabla.sdk.reactnative.messaging.ui.nablamessagingui
 
+import android.app.Activity
 import android.content.Intent
+import android.util.SparseArray
 import com.facebook.react.bridge.*
 import com.nabla.sdk.core.annotation.NablaInternal
-import com.nabla.sdk.reactnative.core.nablaclient.CoreLogger
 import com.nabla.sdk.core.domain.entity.InternalException.Companion.asNablaInternal
+import com.nabla.sdk.reactnative.core.nablaclient.CoreLogger
 import com.nabla.sdk.reactnative.messaging.core.models.toConversationId
 import com.nabla.sdk.reactnative.messaging.core.models.toMap
+import kotlin.random.Random
 
 @OptIn(NablaInternal::class)
-class NablaMessagingUIModule(
-    reactContext: ReactApplicationContext,
-) : ReactContextBaseJavaModule(reactContext) {
+internal class NablaMessagingUIModule(
+    private val reactContext: ReactApplicationContext,
+) : ReactContextBaseJavaModule(reactContext), ActivityEventListener {
     override fun getName() = "NablaMessagingUIModule"
 
+    private val resultCallbacks: SparseArray<Callback> = SparseArray()
+
+    override fun initialize() {
+        super.initialize()
+        reactContext.addActivityEventListener(this)
+    }
+
+    override fun invalidate() {
+        reactContext.removeActivityEventListener(this)
+        super.invalidate()
+    }
+
     @ReactMethod
-    fun navigateToInbox() {
+    fun navigateToInbox(callback: Callback) {
         try {
-            requireNotNull(currentActivity).let {
-                it.startActivity(Intent(it, NablaInboxActivity::class.java))
+            requireNotNull(currentActivity).let { currentActivity ->
+                val requestCode = randomPositiveInt()
+                resultCallbacks.put(requestCode, callback)
+                currentActivity.startActivityForResult(Intent(currentActivity, NablaInboxActivity::class.java), requestCode)
             }
         } catch (e: Exception) {
-            CoreLogger.error("Missing currentActivity in `NablaMessagingUIModule`")
+            CoreLogger.warn("An error occurred while navigating to the InboxScreen", e)
+            callback(e.asNablaInternal().toMap())
             return
         }
     }
@@ -39,25 +57,42 @@ class NablaMessagingUIModule(
             return
         }
         try {
-            requireNotNull(currentActivity).let {
-                it.startActivity(
-                    Intent(it, NablaConversationActivity::class.java)
+            requireNotNull(currentActivity).let { currentActivity ->
+                val requestCode = randomPositiveInt()
+                resultCallbacks.put(requestCode, callback)
+
+                currentActivity.startActivityForResult(
+                    Intent(currentActivity, NablaConversationActivity::class.java)
                         .apply {
-                            putExtra(CONVERSATION_ID_EXTRA, conversationId)
-                            putExtra(SHOW_COMPOSER_EXTRA, showComposer)
-                        }
+                            putExtra(NablaConversationActivity.CONVERSATION_ID_EXTRA,
+                                conversationId)
+                            putExtra(NablaConversationActivity.SHOW_COMPOSER_EXTRA, showComposer)
+                        },
+                    requestCode,
                 )
             }
         } catch (e: Exception) {
-            CoreLogger.warn("Missing currentActivity in `NablaMessagingUIModule`")
+            CoreLogger.warn("An error occurred while navigating to the ConversationScreen", e)
             callback(e.asNablaInternal().toMap())
             return
         }
-        callback(null)
     }
 
-    companion object {
-        const val CONVERSATION_ID_EXTRA = "conversationId"
-        const val SHOW_COMPOSER_EXTRA = "showComposer"
+    private fun randomPositiveInt(): Int = Random.nextInt(from = 0, until = Int.MAX_VALUE)
+
+    override fun onActivityResult(
+        activity: Activity,
+        requestCode: Int,
+        resultCode: Int,
+        data: Intent?,
+    ) {
+        val callback = resultCallbacks.get(requestCode) ?: return
+
+        resultCallbacks.remove(requestCode)
+        callback.invoke(null)
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        // No-op
     }
 }

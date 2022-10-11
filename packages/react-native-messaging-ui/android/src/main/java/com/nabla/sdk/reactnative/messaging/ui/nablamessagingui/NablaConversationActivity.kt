@@ -1,11 +1,10 @@
 package com.nabla.sdk.reactnative.messaging.ui.nablamessagingui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.benasher44.uuid.Uuid
-import com.nabla.sdk.messaging.ui.scene.messages.ConversationFragment
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 import com.nabla.sdk.messaging.core.domain.entity.ConversationId
+import com.nabla.sdk.messaging.ui.scene.messages.ConversationFragment
 import com.nabla.sdk.reactnative.messaging.ui.R
 
 internal class NablaConversationActivity : AppCompatActivity() {
@@ -15,10 +14,8 @@ internal class NablaConversationActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
 
-            val conversationId =
-                intent.getParcelableExtra<ConversationId>(CONVERSATION_ID_EXTRA)
-            val showComposer =
-                intent.getSerializableExtra(SHOW_COMPOSER_EXTRA) as Boolean
+            val conversationId = intent.getParcelableExtra<ConversationId>(CONVERSATION_ID_EXTRA)
+            val showComposer = intent.getSerializableExtra(SHOW_COMPOSER_EXTRA) as Boolean
 
             supportFragmentManager.commit {
                 val conversationFragment = ConversationFragment.newInstance(conversationId!!) {

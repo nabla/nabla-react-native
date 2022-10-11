@@ -1,7 +1,7 @@
 import { nablaVideoCallClientModule } from './NablaVideoCallClientModule';
 import { VideoCallRoom } from '../types';
-import { NablaError } from '@nabla/react-native-core'
-import { merge, mapCoreError } from '@nabla/react-native-core/lib/internal'
+import { NablaError } from '@nabla/react-native-core';
+import { mapCoreError, mergeVoid } from '@nabla/react-native-core/lib/internal';
 
 /**
  * Main entry-point to SDK-wide features.
@@ -27,7 +27,7 @@ export class NablaVideoCallClient {
                                   successCallback: () => void) {
     nablaVideoCallClientModule.joinVideoCall(
       room,
-      merge(mapCoreError, errorCallback, successCallback)
+      mergeVoid(mapCoreError, errorCallback, successCallback),
     );
   }
 }

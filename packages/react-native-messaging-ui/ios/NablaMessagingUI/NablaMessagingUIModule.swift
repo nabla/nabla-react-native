@@ -10,17 +10,25 @@ import UIKit
 final class NablaMessagingUIModule: NSObject {
 
     private var nablaNavigationController: UINavigationController?
+    private var navigateToInboxCallback: (() -> Void)?
+    private var navigateToConversationCallback: (() -> Void)?
 
-    @objc(navigateToInbox)
-    func navigateToInbox() {
+    @objc(navigateToInbox:)
+    func navigateToInbox(callback: @escaping RCTResponseSenderBlock) {
         DispatchQueue.main.async {
             if let appRootViewController = UIApplication.shared.delegate?.window??.rootViewController {
                 self.presentNavigationController(
                     rootViewController: NablaClient.shared.messaging.views.createInboxViewController(delegate: self),
                     from: appRootViewController
                 )
+                self.navigateToInboxCallback = {
+                    callback([NSNull()])
+                    self.navigateToInboxCallback = nil
+                }
             } else {
-                CoreLogger.sharedInstance.error(message: "Missing Application window rootViewController")
+                let message = "Unable to open inbox screen"
+                CoreLogger.sharedInstance.warning(message: message)
+                callback([InternalError.createDictionaryRepresentation(message: message)])
             }
         }
     }
@@ -45,9 +53,12 @@ final class NablaMessagingUIModule: NSObject {
                     )
             if let appRootViewController = UIApplication.shared.delegate?.window??.rootViewController {
                 self.presentNavigationController(rootViewController: conversationViewController, from: appRootViewController)
-                callback([NSNull()])
+                self.navigateToConversationCallback = {
+                    callback([NSNull()])
+                    self.navigateToConversationCallback = nil
+                }
             } else {
-                let message = "Missing Application window rootViewController"
+                let message = "Unable to open ConversationScreen"
                 CoreLogger.sharedInstance.warning(message: message)
                 callback([InternalError.createDictionaryRepresentation(message: message)])
                 return
@@ -63,6 +74,8 @@ final class NablaMessagingUIModule: NSObject {
     @objc private func dismissNavigationController() {
         nablaNavigationController?.dismiss(animated: true)
         nablaNavigationController = nil
+        navigateToInboxCallback?()
+        navigateToConversationCallback?()
     }
 
     private func presentNavigationController(

@@ -4,9 +4,15 @@
 
 ### Added
 
+- Added optional `dismissCallback` to `navigateToInbox` in `NablaMessagingUI`.
+
 ### Changed
 
+- Optional `successCallback` in `navigateToConversation` is now `dismissCallback` in `NablaMessagingUI`.
+
 ### Fixed
+
+- Fixed an issue that prevent success callback from being called when the result is `void`.
 
 ### Versions
 

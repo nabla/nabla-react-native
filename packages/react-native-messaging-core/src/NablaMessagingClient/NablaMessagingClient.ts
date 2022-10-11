@@ -1,7 +1,7 @@
 import { NativeEventEmitter } from 'react-native';
 import equal from 'fast-deep-equal/es6';
 import { NablaError } from '@nabla/react-native-core';
-import { NativeError, merge } from '@nabla/react-native-core/lib/internal';
+import { NativeError, merge, mergeVoid } from '@nabla/react-native-core/lib/internal';
 import {
   conversationItemsWatcherModule,
   conversationListWatcherModule,
@@ -102,7 +102,7 @@ export class NablaMessagingClient {
     successCallback: () => void,
   ): void {
     conversationListWatcherModule.loadMoreConversations(
-      merge(mapError, errorCallback, successCallback),
+      mergeVoid(mapError, errorCallback, successCallback),
     );
   }
 
@@ -255,7 +255,7 @@ export class NablaMessagingClient {
   ) {
     conversationItemsWatcherModule.loadMoreItemsInConversation(
       conversationId,
-      merge(mapError, errorCallback, successCallback),
+      mergeVoid(mapError, errorCallback, successCallback),
     );
   }
 
@@ -278,7 +278,7 @@ export class NablaMessagingClient {
       input.serialize(),
       conversationId,
       replyTo,
-      merge(mapError, errorCallback, successCallback),
+      mergeVoid(mapError, errorCallback, successCallback),
     );
   }
 
@@ -298,7 +298,7 @@ export class NablaMessagingClient {
     nablaMessagingClientModule.retrySendingMessage(
       messageId,
       conversationId,
-      merge(mapError, errorCallback, successCallback),
+      mergeVoid(mapError, errorCallback, successCallback),
     );
   }
 
@@ -318,7 +318,7 @@ export class NablaMessagingClient {
     nablaMessagingClientModule.deleteMessage(
       messageId,
       conversationId,
-      merge(mapError, errorCallback, successCallback),
+      mergeVoid(mapError, errorCallback, successCallback),
     );
   }
 
@@ -335,7 +335,7 @@ export class NablaMessagingClient {
   ) {
     nablaMessagingClientModule.markConversationAsSeen(
       conversationId,
-      merge(mapError, errorCallback, successCallback),
+      mergeVoid(mapError, errorCallback, successCallback),
     );
   }
 
@@ -355,7 +355,7 @@ export class NablaMessagingClient {
     nablaMessagingClientModule.setIsTyping(
       isTyping,
       conversationId,
-      merge(mapError, errorCallback, successCallback),
+      mergeVoid(mapError, errorCallback, successCallback),
     );
   }
 }
