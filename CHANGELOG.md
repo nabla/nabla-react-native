@@ -4,6 +4,19 @@
 
 ### Added
 
+### Changed
+
+### Fixed
+
+### Versions
+
+- Android: `1.0.0-alpha15`
+- iOS: `1.0.0-alpha19`
+- 
+## [1.0.0-alpha06] - 2022-10-14
+
+### Added
+
 - Added optional `dismissCallback` to `navigateToInbox` in `NablaMessagingUI`.
 
 ### Changed
