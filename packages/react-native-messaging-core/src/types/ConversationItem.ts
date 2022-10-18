@@ -25,12 +25,12 @@ export type VideoCallRoomInteractiveMessage = {
   sender: ConversationItemSender;
   videoCallRoomInteractiveMessage:
     | {
-    status: 'closed';
-  }
+        status: 'closed';
+      }
     | {
-    status: 'open';
-    room: VideoCallRoom;
-  };
+        status: 'open';
+        room: VideoCallRoom;
+      };
 };
 
 type DeletedMessageItemContent = {
@@ -42,10 +42,20 @@ type TextMessageItemContent = {
   text: string;
 };
 
+type MediaContent =
+  | {
+      type: 'url';
+      fileURL: string;
+    }
+  | {
+      type: 'base64Data';
+      data: string;
+    };
+
 type Media = {
   fileName: string;
-  fileURL: string;
   mimeType: string;
+  content: MediaContent;
 };
 
 type MediaSize = {
@@ -107,4 +117,4 @@ export type ConversationItem = { createdAt: Date } & (
   | ConversationActivity
   | ConversationMessage
   | VideoCallRoomInteractiveMessage
-  );
+);

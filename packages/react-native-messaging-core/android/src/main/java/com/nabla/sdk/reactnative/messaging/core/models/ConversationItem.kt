@@ -61,7 +61,10 @@ private fun ConversationItem.toMap(): ReadableMap {
                         is Message.Media<*, *> -> {
                             val mediaMap = Arguments.createMap()
                             mediaMap.putString("fileName", fileName)
-                            mediaMap.putString("fileURL", stableUri.toString())
+                            mediaMap.putMap("content", Arguments.createMap().apply {
+                                putString("type", "url")
+                                putString("fileURL", stableUri.toString())
+                            })
                             mediaMap.putString("mimeType", mimeType.stringRepresentation)
                             when (this) {
                                 is Message.Media.Image -> {

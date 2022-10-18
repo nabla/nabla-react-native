@@ -1,1 +1,1 @@
-export { mapError } from '../NablaMessagingClient/types'
+export { mapError } from '../NablaMessagingClient/types';

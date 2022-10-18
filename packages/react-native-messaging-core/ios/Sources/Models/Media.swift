@@ -14,7 +14,19 @@ extension Media {
     var dictionaryRepresentation: [String: Any] {
         var result = [String: Any]()
         result["fileName"] = fileName
-        result["fileURL"] = fileUrl.absoluteString
+
+        switch content {
+        case let .url(url):
+            result["content"] = [
+                "type": "url",
+                "fileURL": url.absoluteString
+            ]
+        case let .data(data):
+            result["content"] = [
+                "type": "base64Data",
+                "data": data.base64EncodedString()
+            ]
+        }
         result["mimeType"] = mimeType.dictionaryValue
         switch self {
         case let imageFile as ImageFile:

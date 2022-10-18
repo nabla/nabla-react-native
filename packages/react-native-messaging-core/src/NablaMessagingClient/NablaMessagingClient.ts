@@ -1,7 +1,11 @@
 import { NativeEventEmitter } from 'react-native';
 import equal from 'fast-deep-equal/es6';
 import { NablaError } from '@nabla/react-native-core';
-import { NativeError, merge, mergeVoid } from '@nabla/react-native-core/lib/internal';
+import {
+  NativeError,
+  merge,
+  mergeVoid,
+} from '@nabla/react-native-core/lib/internal';
 import {
   conversationItemsWatcherModule,
   conversationListWatcherModule,
@@ -119,13 +123,13 @@ export class NablaMessagingClient {
     successCallback: (conversationId: ConversationId) => void,
     title?: string,
     providerIds?: string[],
-    initialMessage?: MessageInput
+    initialMessage?: MessageInput,
   ) {
     nablaMessagingClientModule.createConversation(
       title,
       providerIds,
       initialMessage?.serialize(),
-      merge(mapError, errorCallback, successCallback)
+      merge(mapError, errorCallback, successCallback),
     );
   }
 

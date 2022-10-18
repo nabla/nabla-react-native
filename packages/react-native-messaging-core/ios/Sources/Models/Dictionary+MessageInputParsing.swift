@@ -56,7 +56,7 @@ extension Dictionary where Key == String, Value: Any {
             return nil
         }
 
-        return .image(content: .init(fileName: filename, fileUrl: url, size: nil, mimeType: mimetype))
+        return .image(content: .init(fileName: filename, content: .url(url), size: nil, mimeType: mimetype))
     }
 
     private func parseVideoMessage() -> MessageInput? {
@@ -87,7 +87,7 @@ extension Dictionary where Key == String, Value: Any {
             return nil
         }
 
-        return .video(content: .init(fileName: filename, fileUrl: url, size: nil, mimeType: mimetype))
+        return .video(content: .init(fileName: filename, content: .url(url), size: nil, mimeType: mimetype))
     }
 
     private func parseDocumentMessage() -> MessageInput? {
@@ -117,7 +117,7 @@ extension Dictionary where Key == String, Value: Any {
             return nil
         }
 
-        return .document(content: .init(fileName: filename, fileUrl: url, thumbnailUrl: nil, mimeType: mimetype))
+        return .document(content: .init(fileName: filename, content: .url(url), thumbnailUrl: nil, mimeType: mimetype))
     }
 
     private func parseAudioMessage() -> MessageInput? {
@@ -151,6 +151,6 @@ extension Dictionary where Key == String, Value: Any {
             return nil
         }
 
-        return .audio(content: .init(fileName: filename, fileUrl: url, durationMs: durationMs, mimeType: mimetype))
+        return .audio(content: .init(fileName: filename, content: .url(url), durationMs: durationMs, mimeType: mimetype))
     }
 }
