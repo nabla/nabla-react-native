@@ -10,6 +10,10 @@
 
 ### Versions
 
+## [1.0.0-alpha07] - 2022-10-18
+
+### Versions
+
 - Android: `1.0.0-alpha15`
 - iOS: `1.0.0-alpha20`
 
