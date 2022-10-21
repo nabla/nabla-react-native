@@ -8,6 +8,8 @@
 
 ### Fixed
 
+- Disambiguate the `Logger` protocol usage iOS Core pod.  
+
 ### Versions
 
 ## [1.0.0-alpha07] - 2022-10-18
