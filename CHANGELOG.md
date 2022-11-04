@@ -4,6 +4,19 @@
 
 ### Added
 
+### Changed
+
+### Fixed
+
+### Versions
+
+- Android: `1.0.0-alpha18`
+- iOS: `1.0.0-alpha21`
+
+## [1.0.0-alpha08] - 2022-11-04
+
+### Added
+
 - New Messaging UI feature: You can now scan (with the camera) and send multi-page documents in conversations.
 - Added a new `pictureURL` attribute on `Conversation` type. 
 - Added support for group chats with multiple patients and providers.
