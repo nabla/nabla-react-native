@@ -62,12 +62,11 @@ internal class NablaMessagingUIModule(
                 resultCallbacks.put(requestCode, callback)
 
                 currentActivity.startActivityForResult(
-                    Intent(currentActivity, NablaConversationActivity::class.java)
-                        .apply {
-                            putExtra(NablaConversationActivity.CONVERSATION_ID_EXTRA,
-                                conversationId)
-                            putExtra(NablaConversationActivity.SHOW_COMPOSER_EXTRA, showComposer)
-                        },
+                    NablaConversationActivity.newIntent(
+                        context = currentActivity,
+                        conversationId = conversationId,
+                        showComposer = showComposer,
+                    ),
                     requestCode,
                 )
             }

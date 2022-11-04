@@ -1,5 +1,7 @@
 package com.nabla.sdk.reactnative.messaging.ui.nablamessagingui
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
@@ -21,14 +23,22 @@ internal class NablaConversationActivity : AppCompatActivity() {
                 val conversationFragment = ConversationFragment.newInstance(conversationId!!) {
                     setShowComposer(showComposer)
                 }
-
                 add(R.id.fragmentContainer, conversationFragment, "conversationFragmentTag")
             }
         }
     }
 
     companion object {
-        const val CONVERSATION_ID_EXTRA = "conversationId"
-        const val SHOW_COMPOSER_EXTRA = "showComposer"
+        private const val CONVERSATION_ID_EXTRA = "conversationId"
+        private const val SHOW_COMPOSER_EXTRA = "showComposer"
+
+        fun newIntent(
+            context: Context,
+            conversationId: ConversationId,
+            showComposer: Boolean
+        ): Intent = Intent(context, NablaConversationActivity::class.java).apply {
+            putExtra(CONVERSATION_ID_EXTRA, conversationId)
+            putExtra(SHOW_COMPOSER_EXTRA, showComposer)
+        }
     }
 }

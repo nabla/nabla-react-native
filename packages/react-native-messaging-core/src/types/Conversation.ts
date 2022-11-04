@@ -8,6 +8,7 @@ export class Conversation {
   lastMessagePreview?: string;
   lastModified: Date;
   patientUnreadMessageCount: number;
+  pictureURL?: string;
   providers: ProviderInConversation[];
 
   constructor(
@@ -18,6 +19,7 @@ export class Conversation {
     providers: ProviderInConversation[],
     title?: string,
     lastMessagePreview?: string,
+    pictureURL?: string,
   ) {
     this.id = id;
     this.title = title;
@@ -25,6 +27,7 @@ export class Conversation {
     this.lastMessagePreview = lastMessagePreview;
     this.lastModified = lastModified;
     this.patientUnreadMessageCount = patientUnreadMessageCount;
+    this.pictureURL = pictureURL;
     this.providers = providers;
   }
 }

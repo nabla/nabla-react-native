@@ -10,8 +10,6 @@ internal fun MessageAuthor.toMap(): ReadableMap? = Arguments.createMap().also {
             it.putString("type", "Provider")
             it.putMap("provider", provider.toMap())
         }
-        MessageAuthor.Patient ->
-            it.putString("type", "Patient")
         is MessageAuthor.System -> {
             it.putString("type", "System")
             it.putMap("system", system.toMap())
@@ -20,5 +18,10 @@ internal fun MessageAuthor.toMap(): ReadableMap? = Arguments.createMap().also {
             it.putString("type", "Deleted")
         MessageAuthor.Unknown ->
             it.putString("type", "Unknown")
+        MessageAuthor.Patient.Current -> it.putString("type", "Me")
+        is MessageAuthor.Patient.Other -> {
+            it.putString("type", "Patient")
+            it.putMap("patient", this.patient.toMap())
+        }
     }
 }

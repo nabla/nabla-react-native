@@ -1,8 +1,8 @@
 import { nablaMessagingUIModule } from './NablaMessagingUIModule';
 import { ConversationId } from '@nabla/react-native-messaging-core';
 import { NablaError } from '@nabla/react-native-core';
-import { mergeVoid } from '@nabla/react-native-core/lib/internal';
 import { mapError } from '@nabla/react-native-messaging-core/lib/internal';
+import { mergeVoid } from '@nabla/react-native-core/lib/internal';
 
 /**
  * Main entry-point for Messaging UI features.
@@ -39,6 +39,7 @@ export class NablaMessagingUI {
         mapError,
         errorCallback,
         dismissCallback,
-      ));
+      ),
+    );
   }
 }

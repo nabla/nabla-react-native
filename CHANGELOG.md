@@ -4,6 +4,12 @@
 
 ### Added
 
+- New Messaging UI feature: You can now scan (with the camera) and send multi-page documents in conversations.
+- Added a new `pictureURL` attribute on `Conversation` type. 
+- Added support for group chats with multiple patients and providers.
+  + A new `ConversationItemSender` `Patient` type was introduced for conversations with multiple patients.
+  + `ConversationItemSender` `Patient` type was rename to `Me`.
+
 ### Changed
 
 ### Fixed
@@ -11,6 +17,9 @@
 - Disambiguate the `Logger` protocol usage iOS Core pod.  
 
 ### Versions
+
+- Android: `1.0.0-alpha18`
+- iOS: `1.0.0-alpha21`
 
 ## [1.0.0-alpha07] - 2022-10-18
 

@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   s.source_files  = "ios/Sources/**/*.{h,m,swift}"
 
   s.dependency 'React-Core'
-  s.dependency 'NablaCore', '1.0.0-alpha20'
+  s.dependency 'NablaCore', '1.0.0-alpha21'
 
   s.test_spec 'Tests' do |test_spec|
     test_spec.source_files= "ios/Tests/**/*.{h,m,swift}"

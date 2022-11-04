@@ -98,7 +98,8 @@ type ConversationMessageContent =
   | DocumentMessageItemContent;
 
 export type ConversationItemSender =
-  | { type: 'Patient' }
+  | { type: 'Me' }
+  | { type: 'Patient'; patient: { id: string; displayName: string } }
   | { type: 'Provider'; provider: Provider }
   | { type: 'System'; system: { name: string; avatarURL: string | undefined } }
   | { type: 'Deleted' }

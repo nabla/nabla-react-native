@@ -20,6 +20,7 @@ internal fun Conversation.toMap(): ReadableMap {
         putString("lastMessagePreview", lastMessagePreview)
         putString("lastModified", lastModified.toString())
         putInt("patientUnreadMessageCount", patientUnreadMessageCount)
+        pictureUrl?.url?.toString()?.let { putString("pictureURL", it) }
         putArray("providers", providersInConversation.toMapArray())
     }
 }

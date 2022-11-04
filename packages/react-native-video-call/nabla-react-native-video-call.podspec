@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
 
   s.dependency 'React-Core'
   s.dependency 'nabla-react-native-core'
-  s.dependency 'NablaVideoCall', '1.0.0-alpha20'
+  s.dependency 'NablaVideoCall', '1.0.0-alpha21'
 
   s.test_spec 'Tests' do |test_spec|
     test_spec.source_files= "ios/Tests/**/*.{h,m,swift}"

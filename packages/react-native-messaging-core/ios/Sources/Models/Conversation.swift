@@ -10,6 +10,7 @@ extension Conversation {
         result["lastMessagePreview"] = lastMessagePreview
         result["lastModified"] = lastModified.iso8601String
         result["patientUnreadMessageCount"] = patientUnreadMessageCount
+        result["pictureURL"] = pictureUrl?.absoluteString
         result["providers"] = providers.map(\.dictionaryRepresentation)
         return result
     }

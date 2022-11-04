@@ -15,8 +15,11 @@ extension ConversationMessageSender {
         case let .provider(provider):
             result["type"] = "Provider"
             result["provider"] = provider.dictionaryRepresentation
-        case .patient:
+        case let .patient(patient):
             result["type"] = "Patient"
+            result["patient"] = patient.dictionaryRepresentation
+        case .me:
+            result["type"] = "Me"
         }
         return result
     }
