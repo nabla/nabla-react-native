@@ -12,6 +12,7 @@ export interface NativeConversation {
   lastModified: string;
   patientUnreadMessageCount: number;
   providers: NativeProviderInConversation[];
+  isLocked: boolean;
 }
 
 export const mapConversation: (
@@ -23,6 +24,7 @@ export const mapConversation: (
     new Date(conversation.lastModified),
     conversation.patientUnreadMessageCount,
     conversation.providers.map(mapProviderInConversation),
+    conversation.isLocked,
     conversation.title,
     conversation.lastMessagePreview,
   );

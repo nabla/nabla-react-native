@@ -1,4 +1,4 @@
-import { AuthTokens, NetworkConfiguration, LogLevel } from '../types';
+import { AuthTokens, Configuration, LogLevel, NetworkConfiguration } from '../types';
 import { EmitterSubscription, NativeEventEmitter } from 'react-native';
 import { nablaClientModule } from './NativeModules/NablaClientModule';
 import { Logger } from './Logger';
@@ -43,17 +43,20 @@ export class NablaClient {
    * NablaClient initializer, you must call this method before using `NablaClient.getInstance()`.
    * You must call this method only once.
    *
-   * @param apiKey Your organisation's API key (created online on Nabla dashboard).
+   * @param configuration Your organisation's configuration containing the API key (created online on Nabla dashboard).
    * @param logger logger used by the SDK. You can replace the default `ConsoleLogger` with your own implementation or adjust the log level using `setLogLevel`.
    * @param networkConfiguration optional network configuration, exposed for internal tests purposes and should not be used in your app.
    */
   public async initialize(
-    apiKey: string,
+    configuration: Configuration,
     networkConfiguration: NetworkConfiguration | undefined = undefined,
     logger: Logger = new ConsoleLogger(),
   ) {
     this.logger = logger;
-    await nablaClientModule.initialize(apiKey, networkConfiguration);
+    await nablaClientModule.initialize(
+      configuration.apiKey,
+      configuration.enableReporting,
+      networkConfiguration);
   }
 
   /**

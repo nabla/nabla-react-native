@@ -24,6 +24,14 @@ public final class CoreLogger {
 
 extension CoreLogger: NablaCore.Logger {
 
+    public func debug(message: @autoclosure () -> String, extra: [String: Any]) {
+        if logLevel.isAtLeast(.debug) {
+            Self.logsSubject.send(
+                Log(level: .debug, message: message(), error: extractNablaErrorFromExtra(extra))
+            )
+        }
+    }
+
     public func info(message: @autoclosure () -> String, extra: [String: Any]) {
         if logLevel.isAtLeast(.info) {
             Self.logsSubject.send(

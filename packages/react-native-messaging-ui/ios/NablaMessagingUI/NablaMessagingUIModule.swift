@@ -33,10 +33,9 @@ final class NablaMessagingUIModule: NSObject {
         }
     }
 
-    @objc(navigateToConversation:showComposer:callback:)
+    @objc(navigateToConversation:callback:)
     func navigateToConversation(
         _ conversationIdMap: [String: Any],
-        showComposer: Bool,
         callback: @escaping RCTResponseSenderBlock
     ) {
         guard let conversationId = conversationIdMap.asConversationId else {
@@ -47,10 +46,7 @@ final class NablaMessagingUIModule: NSObject {
         }
         DispatchQueue.main.async {
             let conversationViewController = NablaClient.shared.messaging.views
-                    .createConversationViewController(
-                        conversationId,
-                        showComposer: showComposer
-                    )
+                    .createConversationViewController(conversationId)
             if let appRootViewController = UIApplication.shared.delegate?.window??.rootViewController {
                 self.presentNavigationController(rootViewController: conversationViewController, from: appRootViewController)
                 self.navigateToConversationCallback = {

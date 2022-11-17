@@ -12,6 +12,7 @@ extension Conversation {
         result["patientUnreadMessageCount"] = patientUnreadMessageCount
         result["pictureURL"] = pictureUrl?.absoluteString
         result["providers"] = providers.map(\.dictionaryRepresentation)
+        result["isLocked"] = isLocked
         return result
     }
 }

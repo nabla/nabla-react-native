@@ -17,12 +17,9 @@ internal class NablaConversationActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
 
             val conversationId = intent.getParcelableExtra<ConversationId>(CONVERSATION_ID_EXTRA)
-            val showComposer = intent.getSerializableExtra(SHOW_COMPOSER_EXTRA) as Boolean
 
             supportFragmentManager.commit {
-                val conversationFragment = ConversationFragment.newInstance(conversationId!!) {
-                    setShowComposer(showComposer)
-                }
+                val conversationFragment = ConversationFragment.newInstance(conversationId!!)
                 add(R.id.fragmentContainer, conversationFragment, "conversationFragmentTag")
             }
         }
@@ -30,15 +27,12 @@ internal class NablaConversationActivity : AppCompatActivity() {
 
     companion object {
         private const val CONVERSATION_ID_EXTRA = "conversationId"
-        private const val SHOW_COMPOSER_EXTRA = "showComposer"
 
         fun newIntent(
             context: Context,
-            conversationId: ConversationId,
-            showComposer: Boolean
+            conversationId: ConversationId
         ): Intent = Intent(context, NablaConversationActivity::class.java).apply {
             putExtra(CONVERSATION_ID_EXTRA, conversationId)
-            putExtra(SHOW_COMPOSER_EXTRA, showComposer)
         }
     }
 }

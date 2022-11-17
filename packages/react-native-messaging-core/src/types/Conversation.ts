@@ -10,6 +10,7 @@ export class Conversation {
   patientUnreadMessageCount: number;
   pictureURL?: string;
   providers: ProviderInConversation[];
+  isLocked: boolean;
 
   constructor(
     id: ConversationId,
@@ -17,6 +18,7 @@ export class Conversation {
     lastModified: Date,
     patientUnreadMessageCount: number,
     providers: ProviderInConversation[],
+    isLocked: boolean,
     title?: string,
     lastMessagePreview?: string,
     pictureURL?: string,
@@ -29,5 +31,6 @@ export class Conversation {
     this.patientUnreadMessageCount = patientUnreadMessageCount;
     this.pictureURL = pictureURL;
     this.providers = providers;
+    this.isLocked = isLocked
   }
 }

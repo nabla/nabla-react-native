@@ -1,4 +1,4 @@
-import { Conversation } from '../../../types';
+import { Conversation, RemoteId } from '../../../types';
 import {
   mapProviderInConversation,
   NativeProviderInConversation,
@@ -19,13 +19,14 @@ describe('mapConversation', () => {
       seenUntil: '2000-01-23T01:23:45.678+09:00',
     };
     let nativeConversation = {
-      id: 'conversationId',
+      id: new RemoteId('conversationId'),
       inboxPreviewTitle: 'inboxPreviewTitle',
       lastModified: '2000-01-23T01:23:45.678+09:00',
       patientUnreadMessageCount: 1,
       providers: [nativeProviderInConversation],
       title: null,
       lastMessagePreview: null,
+      isLocked: true,
     };
     // When
     const result = mapConversation(nativeConversation);
@@ -37,6 +38,7 @@ describe('mapConversation', () => {
         new Date(nativeConversation.lastModified),
         nativeConversation.patientUnreadMessageCount,
         nativeConversation.providers.map(mapProviderInConversation),
+        nativeConversation.isLocked,
         nativeConversation.title,
         nativeConversation.lastMessagePreview,
       ),

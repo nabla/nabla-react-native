@@ -22,19 +22,16 @@ export class NablaMessagingUI {
   /**
    * Launches the Conversation Screen.
    * @param conversationId the id of the conversation to display.
-   * @param showComposer optional flag to show or hide the composer.
    * @param errorCallback optional callback called in case of error. (Bad conversationId)
    * @param dismissCallback optional callback called when screen is dismissed.
    */
   public static navigateToConversation(
     conversationId: ConversationId,
-    showComposer: boolean = true,
     errorCallback: (error: NablaError) => void = () => {},
     dismissCallback: () => void = () => {},
   ) {
     nablaMessagingUIModule.navigateToConversation(
       conversationId,
-      showComposer,
       mergeVoid(
         mapError,
         errorCallback,

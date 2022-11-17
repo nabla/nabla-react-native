@@ -14,7 +14,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.suspendCancellableCoroutine
 
 class NablaClientModule(
-    reactContext: ReactApplicationContext
+    reactContext: ReactApplicationContext,
 ) : ReactContextBaseJavaModule(reactContext), SessionTokenProvider {
 
     override fun getName() = "NablaClientModule"
@@ -24,6 +24,7 @@ class NablaClientModule(
     @ReactMethod
     fun initialize(
         apiKey: String,
+        enableReporting: Boolean,
         networkConfiguration: ReadableMap?,
         promise: Promise,
     ) {
@@ -41,7 +42,9 @@ class NablaClientModule(
                     modules = MODULES,
                     configuration = Configuration(
                         publicApiKey = apiKey,
-                        logger = CoreLogger),
+                        logger = CoreLogger,
+                        enableReporting = enableReporting
+                    ),
                     networkConfiguration = NetworkConfiguration(baseUrl = baseUrl)
                 )
             } else {
@@ -49,7 +52,8 @@ class NablaClientModule(
                     modules = MODULES,
                     configuration = Configuration(
                         publicApiKey = apiKey,
-                        logger = CoreLogger
+                        logger = CoreLogger,
+                        enableReporting = enableReporting
                     )
                 )
             }
@@ -58,7 +62,8 @@ class NablaClientModule(
                 modules = MODULES,
                 configuration = Configuration(
                     publicApiKey = apiKey,
-                    logger = CoreLogger
+                    logger = CoreLogger,
+                    enableReporting = true
                 )
             )
         }

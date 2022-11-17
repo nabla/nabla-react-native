@@ -22,6 +22,7 @@ internal fun Conversation.toMap(): ReadableMap {
         putInt("patientUnreadMessageCount", patientUnreadMessageCount)
         pictureUrl?.url?.toString()?.let { putString("pictureURL", it) }
         putArray("providers", providersInConversation.toMapArray())
+        putBoolean("isLocked", isLocked)
     }
 }
 

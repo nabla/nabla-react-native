@@ -12,7 +12,6 @@ interface NablaMessagingUIModule extends NativeModule {
   navigateToInbox(callback: Callback<void>): void;
   navigateToConversation(
     conversationId: ConversationId,
-    showComposer: boolean,
     callback: Callback<void>,
   ): void;
 }

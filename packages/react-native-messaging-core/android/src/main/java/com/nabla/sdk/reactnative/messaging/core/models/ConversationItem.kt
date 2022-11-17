@@ -28,21 +28,26 @@ private fun ConversationItem.toMap(): ReadableMap {
                 id.remoteId?.let { id -> it.putString("id", id.toString()) }
                 it.putString("type", "VideoCallRoomInteractiveMessage")
                 it.putMap("sender", author.toMap())
-                it.putMap("videoCallRoomInteractiveMessage", Arguments.createMap().also { videoCallRoomInteractiveMessageMap ->
-                when (videoCallRoom.status) {
-                    VideoCallRoomStatus.Closed -> {
-                        videoCallRoomInteractiveMessageMap.putString("status", "closed")
-                    }
-                    is VideoCallRoomStatus.Open -> {
-                        videoCallRoomInteractiveMessageMap.putString("status", "open")
-                        videoCallRoomInteractiveMessageMap.putMap("room", Arguments.createMap().also { roomMap ->
-                            roomMap.putString("id", videoCallRoom.id.toString())
-                            roomMap.putString("token", (videoCallRoom.status as VideoCallRoomStatus.Open).token)
-                            roomMap.putString("url", (videoCallRoom.status as VideoCallRoomStatus.Open).url)
-                        })
-                    }
-                }
-                })
+                it.putMap(
+                    "videoCallRoomInteractiveMessage",
+                    Arguments.createMap().also { videoCallRoomInteractiveMessageMap ->
+                        when (videoCallRoom.status) {
+                            VideoCallRoomStatus.Closed -> {
+                                videoCallRoomInteractiveMessageMap.putString("status", "closed")
+                            }
+                            is VideoCallRoomStatus.Open -> {
+                                videoCallRoomInteractiveMessageMap.putString("status", "open")
+                                videoCallRoomInteractiveMessageMap.putMap("room",
+                                    Arguments.createMap().also { roomMap ->
+                                        roomMap.putString("id", videoCallRoom.id.toString())
+                                        roomMap.putString("token",
+                                            (videoCallRoom.status as VideoCallRoomStatus.Open).token)
+                                        roomMap.putString("url",
+                                            (videoCallRoom.status as VideoCallRoomStatus.Open).url)
+                                    })
+                            }
+                        }
+                    })
             }
             is Message -> {
                 it.putString("type", "ConversationMessage")
@@ -88,6 +93,9 @@ private fun ConversationItem.toMap(): ReadableMap {
                                     contentMap.putMap("audio", mediaMap)
                                 }
                             }
+                        }
+                        is Message.VideoCallRoom -> {
+                            /* This case is already handled L:27 */
                         }
                     }
                 })

@@ -20,9 +20,10 @@ public enum NablaModules {
 @objc(NablaClientModule)
 final class NablaClientModule: RCTEventEmitter {
 
-    @objc(initialize:networkConfiguration:resolver:rejecter:)
+    @objc(initialize:enableReporting:networkConfiguration:resolver:rejecter:)
     func initialize(
         apiKey: String,
+        enableReporting: Bool,
         networkConfiguration: [String: Any]?,
         resolver: RCTPromiseResolveBlock,
         rejecter _: RCTPromiseRejectBlock
@@ -32,23 +33,29 @@ final class NablaClientModule: RCTEventEmitter {
            let domain = networkConfiguration["domain"] as? String,
            let path = networkConfiguration["path"] as? String {
 
-            let configuration = SharedNetworkConfiguration(
+            let networkConfiguration = SharedNetworkConfiguration(
                 domain: domain,
                 scheme: scheme,
                 port: networkConfiguration["port"] as? Int,
                 path: path
             )
             NablaClient.initialize(
-                apiKey: apiKey,
-                logger: CoreLogger.sharedInstance,
-                networkConfiguration: configuration,
-                modules: NablaModules.modules
+                modules: NablaModules.modules,
+                configuration: .init(
+                    apiKey: apiKey,
+                    logger: CoreLogger.sharedInstance,
+                    enableReporting: enableReporting
+                ),
+                networkConfiguration: networkConfiguration
             )
         } else {
             NablaClient.initialize(
-                apiKey: apiKey,
-                logger: CoreLogger.sharedInstance,
-                modules: NablaModules.modules
+                modules: NablaModules.modules,
+                configuration: .init(
+                    apiKey: apiKey,
+                    logger: CoreLogger.sharedInstance,
+                    enableReporting: enableReporting
+                )
             )
         }
         resolver(NSNull())

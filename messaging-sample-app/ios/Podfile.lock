@@ -83,32 +83,33 @@ PODS:
     - WebRTC-SDK (~> 104.5112.05)
   - Logging (1.4.0)
   - nabla-react-native-core (1.0.0-alpha08):
-    - NablaCore (= 1.0.0-alpha21)
+    - NablaCore (= 1.0.0-alpha24)
     - React-Core
   - nabla-react-native-messaging-core (1.0.0-alpha08):
     - nabla-react-native-core
-    - NablaMessagingCore (= 1.0.0-alpha21)
+    - NablaMessagingCore (= 1.0.0-alpha24)
     - React-Core
   - nabla-react-native-messaging-ui (1.0.0-alpha08):
     - nabla-react-native-messaging-core
-    - NablaMessagingUI (= 1.0.0-alpha21)
+    - NablaMessagingUI (= 1.0.0-alpha24)
     - React-Core
   - nabla-react-native-video-call (1.0.0-alpha08):
     - nabla-react-native-core
-    - NablaVideoCall (= 1.0.0-alpha21)
+    - NablaVideoCall (= 1.0.0-alpha24)
     - React-Core
-  - NablaCore (1.0.0-alpha21):
+  - NablaCore (1.0.0-alpha24):
     - Apollo/WebSocket (~> 0.50)
-  - NablaDocumentScanner (1.0.0-alpha21)
-  - NablaMessagingCore (1.0.0-alpha21):
-    - NablaCore (= 1.0.0-alpha21)
-  - NablaMessagingUI (1.0.0-alpha21):
-    - NablaCore (= 1.0.0-alpha21)
-    - NablaDocumentScanner (= 1.0.0-alpha21)
-    - NablaMessagingCore (= 1.0.0-alpha21)
-  - NablaVideoCall (1.0.0-alpha21):
+    - Sentry (~> 7.30.1)
+  - NablaDocumentScanner (1.0.0-alpha24)
+  - NablaMessagingCore (1.0.0-alpha24):
+    - NablaCore (= 1.0.0-alpha24)
+  - NablaMessagingUI (1.0.0-alpha24):
+    - NablaCore (= 1.0.0-alpha24)
+    - NablaDocumentScanner (= 1.0.0-alpha24)
+    - NablaMessagingCore (= 1.0.0-alpha24)
+  - NablaVideoCall (1.0.0-alpha24):
     - LiveKitClient (~> 1.0.3)
-    - NablaCore (= 1.0.0-alpha21)
+    - NablaCore (= 1.0.0-alpha24)
   - OpenSSL-Universal (1.1.180)
   - PromisesObjC (2.1.1)
   - PromisesSwift (2.1.1):
@@ -376,8 +377,11 @@ PODS:
     - React-jsi (= 0.67.1)
     - React-logger (= 0.67.1)
     - React-perflogger (= 0.67.1)
-  - SwiftProtobuf (1.20.2)
-  - WebRTC-SDK (104.5112.05)
+  - Sentry (7.30.2):
+    - Sentry/Core (= 7.30.2)
+  - Sentry/Core (7.30.2)
+  - SwiftProtobuf (1.20.3)
+  - WebRTC-SDK (104.5112.06)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -440,6 +444,7 @@ DEPENDENCIES:
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - React-runtimeexecutor (from `../node_modules/react-native/ReactCommon/runtimeexecutor`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - Sentry
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -467,6 +472,7 @@ SPEC REPOS:
     - OpenSSL-Universal
     - PromisesObjC
     - PromisesSwift
+    - Sentry
     - SwiftProtobuf
     - WebRTC-SDK
     - YogaKit
@@ -562,15 +568,15 @@ SPEC CHECKSUMS:
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   LiveKitClient: ad8cca22fafdf87bf3329ee54246affdf259555a
   Logging: beeb016c9c80cf77042d62e83495816847ef108b
-  nabla-react-native-core: 2d9371bfd84f4e23ddb65a752e78a6847cae516c
-  nabla-react-native-messaging-core: d4087d8951187ea61287c8283993bcda6cf9ef1b
-  nabla-react-native-messaging-ui: c83a83659afe78e881b72583d194240a6751e06d
-  nabla-react-native-video-call: 56e8292200fabb69be717d7a12a701a58f434956
-  NablaCore: 1e2960a5df763db0d303a483c9b5ea6f2144c6c3
-  NablaDocumentScanner: f298cd04ba5b5615b0f064a65dbd4faa84dd03c3
-  NablaMessagingCore: 140fd34f934c45f7e234fb6c4e6834668447b195
-  NablaMessagingUI: c5a9e7ba4173d6ff62189d76f45c923fbd43848f
-  NablaVideoCall: e9967fc1ac8d35079ce2a8fc37ad014d8251650f
+  nabla-react-native-core: 25e62f3252d7ba28f3ab745f9260afe6a0015a62
+  nabla-react-native-messaging-core: cb4f077d38c807a4ba8eb6267f65ec990ce1f966
+  nabla-react-native-messaging-ui: d5318ea8c846568eb3f64ca81863ccb216a25c74
+  nabla-react-native-video-call: e46fc2f12ca605a97fbe2b968eed449aa608dcfe
+  NablaCore: 012e98310c6a1eefd1fe703bf81f11b389ea6b3e
+  NablaDocumentScanner: 7f7575bb7a8dd5055210c0f7a7da2b7e351eae62
+  NablaMessagingCore: 0efea28e75562cc2611b06f2b03c675e8c0e1d23
+  NablaMessagingUI: 8b45b0cdd206b16cad222663fa6aaf9743f5c6eb
+  NablaVideoCall: e4a0d5e6709f4fc8c32707fef552341e26378d30
   OpenSSL-Universal: 1aa4f6a6ee7256b83db99ec1ccdaa80d10f9af9b
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
   PromisesSwift: 99fddfe4a0ec88a56486644c0da106694c92a604
@@ -598,11 +604,12 @@ SPEC CHECKSUMS:
   React-RCTVibration: 19c012d1202df46bafbe49268a346f6b3edadfdd
   React-runtimeexecutor: 2c92a8bddd1a3e72c7513d1e74235c2d9c84875c
   ReactCommon: 2e816fad39f65f2a94a5999d5be463a6b620dcf6
-  SwiftProtobuf: 9f458aaa7844a2fc0b910053e66578bc4e2da9c1
-  WebRTC-SDK: 557f12d3145df7187df3aae5336cb4086ceea40b
+  Sentry: 9be48e341494bc976c963b05aa4a8ca48308c684
+  SwiftProtobuf: b02b5075dcf60c9f5f403000b3b0c202a11b6ae1
+  WebRTC-SDK: 85ee61404eb5698cf23a69a27008271db07159fc
   Yoga: 5cbf25add73edb290e1067017690f7ebf56c5468
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 418b4f22d7435b87b084af117bf102e4915c8990
+PODFILE CHECKSUM: 40f0a59e829180e509f1ae84938025f9828ed858
 
 COCOAPODS: 1.11.3

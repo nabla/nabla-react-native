@@ -3,7 +3,7 @@ import { Platform, StyleSheet, Text, View } from 'react-native';
 
 import { Appbar } from 'react-native-paper';
 import { NablaConversationListView, NablaMessagingUI } from '@nabla/react-native-messaging-ui';
-import { AuthTokens, NablaClient } from '@nabla/react-native-core';
+import { AuthTokens, Configuration, NablaClient } from '@nabla/react-native-core';
 import { getStableId, NablaMessagingClient } from '@nabla/react-native-messaging-core';
 import { useState } from 'react';
 import { NablaVideoCallClient } from '@nabla/react-native-video-call';
@@ -18,7 +18,7 @@ const nablaMessagingClient = NablaMessagingClient.getInstance();
 async function initializeNablaClients() {
   await NablaMessagingClient.initializeMessagingModule()
   await NablaVideoCallClient.initializeVideoCallModule()
-  await nablaClient.initialize(apiKey)
+  await nablaClient.initialize(new Configuration(apiKey))
 
   const dummyUserId = 'f0faa561-5707-402e-b7b9-5b747995e1fe';
   nablaClient.authenticate(dummyUserId, async () => {

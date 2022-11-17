@@ -47,7 +47,6 @@ internal class NablaMessagingUIModule(
     @ReactMethod
     fun navigateToConversation(
         conversationIdMap: ReadableMap,
-        showComposer: Boolean,
         callback: Callback,
     ) {
         val conversationId = try {
@@ -65,7 +64,6 @@ internal class NablaMessagingUIModule(
                     NablaConversationActivity.newIntent(
                         context = currentActivity,
                         conversationId = conversationId,
-                        showComposer = showComposer,
                     ),
                     requestCode,
                 )

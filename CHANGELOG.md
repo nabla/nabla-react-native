@@ -3,15 +3,30 @@
 ## [Unreleased]
 
 ### Added
+- Reporting: an ErrorReporter was added to the native SDKs to report anonymous events to nabla servers to help debug some features like video calls. 
+  
+  ⚠️To update to this version you need to add a new pod in the `ios/Podfile`
+  ```ruby
+    pod 'Sentry', :modular_headers => true
+  ```
+  (You can find more info in the [documentation](https://docs.nabla.com/docs/init-rn#add-the-dependency))
 
 ### Changed
+
+- Theming: the native SDKs updates contain an enhanced handling of the dark/night modes.
+
+- Removed the `showComposer` parameter from `NablaMessagingUI.navigateToConversation` method and relied on `Conversation` `isLocked` property to hide the composer.  
+  ⚠️ If you were using the `showComposer` parameter of `NablaMessagingUI.navigateToConversation`, it is not available anymore, and you should migrate to using lock conversation from the Console.
+
+- The `NablaClient.initialize` method now takes a `Configuration` class instead of multiple parameters.
+  ⚠️ This change is breaking and you will need to update all `NablaClient` `initialize`.
 
 ### Fixed
 
 ### Versions
 
-- Android: `1.0.0-alpha18`
-- iOS: `1.0.0-alpha21`
+- Android: [`1.0.0-alpha19`](https://github.com/nabla/nabla-android/releases/tag/1.0.0-alpha19)
+- iOS: [`1.0.0-alpha24`](https://github.com/nabla/nabla-ios/releases/tag/1.0.0-alpha24)
 
 ## [1.0.0-alpha08] - 2022-11-04
 
