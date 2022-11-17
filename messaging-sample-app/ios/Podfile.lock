@@ -82,18 +82,18 @@ PODS:
     - SwiftProtobuf
     - WebRTC-SDK (~> 104.5112.05)
   - Logging (1.4.0)
-  - nabla-react-native-core (1.0.0-alpha08):
+  - nabla-react-native-core (1.0.0-alpha09):
     - NablaCore (= 1.0.0-alpha24)
     - React-Core
-  - nabla-react-native-messaging-core (1.0.0-alpha08):
+  - nabla-react-native-messaging-core (1.0.0-alpha09):
     - nabla-react-native-core
     - NablaMessagingCore (= 1.0.0-alpha24)
     - React-Core
-  - nabla-react-native-messaging-ui (1.0.0-alpha08):
+  - nabla-react-native-messaging-ui (1.0.0-alpha09):
     - nabla-react-native-messaging-core
     - NablaMessagingUI (= 1.0.0-alpha24)
     - React-Core
-  - nabla-react-native-video-call (1.0.0-alpha08):
+  - nabla-react-native-video-call (1.0.0-alpha09):
     - nabla-react-native-core
     - NablaVideoCall (= 1.0.0-alpha24)
     - React-Core
@@ -568,10 +568,10 @@ SPEC CHECKSUMS:
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   LiveKitClient: ad8cca22fafdf87bf3329ee54246affdf259555a
   Logging: beeb016c9c80cf77042d62e83495816847ef108b
-  nabla-react-native-core: 25e62f3252d7ba28f3ab745f9260afe6a0015a62
-  nabla-react-native-messaging-core: cb4f077d38c807a4ba8eb6267f65ec990ce1f966
-  nabla-react-native-messaging-ui: d5318ea8c846568eb3f64ca81863ccb216a25c74
-  nabla-react-native-video-call: e46fc2f12ca605a97fbe2b968eed449aa608dcfe
+  nabla-react-native-core: 9ff858dea0e262465fd301927c707f0d46723814
+  nabla-react-native-messaging-core: 64c5e5af94435380f6e8ca40073d962be1a9c783
+  nabla-react-native-messaging-ui: 87f881fc2f47c8214698b56c4bfa5eda7ce3c58a
+  nabla-react-native-video-call: 70751fb9ef3277e0830a19b832b006357751d4f3
   NablaCore: 012e98310c6a1eefd1fe703bf81f11b389ea6b3e
   NablaDocumentScanner: 7f7575bb7a8dd5055210c0f7a7da2b7e351eae62
   NablaMessagingCore: 0efea28e75562cc2611b06f2b03c675e8c0e1d23

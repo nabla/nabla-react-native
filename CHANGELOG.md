@@ -3,6 +3,20 @@
 ## [Unreleased]
 
 ### Added
+
+### Changed
+
+### Fixed
+
+### Versions
+
+- Android: [`1.0.0-alpha19`](https://github.com/nabla/nabla-android/releases/tag/1.0.0-alpha19)
+- iOS: [`1.0.0-alpha24`](https://github.com/nabla/nabla-ios/releases/tag/1.0.0-alpha24)
+
+## [1.0.0-alpha09] - 2022-11-17
+
+### Added
+
 - Reporting: an ErrorReporter was added to the native SDKs to report anonymous events to nabla servers to help debug some features like video calls. 
   
   ⚠️To update to this version you need to add a new pod in the `ios/Podfile`
