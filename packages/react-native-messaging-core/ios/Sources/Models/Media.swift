@@ -36,7 +36,9 @@ extension Media {
         case let audioFile as AudioFile:
             result["durationMs"] = audioFile.durationMs
         case let documentFile as DocumentFile:
-            result["thumbnailURL"] = documentFile.thumbnailUrl?.absoluteString
+            if case let .url(thumbnailURL) = documentFile.thumbnail {
+                result["thumbnailURL"] = thumbnailURL.absoluteString
+            }
         default:
             result["type"] = "UnknownMedia"
         }

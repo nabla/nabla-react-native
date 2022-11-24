@@ -76,40 +76,40 @@ PODS:
   - fmt (6.2.1)
   - glog (0.3.5)
   - libevent (2.1.12)
-  - LiveKitClient (1.0.6):
+  - LiveKitClient (1.0.5):
     - Logging
     - PromisesSwift
     - SwiftProtobuf
-    - WebRTC-SDK (~> 104.5112.05)
+    - WebRTC-SDK (~> 104.5112.02)
   - Logging (1.4.0)
   - nabla-react-native-core (1.0.0-alpha09):
-    - NablaCore (= 1.0.0-alpha24)
+    - NablaCore (= 1.0.0-alpha25)
     - React-Core
   - nabla-react-native-messaging-core (1.0.0-alpha09):
     - nabla-react-native-core
-    - NablaMessagingCore (= 1.0.0-alpha24)
+    - NablaMessagingCore (= 1.0.0-alpha25)
     - React-Core
   - nabla-react-native-messaging-ui (1.0.0-alpha09):
     - nabla-react-native-messaging-core
-    - NablaMessagingUI (= 1.0.0-alpha24)
+    - NablaMessagingUI (= 1.0.0-alpha25)
     - React-Core
   - nabla-react-native-video-call (1.0.0-alpha09):
     - nabla-react-native-core
-    - NablaVideoCall (= 1.0.0-alpha24)
+    - NablaVideoCall (= 1.0.0-alpha25)
     - React-Core
-  - NablaCore (1.0.0-alpha24):
+  - NablaCore (1.0.0-alpha25):
     - Apollo/WebSocket (~> 0.50)
     - Sentry (~> 7.30.1)
-  - NablaDocumentScanner (1.0.0-alpha24)
-  - NablaMessagingCore (1.0.0-alpha24):
-    - NablaCore (= 1.0.0-alpha24)
-  - NablaMessagingUI (1.0.0-alpha24):
-    - NablaCore (= 1.0.0-alpha24)
-    - NablaDocumentScanner (= 1.0.0-alpha24)
-    - NablaMessagingCore (= 1.0.0-alpha24)
-  - NablaVideoCall (1.0.0-alpha24):
+  - NablaDocumentScanner (1.0.0-alpha25)
+  - NablaMessagingCore (1.0.0-alpha25):
+    - NablaCore (= 1.0.0-alpha25)
+  - NablaMessagingUI (1.0.0-alpha25):
+    - NablaCore (= 1.0.0-alpha25)
+    - NablaDocumentScanner (= 1.0.0-alpha25)
+    - NablaMessagingCore (= 1.0.0-alpha25)
+  - NablaVideoCall (1.0.0-alpha25):
     - LiveKitClient (~> 1.0.3)
-    - NablaCore (= 1.0.0-alpha24)
+    - NablaCore (= 1.0.0-alpha25)
   - OpenSSL-Universal (1.1.180)
   - PromisesObjC (2.1.1)
   - PromisesSwift (2.1.1):
@@ -413,6 +413,7 @@ DEPENDENCIES:
   - FlipperKit/FlipperKitUserDefaultsPlugin (= 0.99.0)
   - FlipperKit/SKIOSNetworkPlugin (= 0.99.0)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
+  - LiveKitClient (= 1.0.5)
   - "nabla-react-native-core (from `../node_modules/@nabla/react-native-core`)"
   - "nabla-react-native-messaging-core (from `../node_modules/@nabla/react-native-messaging-core`)"
   - "nabla-react-native-messaging-ui (from `../node_modules/@nabla/react-native-messaging-ui`)"
@@ -566,17 +567,17 @@ SPEC CHECKSUMS:
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 85ecdd10ee8d8ec362ef519a6a45ff9aa27b2e85
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
-  LiveKitClient: ad8cca22fafdf87bf3329ee54246affdf259555a
+  LiveKitClient: 0a1dba2b9ce62555dfa4bd984af66b921802bce5
   Logging: beeb016c9c80cf77042d62e83495816847ef108b
-  nabla-react-native-core: 9ff858dea0e262465fd301927c707f0d46723814
-  nabla-react-native-messaging-core: 64c5e5af94435380f6e8ca40073d962be1a9c783
-  nabla-react-native-messaging-ui: 87f881fc2f47c8214698b56c4bfa5eda7ce3c58a
-  nabla-react-native-video-call: 70751fb9ef3277e0830a19b832b006357751d4f3
-  NablaCore: 012e98310c6a1eefd1fe703bf81f11b389ea6b3e
-  NablaDocumentScanner: 7f7575bb7a8dd5055210c0f7a7da2b7e351eae62
-  NablaMessagingCore: 0efea28e75562cc2611b06f2b03c675e8c0e1d23
-  NablaMessagingUI: 8b45b0cdd206b16cad222663fa6aaf9743f5c6eb
-  NablaVideoCall: e4a0d5e6709f4fc8c32707fef552341e26378d30
+  nabla-react-native-core: a873aad8409b02facd7ca832c784ee97ff98e2f0
+  nabla-react-native-messaging-core: 59c62de75a87638243ed2aaefc14299e82d1f399
+  nabla-react-native-messaging-ui: 27e448d4e45c9e07d4d4b1f76b3027bc374531e9
+  nabla-react-native-video-call: 9c57a15ae418393cff81f96448e118b69a7257b3
+  NablaCore: b649b0da76dc8e17de583ba04a651b9b9627ab28
+  NablaDocumentScanner: 92963fef05fc557a033619395e2dbd431adf85d0
+  NablaMessagingCore: 8d5191bfece4cf10455a91fa20b8eaf55ba015a0
+  NablaMessagingUI: ed215b6302e1a4d64b7091652df2d57ace207b5d
+  NablaVideoCall: 9f902c0ec0a0c9fe357c98ef1fdb29784843ffd9
   OpenSSL-Universal: 1aa4f6a6ee7256b83db99ec1ccdaa80d10f9af9b
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
   PromisesSwift: 99fddfe4a0ec88a56486644c0da106694c92a604
@@ -610,6 +611,6 @@ SPEC CHECKSUMS:
   Yoga: 5cbf25add73edb290e1067017690f7ebf56c5468
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 40f0a59e829180e509f1ae84938025f9828ed858
+PODFILE CHECKSUM: 3bd866aabe854de882dd083ef480e06757a63d74
 
 COCOAPODS: 1.11.3

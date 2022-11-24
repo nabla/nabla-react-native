@@ -56,7 +56,7 @@ extension Dictionary where Key == String, Value: Any {
             return nil
         }
 
-        return .image(content: .init(fileName: filename, content: .url(url), size: nil, mimeType: mimetype))
+        return .image(content: .init(fileName: filename, source: .url(url), size: nil, mimeType: mimetype))
     }
 
     private func parseVideoMessage() -> MessageInput? {
@@ -117,15 +117,15 @@ extension Dictionary where Key == String, Value: Any {
             return nil
         }
 
-        return .document(content: .init(fileName: filename, content: .url(url), thumbnailUrl: nil, mimeType: mimetype))
+        return .document(content: .init(fileName: filename, content: .url(url), thumbnail: nil, mimeType: mimetype))
     }
 
     private func parseAudioMessage() -> MessageInput? {
-        guard let valueDictionnary = self["value"] as? Dictionary<String, AnyObject> else {
+        guard let valueDictionary = self["value"] as? Dictionary<String, AnyObject> else {
             return nil
         }
 
-        guard let uri = valueDictionnary["uri"] as? String else {
+        guard let uri = valueDictionary["uri"] as? String else {
             return nil
         }
 
@@ -133,7 +133,7 @@ extension Dictionary where Key == String, Value: Any {
             return nil
         }
 
-        guard let mimetypeString = valueDictionnary["mimetype"] as? String else {
+        guard let mimetypeString = valueDictionary["mimetype"] as? String else {
             return nil
         }
 
@@ -143,11 +143,11 @@ extension Dictionary where Key == String, Value: Any {
         default: mimetype = .other
         }
 
-        guard let filename = valueDictionnary["filename"] as? String else {
+        guard let filename = valueDictionary["filename"] as? String else {
             return nil
         }
 
-        guard let durationMs = valueDictionnary["estimatedDurationMs"] as? Int else {
+        guard let durationMs = valueDictionary["estimatedDurationMs"] as? Int else {
             return nil
         }
 

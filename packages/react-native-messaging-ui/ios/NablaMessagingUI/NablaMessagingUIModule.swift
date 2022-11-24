@@ -88,11 +88,6 @@ final class NablaMessagingUIModule: NSObject {
             action: #selector(self.dismissNavigationController))
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = appearance.backgroundColor?.resolvedColor(with: UITraitCollection(userInterfaceStyle: .light))
-        appearance.titleTextAttributes[.foregroundColor] = (appearance.titleTextAttributes[.foregroundColor] as? UIColor)?
-                .resolvedColor(with: UITraitCollection(userInterfaceStyle: .light))
-        appearance.largeTitleTextAttributes[.foregroundColor] = (appearance.largeTitleTextAttributes[.foregroundColor] as? UIColor)?
-                .resolvedColor(with: UITraitCollection(userInterfaceStyle: .light))
         nablaNavigationController?.navigationBar.standardAppearance = appearance
         nablaNavigationController?.navigationBar.scrollEdgeAppearance = appearance
         nablaNavigationController?.modalPresentationStyle = .fullScreen

@@ -28,6 +28,10 @@ target 'MessagingSampleApp' do
 
   pod 'Sentry', :modular_headers => true
 
+  # Locking the LiveKitClient version is necessary when using Xcode 13 as the latest version does not compile when using Xcode 13. 
+  # This line is not needed if you are using Xcode 14 and Swift 5.7.
+  pod 'LiveKitClient', '1.0.5'
+
   post_install do |installer|
     react_native_post_install(installer)
     __apply_Xcode_12_5_M1_post_install_workaround(installer)
