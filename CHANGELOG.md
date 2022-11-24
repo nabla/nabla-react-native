@@ -6,11 +6,14 @@
 
 ### Changed
 
+- Updated the Android native SDK dependency to `1.0.0-alpha20`.
+> The Android SDK now targets API 33, meaning you should bump your `compileSdkVersion` in the Android project to be 33 or higher (this doesn't impact your app's minimum Android supported version).
+
 ### Fixed
 
 ### Versions
 
-- Android: [`1.0.0-alpha19`](https://github.com/nabla/nabla-android/releases/tag/1.0.0-alpha19)
+- Android: [`1.0.0-alpha20`](https://github.com/nabla/nabla-android/releases/tag/1.0.0-alpha20)
 - iOS: [`1.0.0-alpha24`](https://github.com/nabla/nabla-ios/releases/tag/1.0.0-alpha24)
 
 ## [1.0.0-alpha09] - 2022-11-17
