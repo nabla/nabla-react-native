@@ -6,6 +6,22 @@
 
 ### Changed
 
+### Fixed
+
+### Versions
+
+- Android: [`1.0.0-alpha20`](https://github.com/nabla/nabla-android/releases/tag/1.0.0-alpha20)
+- iOS: [`1.0.0-alpha26`](https://github.com/nabla/nabla-ios/releases/tag/1.0.0-alpha26)
+
+
+## [1.0.0-alpha10] - 2022-11-25
+
+### Added
+
+- The conversation screen is now available as a React Native `Component`: `NablaConversationView`.
+
+### Changed
+
 - Updated the iOS native SDK dependency to `1.0.0-alpha26`.
 - Updated the Android native SDK dependency to `1.0.0-alpha20`.
 > The Android SDK now targets API 33, meaning you should bump your `compileSdkVersion` in the Android project to be 33 or higher (this doesn't impact your app's minimum Android supported version).
