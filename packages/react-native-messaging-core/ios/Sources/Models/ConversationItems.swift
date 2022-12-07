@@ -1,11 +1,12 @@
 import Foundation
+import NablaCore
 import NablaMessagingCore
 
-extension ConversationItems {
+extension PaginatedList where T == ConversationItem {
     var dictionaryRepresentation: [String: Any] {
         var result = [String: Any]()
         result["hasMore"] = hasMore
-        result["items"] = items.map(\.dictionaryRepresentation)
+        result["items"] = elements.map(\.dictionaryRepresentation)
         return result
     }
 }

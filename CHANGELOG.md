@@ -7,11 +7,13 @@
 ### Changed
 
 ### Fixed
+ 
+- Fixed some cases in MessagingCore where the success callback was called too in addition to the error callback when the method fails.
 
 ### Versions
 
 - Android: [`1.0.0-alpha20`](https://github.com/nabla/nabla-android/releases/tag/1.0.0-alpha20)
-- iOS: [`1.0.0-alpha26`](https://github.com/nabla/nabla-ios/releases/tag/1.0.0-alpha26)
+- iOS: [`1.0.0-alpha27`](https://github.com/nabla/nabla-ios/releases/tag/1.0.0-alpha27)
 
 
 ## [1.0.0-alpha10] - 2022-11-25

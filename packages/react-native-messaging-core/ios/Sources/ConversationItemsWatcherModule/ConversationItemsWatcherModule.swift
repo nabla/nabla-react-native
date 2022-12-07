@@ -1,3 +1,4 @@
+import Combine
 import Foundation
 import NablaCore
 import NablaMessagingCore
@@ -6,8 +7,8 @@ import nabla_react_native_core
 @objc(ConversationItemsWatcherModule)
 final class ConversationItemsWatcherModule: RCTEventEmitter {
 
-    private var conversationItemsWatchers: [UUID: PaginatedWatcher] = [:]
-    private var conversationItemsLoadMoreCancellables: [UUID: Cancellable] = [:]
+    private var conversationItemsWatchers: [UUID: AnyCancellable] = [:]
+    private var conversationItemsLoadMoreFunctions: [UUID: () async throws -> Void] = [:]
 
     private enum Event: String, CaseIterable {
         case watchConversationItemsUpdated
@@ -22,15 +23,8 @@ final class ConversationItemsWatcherModule: RCTEventEmitter {
         conversationItemsWatchers.values.forEach {
             $0.cancel()
         }
-        conversationItemsWatchers.keys.forEach {
-            conversationItemsWatchers[$0] = nil
-        }
-        conversationItemsLoadMoreCancellables.values.forEach {
-            $0.cancel()
-        }
-        conversationItemsLoadMoreCancellables.keys.forEach {
-            conversationItemsWatchers[$0] = nil
-        }
+        conversationItemsWatchers.removeAll()
+        conversationItemsLoadMoreFunctions.removeAll()
     }
 
     @objc(watchConversationItems:callback:)
@@ -44,18 +38,40 @@ final class ConversationItemsWatcherModule: RCTEventEmitter {
             )
             return
         }
-        let conversationItemsWatcher = NablaMessagingClient.shared.watchItems(ofConversationWithId: conversationId) { result in
-            switch result {
-            case .success(let conversationItems):
-                var dictionaryRepresentation = conversationItems.dictionaryRepresentation
-                dictionaryRepresentation["id"] = conversationIdMap
-                self.sendEvent(withName: Event.watchConversationItemsUpdated.rawValue, body: dictionaryRepresentation)
-            case .failure(let error):
-                var dictionaryRepresentation = error.dictionaryRepresentation
-                dictionaryRepresentation["id"] = conversationIdMap
-                self.sendEvent(withName: Event.watchConversationItemsError.rawValue, body: dictionaryRepresentation)
-            }
-        }
+
+        let conversationItemsWatcher = NablaMessagingClient.shared.watchItems(ofConversationWithId: conversationId)
+            .sink(
+                receiveCompletion: { [weak self] completion in
+                    guard let self = self else {
+                        return
+                    }
+                    switch completion {
+                    case .finished:
+                        break
+                    case .failure(let error):
+                        var dictionaryRepresentation = error.dictionaryRepresentation
+                        dictionaryRepresentation["id"] = conversationIdMap
+                        self.conversationItemsLoadMoreFunctions[conversationId] = nil
+                        self.sendEvent(
+                            withName: Event.watchConversationItemsError.rawValue,
+                            body: dictionaryRepresentation
+                        )
+                    }
+
+                },
+                receiveValue: { [weak self] conversationItems in
+                    guard let self = self else {
+                        return
+                    }
+                    var dictionaryRepresentation = conversationItems.dictionaryRepresentation
+                    dictionaryRepresentation["id"] = conversationIdMap
+                    self.conversationItemsLoadMoreFunctions[conversationId] = conversationItems.loadMore
+                    self.sendEvent(
+                        withName: Event.watchConversationItemsUpdated.rawValue,
+                        body: dictionaryRepresentation
+                    )
+                })
+
         conversationItemsWatchers[conversationId] = conversationItemsWatcher
         callback([NSNull()])
     }
@@ -72,8 +88,7 @@ final class ConversationItemsWatcherModule: RCTEventEmitter {
         }
         conversationItemsWatchers[conversationId]?.cancel()
         conversationItemsWatchers[conversationId] = nil
-        conversationItemsLoadMoreCancellables[conversationId]?.cancel()
-        conversationItemsLoadMoreCancellables[conversationId] = nil
+        conversationItemsLoadMoreFunctions[conversationId] = nil
     }
 
     @objc(loadMoreItemsInConversation:errorCallback:)
@@ -86,19 +101,19 @@ final class ConversationItemsWatcherModule: RCTEventEmitter {
             return
         }
 
-        guard let conversationItemsWatcher = conversationItemsWatchers[conversationId] else {
+        guard conversationItemsWatchers[conversationId] != nil else {
             callback([
                 InternalError.createDictionaryRepresentation(message: "Need to watch conversation items before loading more items")
             ])
             return
         }
 
-        let conversationItemsLoadMoreCancellable = conversationItemsWatcher.loadMore { result in
-            switch result {
-            case .success:
+        Task {
+            do {
+                try await self.conversationItemsLoadMoreFunctions[conversationId]?()
                 callback([NSNull()])
-            case .failure(let error):
-                callback([(error as? NablaError)?.dictionaryRepresentation ?? [:]])
+            } catch {
+                callback([error.dictionaryRepresentation])
             }
         }
     }

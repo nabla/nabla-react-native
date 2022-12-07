@@ -6,11 +6,22 @@ private enum Constants {
     static let extraKey = "extra"
 }
 
+extension Error {
+    public var dictionaryRepresentation: [String: Any] {
+        (self as? NablaError)?.dictionaryRepresentation ?? NablaError.unknownErrorDictionaryRepresentation
+    }
+}
+
 extension NablaError {
-    @objc open var dictionaryRepresentation: [String: Any] {
+
+    static var unknownErrorDictionaryRepresentation: [String: Any] {
         [
             Constants.codeKey: 3 // UnknownError
         ]
+    }
+
+    @objc open var dictionaryRepresentation: [String: Any] {
+        Self.unknownErrorDictionaryRepresentation
     }
 }
 

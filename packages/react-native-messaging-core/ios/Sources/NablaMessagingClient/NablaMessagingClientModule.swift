@@ -1,3 +1,4 @@
+import Combine
 import Foundation
 import NablaCore
 import NablaMessagingCore
@@ -5,13 +6,6 @@ import nabla_react_native_core
 
 @objc(NablaMessagingClientModule)
 final class NablaMessagingClientModule: NSObject {
-
-    private var createConversationCancellable: Cancellable?
-    private var sendMessageCancellable: Cancellable?
-    private var retrySendingMessageCancellable: Cancellable?
-    private var deleteMessageCancellable: Cancellable?
-    private var markConversationAsSeenCancellable: Cancellable?
-    private var setIsTypingCancellable: Cancellable?
 
     @objc(initializeMessagingModule:rejecter:)
     func initializeMessagingModule(resolver: RCTPromiseResolveBlock, rejecter _: RCTPromiseRejectBlock) {
@@ -37,15 +31,15 @@ final class NablaMessagingClientModule: NSObject {
             initialMessage = nil
         }
 
-        createConversationCancellable = NablaMessagingClient.shared.createConversation(
-            title: title,
-            providerIds: providerIds?.compactMap(UUID.init),
-            initialMessage: initialMessage
-        ) { result in
-            switch result {
-            case .success(let conversation):
+        Task {
+            do {
+                let conversation = try await NablaMessagingClient.shared.createConversation(
+                    title: title,
+                    providerIds: providerIds?.compactMap(UUID.init),
+                    initialMessage: initialMessage
+                )
                 callback([NSNull(), conversation.id.dictionaryRepresentation])
-            case .failure(let error):
+            } catch {
                 callback([error.dictionaryRepresentation])
             }
         }
@@ -81,19 +75,18 @@ final class NablaMessagingClientModule: NSObject {
             return
         }
 
-        sendMessageCancellable = NablaMessagingClient.shared.sendMessage(
-            messageInput,
-            replyingToMessageWithId: replyToMap?.asMessageId,
-            inConversationWithId: conversationId,
-            handler: { result in
-                switch result {
-                case .success:
-                    callback([NSNull()])
-                case .failure(let error):
-                    callback([error.dictionaryRepresentation])
-                }
+        Task {
+            do {
+                try await NablaMessagingClient.shared.sendMessage(
+                    messageInput,
+                    replyingToMessageWithId: replyToMap?.asMessageId,
+                    inConversationWithId: conversationId
+                )
+                callback([NSNull()])
+            } catch {
+                callback([error.dictionaryRepresentation])
             }
-        )
+        }
     }
 
     @objc(retrySendingMessage:conversationId:callback:)
@@ -116,17 +109,17 @@ final class NablaMessagingClientModule: NSObject {
             return
         }
 
-        retrySendingMessageCancellable = NablaMessagingClient.shared.retrySending(
-            itemWithId: messageId,
-            inConversationWithId: conversationId,
-            handler: { result in
-                switch result {
-                case .success:
-                    callback([NSNull()])
-                case .failure(let error):
-                    callback([error.dictionaryRepresentation])
-                }
-            })
+        Task {
+            do {
+                try await NablaMessagingClient.shared.retrySending(
+                    itemWithId: messageId,
+                    inConversationWithId: conversationId
+                )
+                callback([NSNull()])
+            } catch {
+                callback([error.dictionaryRepresentation])
+            }
+        }
     }
 
     @objc(deleteMessage:conversationId:callback:)
@@ -149,18 +142,17 @@ final class NablaMessagingClientModule: NSObject {
             return
         }
 
-        deleteMessageCancellable = NablaMessagingClient.shared.deleteMessage(
-            withId: messageId,
-            conversationId: conversationId,
-            handler: { result in
-                switch result {
-                case .success:
-                    callback([NSNull()])
-                case .failure(let error):
-                    callback([error.dictionaryRepresentation])
-                }
+        Task {
+            do {
+                try await NablaMessagingClient.shared.deleteMessage(
+                    withId: messageId,
+                    conversationId: conversationId
+                )
+                callback([NSNull()])
+            } catch {
+                callback([error.dictionaryRepresentation])
             }
-        )
+        }
     }
 
     @objc(markConversationAsSeen:callback:)
@@ -175,15 +167,14 @@ final class NablaMessagingClientModule: NSObject {
             ])
             return
         }
-
-        markConversationAsSeenCancellable = NablaMessagingClient.shared.markConversationAsSeen(conversationId, handler: { result in
-            switch result {
-            case .success:
+        Task {
+            do {
+                try await NablaMessagingClient.shared.markConversationAsSeen(conversationId)
                 callback([NSNull()])
-            case .failure(let error):
+            } catch {
                 callback([error.dictionaryRepresentation])
             }
-        })
+        }
     }
 
     @objc(setIsTyping:conversationId:callback:)
@@ -199,17 +190,17 @@ final class NablaMessagingClientModule: NSObject {
             return
         }
 
-        setIsTypingCancellable = NablaMessagingClient.shared.setIsTyping(
-            isTyping,
-            inConversationWithId: conversationId,
-            handler: { result in
-                switch result {
-                case .success:
-                    callback([NSNull()])
-                case .failure(let error):
-                    callback([error.dictionaryRepresentation])
-                }
-            })
+        Task {
+            do {
+                try await NablaMessagingClient.shared.setIsTyping(
+                    isTyping,
+                    inConversationWithId: conversationId
+                )
+                callback([NSNull()])
+            } catch {
+                callback([error.dictionaryRepresentation])
+            }
+        }
     }
 
     @objc class func requiresMainQueueSetup() -> Bool {

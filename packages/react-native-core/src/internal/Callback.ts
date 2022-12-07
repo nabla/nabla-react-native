@@ -13,8 +13,9 @@ export function mergeVoid<Error>(
   return (error, result) => {
     if (error) {
       errorCallback(mapError(error));
+    } else {
+      successCallback();
     }
-    successCallback();
   };
 }
 

@@ -82,34 +82,34 @@ PODS:
     - SwiftProtobuf
     - WebRTC-SDK (~> 104.5112.02)
   - Logging (1.4.0)
-  - nabla-react-native-core (1.0.0-alpha09):
-    - NablaCore (= 1.0.0-alpha26)
+  - nabla-react-native-core (1.0.0-alpha10):
+    - NablaCore (= 1.0.0-alpha27)
     - React-Core
-  - nabla-react-native-messaging-core (1.0.0-alpha09):
+  - nabla-react-native-messaging-core (1.0.0-alpha10):
     - nabla-react-native-core
-    - NablaMessagingCore (= 1.0.0-alpha26)
+    - NablaMessagingCore (= 1.0.0-alpha27)
     - React-Core
-  - nabla-react-native-messaging-ui (1.0.0-alpha09):
+  - nabla-react-native-messaging-ui (1.0.0-alpha10):
     - nabla-react-native-messaging-core
-    - NablaMessagingUI (= 1.0.0-alpha26)
+    - NablaMessagingUI (= 1.0.0-alpha27)
     - React-Core
-  - nabla-react-native-video-call (1.0.0-alpha09):
+  - nabla-react-native-video-call (1.0.0-alpha10):
     - nabla-react-native-core
-    - NablaVideoCall (= 1.0.0-alpha26)
+    - NablaVideoCall (= 1.0.0-alpha27)
     - React-Core
-  - NablaCore (1.0.0-alpha26):
+  - NablaCore (1.0.0-alpha27):
     - Apollo/WebSocket (~> 0.50)
     - Sentry (~> 7.30.1)
-  - NablaDocumentScanner (1.0.0-alpha26)
-  - NablaMessagingCore (1.0.0-alpha26):
-    - NablaCore (= 1.0.0-alpha26)
-  - NablaMessagingUI (1.0.0-alpha26):
-    - NablaCore (= 1.0.0-alpha26)
-    - NablaDocumentScanner (= 1.0.0-alpha26)
-    - NablaMessagingCore (= 1.0.0-alpha26)
-  - NablaVideoCall (1.0.0-alpha26):
+  - NablaDocumentScanner (1.0.0-alpha27)
+  - NablaMessagingCore (1.0.0-alpha27):
+    - NablaCore (= 1.0.0-alpha27)
+  - NablaMessagingUI (1.0.0-alpha27):
+    - NablaCore (= 1.0.0-alpha27)
+    - NablaDocumentScanner (= 1.0.0-alpha27)
+    - NablaMessagingCore (= 1.0.0-alpha27)
+  - NablaVideoCall (1.0.0-alpha27):
     - LiveKitClient (~> 1.0.3)
-    - NablaCore (= 1.0.0-alpha26)
+    - NablaCore (= 1.0.0-alpha27)
   - OpenSSL-Universal (1.1.180)
   - PromisesObjC (2.1.1)
   - PromisesSwift (2.1.1):
@@ -381,7 +381,7 @@ PODS:
     - Sentry/Core (= 7.30.2)
   - Sentry/Core (7.30.2)
   - SwiftProtobuf (1.20.3)
-  - WebRTC-SDK (104.5112.06)
+  - WebRTC-SDK (104.5112.07)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -569,15 +569,15 @@ SPEC CHECKSUMS:
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   LiveKitClient: 0a1dba2b9ce62555dfa4bd984af66b921802bce5
   Logging: beeb016c9c80cf77042d62e83495816847ef108b
-  nabla-react-native-core: 7a2577e77f8edf87bceef589ed13077e91545908
-  nabla-react-native-messaging-core: ace2fd41132badc1cd330cad38723ade3cb14cd8
-  nabla-react-native-messaging-ui: 4234313601db5e4216e28ee6699c819c731fd87d
-  nabla-react-native-video-call: 92978002e82b530e56adf6d6453ffad476eb3256
-  NablaCore: ec622d3fed4d7534f9b8d16b3e47a712ca65208b
-  NablaDocumentScanner: d4f777c70f920b0877cca364f0c876eb2ac2d604
-  NablaMessagingCore: a72abb032fa19de07931c4844d2ff9f152dcc6f1
-  NablaMessagingUI: 671899f548a5caa71bb32e9a38d93444e2110cc5
-  NablaVideoCall: 5b87f0e734cd3f5ef1a13d02a6559c35e5ed444d
+  nabla-react-native-core: 11a1a3e76c7a3cd968c8a160f94e80c556959af1
+  nabla-react-native-messaging-core: bf377e27841609f1317cb5642b5ddb187f53dfe3
+  nabla-react-native-messaging-ui: b3b3f5b23267d45c137187f53cb5e8e8f1db416c
+  nabla-react-native-video-call: 0eee31c1a89c4e75e3a8065864ea0e848e65493e
+  NablaCore: 8363c66ee273dc4fbb4139596b8246eb97d6f476
+  NablaDocumentScanner: d7a97bf2e0241dc72cb46f75fdd9f54fef72e2f1
+  NablaMessagingCore: 373b646423852acd561e0c39ed87feae3c1dfdca
+  NablaMessagingUI: 65939dd78873d611493700aba1780294f4896915
+  NablaVideoCall: c2a19e29feaf298db2d910860aa7aeed0188bd92
   OpenSSL-Universal: 1aa4f6a6ee7256b83db99ec1ccdaa80d10f9af9b
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
   PromisesSwift: 99fddfe4a0ec88a56486644c0da106694c92a604
@@ -607,7 +607,7 @@ SPEC CHECKSUMS:
   ReactCommon: 2e816fad39f65f2a94a5999d5be463a6b620dcf6
   Sentry: 9be48e341494bc976c963b05aa4a8ca48308c684
   SwiftProtobuf: b02b5075dcf60c9f5f403000b3b0c202a11b6ae1
-  WebRTC-SDK: 85ee61404eb5698cf23a69a27008271db07159fc
+  WebRTC-SDK: ef83f71e443c135d98de109940343bcf6d313e8f
   Yoga: 5cbf25add73edb290e1067017690f7ebf56c5468
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 

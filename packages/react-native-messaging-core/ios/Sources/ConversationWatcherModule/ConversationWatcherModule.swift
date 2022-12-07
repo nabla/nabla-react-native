@@ -1,3 +1,4 @@
+import Combine
 import Foundation
 import NablaCore
 import NablaMessagingCore
@@ -6,7 +7,7 @@ import nabla_react_native_core
 @objc(ConversationWatcherModule)
 final class ConversationWatcherModule: RCTEventEmitter {
 
-    private var conversationWatchers: [UUID: Watcher] = [:]
+    private var conversationWatchers: [UUID: AnyCancellable] = [:]
 
     private enum Event: String, CaseIterable {
         case watchConversationUpdated
@@ -21,11 +22,8 @@ final class ConversationWatcherModule: RCTEventEmitter {
         conversationWatchers.values.forEach {
             $0.cancel()
         }
-        conversationWatchers.keys.forEach {
-            conversationWatchers[$0] = nil
-        }
+        conversationWatchers.removeAll()
     }
-
 
     @objc(watchConversation:callback:)
     func watchConversation(
@@ -38,22 +36,36 @@ final class ConversationWatcherModule: RCTEventEmitter {
             ])
             return
         }
-        let conversationWatcher = NablaMessagingClient.shared.watchConversation(conversationId) { result in
-            switch result {
-            case .success(let conversation):
-                self.sendEvent(
-                    withName: Event.watchConversationUpdated.rawValue,
-                    body: conversation.dictionaryRepresentation
-                )
-            case .failure(let error):
-                var dictionaryRepresentation = error.dictionaryRepresentation
-                dictionaryRepresentation["id"] = conversationId.uuidString
-                self.sendEvent(
-                    withName: Event.watchConversationError.rawValue,
-                    body: dictionaryRepresentation
-                )
-            }
-        }
+
+        let conversationWatcher = NablaMessagingClient.shared
+            .watchConversation(withId: conversationId)
+            .sink(
+                receiveCompletion: { [weak self] completion in
+                    guard let self = self else {
+                        return
+                    }
+                    switch completion {
+                    case .finished:
+                        break
+                    case .failure(let error):
+                        var dictionaryRepresentation = error.dictionaryRepresentation
+                        dictionaryRepresentation["id"] = conversationId.uuidString
+                        self.sendEvent(
+                            withName: Event.watchConversationError.rawValue,
+                            body: dictionaryRepresentation
+                        )
+                    }
+                },
+                receiveValue: { [weak self] conversation in
+                    guard let self = self else {
+                        return
+                    }
+                    self.sendEvent(
+                        withName: Event.watchConversationUpdated.rawValue,
+                        body: conversation.dictionaryRepresentation
+                    )
+                }
+            )
         conversationWatchers[conversationId] = conversationWatcher
         callback([NSNull()])
     }
