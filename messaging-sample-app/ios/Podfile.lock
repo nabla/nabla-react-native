@@ -82,18 +82,18 @@ PODS:
     - SwiftProtobuf
     - WebRTC-SDK (~> 104.5112.02)
   - Logging (1.4.0)
-  - nabla-react-native-core (1.0.0-alpha10):
+  - nabla-react-native-core (1.0.0-alpha11):
     - NablaCore (= 1.0.0-alpha28)
     - React-Core
-  - nabla-react-native-messaging-core (1.0.0-alpha10):
+  - nabla-react-native-messaging-core (1.0.0-alpha11):
     - nabla-react-native-core
     - NablaMessagingCore (= 1.0.0-alpha28)
     - React-Core
-  - nabla-react-native-messaging-ui (1.0.0-alpha10):
+  - nabla-react-native-messaging-ui (1.0.0-alpha11):
     - nabla-react-native-messaging-core
     - NablaMessagingUI (= 1.0.0-alpha28)
     - React-Core
-  - nabla-react-native-video-call (1.0.0-alpha10):
+  - nabla-react-native-video-call (1.0.0-alpha11):
     - nabla-react-native-core
     - NablaVideoCall (= 1.0.0-alpha28)
     - React-Core
@@ -569,10 +569,10 @@ SPEC CHECKSUMS:
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   LiveKitClient: 0a1dba2b9ce62555dfa4bd984af66b921802bce5
   Logging: beeb016c9c80cf77042d62e83495816847ef108b
-  nabla-react-native-core: 56faa9f43fab6954f8e97dd52044f382d5487d74
-  nabla-react-native-messaging-core: f744c1330fa1f14881d756185e1fdd3a797d7044
-  nabla-react-native-messaging-ui: 506b60f4ea65d467ee8410bd6da777e491cc6b30
-  nabla-react-native-video-call: 0451cb24abd85a059a8b6018e7844975b310993d
+  nabla-react-native-core: 8cd472c54ae86fb9f6b387890ad208eda5a051ae
+  nabla-react-native-messaging-core: 0dfad9ef49c54fdf06e44a3b6e0275e84c06f50e
+  nabla-react-native-messaging-ui: 030198042d38fb83528bad3409345dcea98338fc
+  nabla-react-native-video-call: 036c4235919346f24075894f5c93d67ae3119894
   NablaCore: 27461f849a1a03bb26cb20a6387a32bf13d3babb
   NablaDocumentScanner: 91365b9731484982b9277bc846fd9a80df4e90f8
   NablaMessagingCore: afd85c02cf5cbbf57d906d37e4fbe9cc2c713856
@@ -611,6 +611,6 @@ SPEC CHECKSUMS:
   Yoga: 5cbf25add73edb290e1067017690f7ebf56c5468
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: c7a4b2b778eac3b3ffc04de7fa76156180fb30aa
+PODFILE CHECKSUM: 67976a67b57b3dcd75968cd2a1085e6a4af0af37
 
 COCOAPODS: 1.11.3
