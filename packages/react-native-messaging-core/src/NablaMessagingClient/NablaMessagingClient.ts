@@ -111,44 +111,45 @@ export class NablaMessagingClient {
   }
 
   /**
-   * Create a new conversation on behalf of the current user.
-   * @param errorCallback The callback called in case of error.
-   * @param successCallback The callback called when conversation creation succeeds.
-   * @param title optional title for the conversation.
-   * @param providerIds optional providers ids list that will participate in the conversation. Make sure the specified providers have enough rights to participate in a conversation. See [Roles and Permissions](https://docs.nabla.com/docs/roles-and-permissions).
-   * @param initialMessage optional initial message to be sent in the conversation.
-   */
-  public createConversation(
-    errorCallback: (error: NablaError) => void,
-    successCallback: (conversationId: ConversationId) => void,
-    title?: string,
-    providerIds?: string[],
-    initialMessage?: MessageInput,
-  ) {
-    nablaMessagingClientModule.createConversation(
-      title,
-      providerIds,
-      initialMessage?.serialize(),
-      merge(mapError, errorCallback, successCallback),
-    );
-  }
-
-  /**
-   * Create a new draft conversation on behalf of the current user.
+   * Start a new conversation on behalf of the current user.
    * This conversation will not be created server-side nor visible from the console until a first message is sent in it.
    * @param successCallback The callback called when conversation creation succeeds.
    * @param title optional title for the conversation.
    * @param providerIds optional providers ids list that will participate in the conversation. Make sure the specified providers have enough rights to participate in a conversation. See [Roles and Permissions](https://docs.nabla.com/docs/roles-and-permissions).
    */
-  public createDraftConversation(
+  public startConversation(
     successCallback: (conversationId: ConversationId) => void,
     title?: string,
     providerIds?: string[],
   ) {
-    nablaMessagingClientModule.createDraftConversation(
+    nablaMessagingClientModule.startConversation(
       title,
       providerIds,
       merge(mapError, () => {}, successCallback),
+    );
+  }
+
+  /**
+   * Create a new conversation on behalf of the current user.
+   * This conversation will not be created server-side nor visible from the console until a first message is sent in it.
+   * @param errorCallback The callback called in case of error.
+   * @param successCallback The callback called when conversation creation succeeds.
+   * @param message initial message to be sent in the conversation.
+   * @param title optional title for the conversation.
+   * @param providerIds optional providers ids list that will participate in the conversation. Make sure the specified providers have enough rights to participate in a conversation. See [Roles and Permissions](https://docs.nabla.com/docs/roles-and-permissions).
+   */
+  public createConversationWithMessage(
+    errorCallback: (error: NablaError) => void,
+    successCallback: (conversationId: ConversationId) => void,
+    message: MessageInput,
+    title?: string,
+    providerIds?: string[],
+  ) {
+    nablaMessagingClientModule.createConversation(
+      message.serialize(),
+      title,
+      providerIds,
+      merge(mapError, errorCallback, successCallback),
     );
   }
 

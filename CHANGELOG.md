@@ -6,14 +6,18 @@
 
 ### Changed
 
+- Messaging Core: Renamed `createDraftConversation` to `startConversation`. It keeps the behavior of creating the conversation lazily when the patient sends the first message.
+- Messaging Core: `createConversation` has been renamed `createConversationWithMessage` and now has a required `message` argument. It should be used to start a conversation on behalf of the patient with a first message from them.
+
+
 ### Fixed
  
 - Fixed some cases in MessagingCore where the success callback was called too in addition to the error callback when the method fails.
 
 ### Versions
 
-- Android: [`1.0.0-alpha20`](https://github.com/nabla/nabla-android/releases/tag/1.0.0-alpha20)
-- iOS: [`1.0.0-alpha27`](https://github.com/nabla/nabla-ios/releases/tag/1.0.0-alpha27)
+- Android: [`1.0.0-alpha21`](https://github.com/nabla/nabla-android/releases/tag/1.0.0-alpha21)
+- iOS: [`1.0.0-alpha28`](https://github.com/nabla/nabla-ios/releases/tag/1.0.0-alpha28)
 
 
 ## [1.0.0-alpha10] - 2022-11-25

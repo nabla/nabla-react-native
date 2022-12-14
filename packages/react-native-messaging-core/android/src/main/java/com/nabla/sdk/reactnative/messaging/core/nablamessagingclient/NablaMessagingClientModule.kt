@@ -37,26 +37,25 @@ internal class NablaMessagingClientModule(
 
     @ReactMethod
     fun createConversation(
+        messageInput: ReadableMap,
         title: String?,
         providerIds: ReadableArray?,
-        initialMessageInput: ReadableMap?,
         callback: Callback,
     ) {
         val providerUuids = providerIds?.let {
             (0 until it.size()).map { index -> Uuid.fromString(it.getString(index)) }
         }
         val initialMessage = try {
-            initialMessageInput?.messageInputOrThrow()
+            messageInput.messageInputOrThrow()
         } catch (e: Exception) {
             callback(e.asNablaInternal().toMap())
             return
         }
         this.launch {
             NablaClient.getInstance().messagingClient
-                .createConversation(
+                .createConversationWithMessage(
+                    initialMessage,
                     title,
-                    providerUuids,
-                    initialMessage
                 )
                 .onSuccess {
                     callback(null, it.id.toMap())
@@ -68,7 +67,7 @@ internal class NablaMessagingClientModule(
     }
 
     @ReactMethod
-    fun createDraftConversation(
+    fun startConversation(
         title: String?,
         providerIds: ReadableArray?,
         callback: Callback,
@@ -77,9 +76,9 @@ internal class NablaMessagingClientModule(
             (0 until it.size()).map { index -> Uuid.fromString(it.getString(index)) }
         }
         val conversationId = NablaClient.getInstance().messagingClient
-            .createDraftConversation(
+            .startConversation(
                 title,
-                providerUuids
+                providerUuids,
             )
         callback(null, conversationId.toMap())
     }

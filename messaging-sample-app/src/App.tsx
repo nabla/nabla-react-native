@@ -26,16 +26,13 @@ async function initializeNablaClients() {
   });
 }
 
-const createConversationIcon = () => (
+const startConversationIcon = () => (
   <Text style={styles.appbarButtonTextStyle}>+</Text>
 );
 
 export default function App() {
-  const createConversation = () => {
-    nablaMessagingClient.createConversation(
-      (error) => {
-        console.log({ ...error });
-      },
+  const startConversation = () => {
+    nablaMessagingClient.startConversation(
       (conversationId) => {
         console.log(
           `createConversationSuccess id: ${getStableId(conversationId)}`,
@@ -56,8 +53,8 @@ export default function App() {
             title='Medical chat'
           />
           <Appbar.Action
-            icon={createConversationIcon}
-            onPress={createConversation}
+            icon={startConversationIcon}
+            onPress={startConversation}
           />
         </Appbar.Header>
         {initialized &&

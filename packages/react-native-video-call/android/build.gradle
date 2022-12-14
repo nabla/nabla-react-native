@@ -46,5 +46,5 @@ dependencies {
 
     implementation project(path: ':nabla_react-native-core')
 
-    implementation 'com.nabla.nabla-android:video-call:1.0.0-alpha20'
+    implementation 'com.nabla.nabla-android:video-call:1.0.0-alpha21'
 }

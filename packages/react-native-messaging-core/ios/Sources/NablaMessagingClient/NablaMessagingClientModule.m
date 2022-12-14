@@ -5,14 +5,14 @@
 RCT_EXTERN_METHOD(initializeMessagingModule: (RCTPromiseResolveBlock)resolve
                                    rejecter: (RCTPromiseRejectBlock)reject)
 
-RCT_EXTERN_METHOD(createConversation: (NSString *)title
+RCT_EXTERN_METHOD(createConversation: (id)message
+                               title: (NSString *)title
                          providerIds: (NSArray<NSString *> *)providerIds
-                      initialMessage: (id)initialMessage
                             callback: (RCTResponseSenderBlock)callback)
 
-RCT_EXTERN_METHOD(createDraftConversation: (NSString *)title
-                              providerIds: (NSArray<NSString *> *)providerIds
-                                 callback: (RCTResponseSenderBlock)callback)
+RCT_EXTERN_METHOD(startConversation: (NSString *)title
+                        providerIds: (NSArray<NSString *> *)providerIds
+                           callback: (RCTResponseSenderBlock)callback)
 
 RCT_EXTERN_METHOD(sendMessage: (id)input
                conversationId: (id)conversationIdMap

@@ -11,14 +11,14 @@ const LINKING_ERROR =
 interface NablaMessagingClientModule extends NativeModule {
   initializeMessagingModule(): Promise<void>;
 
-  createConversation(
+  startConversation(
     title: String | undefined,
     providerIds: String[] | undefined,
-    initialMessageInput: any | undefined,
     callback: Callback<ConversationId>,
   ): void;
 
-  createDraftConversation(
+  createConversation(
+    messageInput: any,
     title: String | undefined,
     providerIds: String[] | undefined,
     callback: Callback<ConversationId>,

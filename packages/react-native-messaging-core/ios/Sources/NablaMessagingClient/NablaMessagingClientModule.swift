@@ -13,49 +13,43 @@ final class NablaMessagingClientModule: NSObject {
         resolver(NSNull())
     }
 
-    @objc(createConversation:providerIds:initialMessage:callback:)
-    func createConversation(
+    @objc(startConversation:providerIds:callback:)
+    func startConversation(
         title: String?,
         providerIds: [String]?,
-        initialMessageInput: [String: Any]?,
         callback: @escaping RCTResponseSenderBlock
     ) {
-        let initialMessage: MessageInput?
-        if let initialMessageInput = initialMessageInput {
-            guard let messageInput = initialMessageInput.messageInput else {
-                callback([InternalError.createDictionaryRepresentation(message: "Unable to parse initial message input")])
-                return
-            }
-            initialMessage = messageInput
-        } else {
-            initialMessage = nil
+        let conversation = NablaMessagingClient.shared.startConversation(
+            title: title,
+            providerIds: providerIds?.compactMap(UUID.init)
+        )
+        callback([NSNull(), conversation.id.dictionaryRepresentation])
+    }
+
+    @objc(createConversation:title:providerIds:callback:)
+    func createConversation(
+        message: [String: Any],
+        title: String?,
+        providerIds: [String]?,
+        callback: @escaping RCTResponseSenderBlock
+    ) {
+        guard let messageInput = message.messageInput else {
+            callback([InternalError.createDictionaryRepresentation(message: "Unable to parse initial message input")])
+            return
         }
 
         Task {
             do {
                 let conversation = try await NablaMessagingClient.shared.createConversation(
+                    withMessage: messageInput,
                     title: title,
-                    providerIds: providerIds?.compactMap(UUID.init),
-                    initialMessage: initialMessage
+                    providerIds: providerIds?.compactMap(UUID.init)
                 )
                 callback([NSNull(), conversation.id.dictionaryRepresentation])
             } catch {
                 callback([error.dictionaryRepresentation])
             }
         }
-    }
-
-    @objc(createDraftConversation:providerIds:callback:)
-    func createDraftConversation(
-        title: String?,
-        providerIds: [String]?,
-        callback: @escaping RCTResponseSenderBlock
-    ) {
-        let conversation = NablaMessagingClient.shared.createDraftConversation(
-            title: title,
-            providerIds: providerIds?.compactMap(UUID.init)
-        )
-        callback([NSNull(), conversation.id.dictionaryRepresentation])
     }
 
     @objc(sendMessage:conversationId:replyTo:callback:)
