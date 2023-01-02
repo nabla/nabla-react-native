@@ -1,6 +1,6 @@
 {
   "name": "@nabla/react-native-video-call",
-  "version": "1.0.0-alpha11",
+  "version": "1.0.0-alpha12",
   "description": "Nabla Video Call SDK",
   "repository": "https://github.com/nabla/nabla-react-native",
   "main": "lib/index.js",
@@ -26,7 +26,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@nabla/react-native-core": "1.0.0-alpha11"
+    "@nabla/react-native-core": "1.0.0-alpha12"
   },
   "devDependencies": {
     "@babel/core": "^7.16.12",
