@@ -2,9 +2,18 @@ import * as React from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 
 import { Appbar } from 'react-native-paper';
-import { NablaConversationListView, NablaMessagingUI } from '@nabla/react-native-messaging-ui';
-import { AuthTokens, Configuration, NablaClient } from '@nabla/react-native-core';
-import { getStableId, NablaMessagingClient } from '@nabla/react-native-messaging-core';
+import {
+  NablaConversationListView,
+  NablaMessagingUI,
+} from '@nabla/react-native-messaging-ui';
+import {
+  AuthTokens,
+  Configuration,
+  NablaClient,
+} from '@nabla/react-native-core';
+import {
+  NablaMessagingClient,
+} from '@nabla/react-native-messaging-core';
 import { useState } from 'react';
 import { NablaVideoCallClient } from '@nabla/react-native-video-call';
 
@@ -16,9 +25,9 @@ const nablaClient = NablaClient.getInstance();
 const nablaMessagingClient = NablaMessagingClient.getInstance();
 
 async function initializeNablaClients() {
-  await NablaMessagingClient.initializeMessagingModule()
-  await NablaVideoCallClient.initializeVideoCallModule()
-  await nablaClient.initialize(new Configuration(apiKey))
+  await NablaMessagingClient.initializeMessagingModule();
+  await NablaVideoCallClient.initializeVideoCallModule();
+  await nablaClient.initialize(new Configuration(apiKey));
 
   const dummyUserId = 'f0faa561-5707-402e-b7b9-5b747995e1fe';
   nablaClient.authenticate(dummyUserId, async () => {
@@ -32,17 +41,13 @@ const startConversationIcon = () => (
 
 export default function App() {
   const startConversation = () => {
-    nablaMessagingClient.startConversation(
-      (conversationId) => {
-        console.log(
-          `createConversationSuccess id: ${getStableId(conversationId)}`,
-        );
-      },
-    );
+    nablaMessagingClient.startConversation((conversationId) => {
+      NablaMessagingUI.navigateToConversation(conversationId);
+    });
   };
 
-  const [initialized, setInitialized] = useState(false)
-  initializeNablaClients().then(() => setInitialized(true))
+  const [initialized, setInitialized] = useState(false);
+  initializeNablaClients().then(() => setInitialized(true));
 
   return (
     <View style={styles.vContainer}>
@@ -50,21 +55,21 @@ export default function App() {
         <Appbar.Header style={styles.appbarHeaderStyle}>
           <Appbar.Content
             color={Platform.OS === 'ios' ? 'black' : 'white'}
-            title='Medical chat'
+            title="Medical chat"
           />
           <Appbar.Action
             icon={startConversationIcon}
             onPress={startConversation}
           />
         </Appbar.Header>
-        {initialized &&
+        {initialized && (
           <NablaConversationListView
             onConversationSelected={(conversationId) => {
               NablaMessagingUI.navigateToConversation(conversationId);
             }}
             style={styles.conversationListViewStyle}
           />
-        }
+        )}
       </View>
     </View>
   );
