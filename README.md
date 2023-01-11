@@ -30,7 +30,7 @@ You can find the latest version available in the [release page](https://github.c
 
 ## Sample app
 
-You can find an example of a basic integration of the Messaging UI SDK in our [demo app](https://github.com/nabla/nabla-react-native/tree/main/react-native-sample-app).
+You can find an example of a basic integration of the Messaging UI SDK in our [demo app](https://github.com/nabla/nabla-react-native/tree/main/messaging-sample-app).
 
 ## Need more help?
 
