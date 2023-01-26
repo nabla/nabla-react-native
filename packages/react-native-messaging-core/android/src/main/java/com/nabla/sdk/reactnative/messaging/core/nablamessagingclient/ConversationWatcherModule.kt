@@ -42,7 +42,7 @@ internal class ConversationWatcherModule(
         val watchConversationJob =
             NablaClient.getInstance().messagingClient.watchConversation(conversationId)
                 .onEach {
-                    sendUpdate(it.toMap())
+                    sendUpdate(it.toMap(reactApplicationContext))
                 }
                 .catch { exception: Throwable ->
                     sendError(

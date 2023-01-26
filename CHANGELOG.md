@@ -4,14 +4,19 @@
 
 ### Added
 
+- A new `onAppointmentSelected` property is available in `NablaAppointmentListView` component and should be provided to redirect to the appointment detail screen (`NablaSchedulingUI.navigateToAppointmentDetailScreen(appointmentId)`).
+(This callback will only be used on iOS and the navigation will work as expected on Android)
+
 ### Changed
+
+- `NablaSchedulingClient.openScheduleAppointmentScreen()` has been renamed to `NablaSchedulingUI.navigateToScheduleAppointmentScreen()` in the NablaScheduling package. 
 
 ### Fixed
 
 ### Versions
 
-- Android: [`1.0.0-alpha21`](https://github.com/nabla/nabla-android/releases/tag/1.0.0-alpha21)
-- iOS: [`1.0.0-alpha29`](https://github.com/nabla/nabla-ios/releases/tag/1.0.0-alpha29)
+- Android: [`1.0.0-alpha22`](https://github.com/nabla/nabla-android/releases/tag/1.0.0-alpha22)
+- iOS: [`1.0.0-alpha30`](https://github.com/nabla/nabla-ios/releases/tag/1.0.0-alpha30)
 
 ## [1.0.0-alpha12] - 2023-01-02
 

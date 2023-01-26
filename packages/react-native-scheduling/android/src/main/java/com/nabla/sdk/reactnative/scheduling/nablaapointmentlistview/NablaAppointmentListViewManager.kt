@@ -3,6 +3,7 @@ package com.nabla.sdk.reactnative.scheduling.nablaapointmentlistview
 import androidx.fragment.app.FragmentActivity
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReadableArray
+import com.facebook.react.common.MapBuilder
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.ViewGroupManager
 import com.nabla.sdk.reactnative.scheduling.utils.NativeViewWrapper
@@ -35,6 +36,7 @@ internal class NablaAppointmentListViewManager(
 
     private fun createFragment(reactNativeViewId: Int) {
         val fragment = AppointmentsFragment.newInstance()
+
         (reactContext.currentActivity as FragmentActivity).supportFragmentManager
             .beginTransaction()
             .replace(
@@ -43,6 +45,16 @@ internal class NablaAppointmentListViewManager(
                 reactNativeViewId.toString()
             )
             .commit()
+    }
+
+    override fun getExportedCustomDirectEventTypeConstants(): MutableMap<String, Any>? {
+        return MapBuilder.of(
+            "onAppointmentClicked",
+            MapBuilder.of(
+                "registrationName",
+                "onAppointmentSelected"
+            )
+        )
     }
 
     companion object {

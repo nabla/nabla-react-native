@@ -36,7 +36,7 @@ internal class ConversationListWatcherModule(
                 .onEach {
                     loadMoreConversationsCallback = it.loadMore
                     val params = Arguments.createMap().apply {
-                        putArray("conversations", it.content.toMapArray())
+                        putArray("conversations", it.content.toMapArray(reactApplicationContext))
                     }
                     sendEvent(reactApplicationContext,
                         WATCH_CONVERSATIONS_UPDATED, params)

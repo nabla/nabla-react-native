@@ -24,40 +24,41 @@ public final class CoreLogger {
 
 extension CoreLogger: NablaCore.Logger {
 
-    public func debug(message: @autoclosure () -> String, extra: [String: Any]) {
+    public func debug(message: @autoclosure () -> String, error: Error?, extra: [String: Any]) {
         if logLevel.isAtLeast(.debug) {
             Self.logsSubject.send(
-                Log(level: .debug, message: message(), error: extractNablaErrorFromExtra(extra))
+                Log(level: .debug, message: message(), error: error?.asNablaError())
             )
         }
     }
 
-    public func info(message: @autoclosure () -> String, extra: [String: Any]) {
+    public func info(message: @autoclosure () -> String, error: Error?, extra: [String: Any]) {
         if logLevel.isAtLeast(.info) {
             Self.logsSubject.send(
-                Log(level: .info, message: message(), error: extractNablaErrorFromExtra(extra))
+                Log(level: .info, message: message(), error: error?.asNablaError())
             )
         }
     }
 
-    public func warning(message: @autoclosure () -> String, extra: [String: Any]) {
+    public func warning(message: @autoclosure () -> String, error: Error?, extra: [String: Any]) {
         if logLevel.isAtLeast(.warn) {
             Self.logsSubject.send(
-                Log(level: .warn, message: message(), error: extractNablaErrorFromExtra(extra))
+                Log(level: .warn, message: message(), error: error?.asNablaError())
             )
         }
     }
 
-    public func error(message: @autoclosure () -> String, extra: [String: Any]) {
+    public func error(message: @autoclosure () -> String, error: Error?, extra: [String: Any]) {
         if logLevel.isAtLeast(.error) {
             Self.logsSubject.send(
-                Log(level: .error, message: message(), error: extractNablaErrorFromExtra(extra))
+                Log(level: .error, message: message(), error: error?.asNablaError())
             )
         }
     }
+}
 
-    private func extractNablaErrorFromExtra(_ extra: [String: Any]) -> NablaError? {
-        let error = (extra["error"] as? Error) ?? (extra["reason"] as? Error)
-        return (error as? NablaError) ?? error.map(InternalError.init)
+extension Error {
+    fileprivate func asNablaError() -> NablaError {
+        (self as? NablaError) ?? InternalError(underlyingError: self)
     }
 }

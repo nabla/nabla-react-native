@@ -29,12 +29,28 @@ final class NablaAppointmentListView: UIView {
     private func embed() {
         guard let parentVC = parentViewController else { return }
 
-        let viewController = NablaClient.shared.scheduling.views.createAppointmentListViewController()
+        let viewController = NablaClient.shared.scheduling.views
+                .createAppointmentListViewController(delegate: self)
         parentVC.addChild(viewController)
         addSubview(viewController.view)
         viewController.view.frame = bounds
         viewController.didMove(toParent: parentVC)
         appointmentListViewController = viewController
+    }
+
+    // MARK: - Private
+    @objc private var onAppointmentSelected: RCTDirectEventBlock?
+}
+
+extension NablaAppointmentListView: AppointmentListDelegate {
+    func appointmentListDidSelectAppointment(_ appointment: Appointment) {
+        onAppointmentSelected?(["appointmentId": appointment.id.uuidString])
+    }
+
+    func appointmentListDidSelectNewAppointment() {
+        parentViewController.map {
+            NablaClient.shared.scheduling.views.presentScheduleAppointmentNavigationController(from: $0)
+        }
     }
 }
 

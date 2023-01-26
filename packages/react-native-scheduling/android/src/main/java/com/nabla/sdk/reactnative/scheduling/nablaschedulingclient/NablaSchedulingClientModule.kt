@@ -21,13 +21,4 @@ class NablaSchedulingClientModule(
         NablaClientModule.addModule(NablaSchedulingModule())
         promise.resolve(null)
     }
-
-    @ReactMethod
-    fun openScheduleAppointmentScreen() {
-        if (currentActivity == null) {
-            CoreLogger.warn("Missing current activity in `NablaSchedulingClientModule`")
-            return
-        }
-        NablaClient.getInstance().schedulingModule.openScheduleAppointmentActivity(currentActivity!!)
-    }
 }

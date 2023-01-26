@@ -6,6 +6,7 @@ import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.uimanager.ViewManager
 import com.nabla.sdk.reactnative.scheduling.nablaapointmentlistview.NablaAppointmentListViewManager
 import com.nabla.sdk.reactnative.scheduling.nablaschedulingclient.NablaSchedulingClientModule
+import com.nabla.sdk.reactnative.scheduling.nablaschedulingui.NablaSchedulingUIModule
 
 class NablaSchedulingPackage : ReactPackage {
 
@@ -19,7 +20,8 @@ class NablaSchedulingPackage : ReactPackage {
     override fun createNativeModules(reactContext: ReactApplicationContext):
             MutableList<NativeModule> {
         return mutableListOf(
-            NablaSchedulingClientModule(reactContext)
+            NablaSchedulingClientModule(reactContext),
+            NablaSchedulingUIModule(reactContext)
         )
     }
 }

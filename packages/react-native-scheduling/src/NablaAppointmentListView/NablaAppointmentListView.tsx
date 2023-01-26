@@ -1,6 +1,13 @@
 import React, { useEffect, useRef } from 'react';
-import { findNodeHandle, Platform, StyleSheet, UIManager, View } from 'react-native';
+import {
+  findNodeHandle, NativeSyntheticEvent,
+  Platform,
+  StyleSheet,
+  UIManager,
+  ViewProps
+} from "react-native";
 import { NablaAppointmentListViewManager } from './NablaAppointmentListViewManager';
+import { AppointmentId } from '../types';
 
 const createFragment = (viewId: number | null) =>
   UIManager.dispatchViewManagerCommand(
@@ -11,22 +18,38 @@ const createFragment = (viewId: number | null) =>
     [viewId],
   );
 
+type NablaAppointmentListViewProps = ViewProps & {
+  onAppointmentSelected: (appointmentId: AppointmentId) => void;
+};
 
-export const NablaAppointmentListView: React.FC = () => {
+export const NablaAppointmentListView: React.FC<
+  NablaAppointmentListViewProps
+> = (props: NablaAppointmentListViewProps) => {
   const ref = useRef(null);
 
   useEffect(() => {
-
-    if (Platform.OS === 'android') {
-      const viewId = findNodeHandle(ref.current);
-      createFragment(viewId);
-    }
+    setTimeout( () => {
+      if (Platform.OS === 'android') {
+        const viewId = findNodeHandle(ref.current);
+        createFragment(viewId);
+      }
+    })
   }, []);
+
+  const nativeProps = {
+    ...props,
+    onAppointmentSelected: (
+      event: NativeSyntheticEvent<{ appointmentId: AppointmentId }>,
+    ) => {
+      props.onAppointmentSelected(event.nativeEvent.appointmentId);
+    },
+  };
 
   return (
     <NablaAppointmentListViewManager
       style={styles.container}
       ref={ref}
+      {...nativeProps}
     />
   );
 };
