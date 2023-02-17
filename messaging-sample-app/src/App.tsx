@@ -24,6 +24,12 @@ const refreshToken = 'yourRefreshToken';
 const nablaClient = NablaClient.getInstance();
 const nablaMessagingClient = NablaMessagingClient.getInstance();
 
+enum NablaClientState {
+  NotInitialized = 1,
+  Initializing,
+  Initialized,
+}
+
 async function initializeNablaClients() {
   await NablaMessagingClient.initializeMessagingModule();
   await NablaVideoCallClient.initializeVideoCallModule();
@@ -46,8 +52,15 @@ export default function App() {
     });
   };
 
-  const [initialized, setInitialized] = useState(false);
-  initializeNablaClients().then(() => setInitialized(true));
+  const [initializationState, setInitializationState] = useState(
+    NablaClientState.NotInitialized,
+  );
+  if (initializationState === NablaClientState.NotInitialized) {
+    setInitializationState(NablaClientState.Initializing);
+    initializeNablaClients().then(() =>
+      setInitializationState(NablaClientState.Initialized),
+    );
+  }
 
   return (
     <View style={styles.vContainer}>
@@ -62,7 +75,7 @@ export default function App() {
             onPress={startConversation}
           />
         </Appbar.Header>
-        {initialized && (
+        {initializationState === NablaClientState.Initialized && (
           <NablaConversationListView
             onConversationSelected={(conversationId) => {
               NablaMessagingUI.navigateToConversation(conversationId);
