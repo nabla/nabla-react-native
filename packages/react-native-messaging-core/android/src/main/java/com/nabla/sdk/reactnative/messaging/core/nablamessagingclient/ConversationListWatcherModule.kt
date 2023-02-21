@@ -33,10 +33,10 @@ internal class ConversationListWatcherModule(
     fun addListener(eventName: String) {
         if (eventName == WATCH_CONVERSATIONS_UPDATED || eventName == WATCH_CONVERSATIONS_ERROR) {
             watchConversationJob = NablaClient.getInstance().messagingClient.watchConversations()
-                .onEach {
-                    loadMoreConversationsCallback = it.loadMore
-                    val params = Arguments.createMap().apply {
-                        putArray("conversations", it.content.toMapArray(reactApplicationContext))
+                .onEach { response ->
+                    loadMoreConversationsCallback = response.data.loadMore
+                    val params = response.toMap { content ->
+                        content.toMap { it.toMap(reactApplicationContext) }
                     }
                     sendEvent(reactApplicationContext,
                         WATCH_CONVERSATIONS_UPDATED, params)

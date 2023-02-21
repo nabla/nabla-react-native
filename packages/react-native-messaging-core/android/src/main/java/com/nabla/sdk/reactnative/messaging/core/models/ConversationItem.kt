@@ -6,16 +6,7 @@ import com.facebook.react.bridge.ReadableMap
 import com.nabla.sdk.core.domain.entity.VideoCallRoomStatus
 import com.nabla.sdk.messaging.core.domain.entity.*
 
-@JvmName("toConversationItemMapArray")
-internal fun List<ConversationItem>.toMapArray(): ReadableArray {
-    return Arguments.createArray().apply {
-        forEach { item ->
-            pushMap(item.toMap())
-        }
-    }
-}
-
-private fun ConversationItem.toMap(): ReadableMap {
+internal fun ConversationItem.toMap(): ReadableMap {
     return Arguments.createMap().also {
         it.putString("createdAt", createdAt.toString())
         when (this) {

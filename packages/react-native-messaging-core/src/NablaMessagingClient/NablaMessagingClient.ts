@@ -14,12 +14,12 @@ import {
 } from './NativeModules';
 import {
   Conversation,
-  ConversationId,
-  ConversationItems,
-  ConversationList,
+  ConversationId, ConversationItem,
   MessageId,
   MessageInput,
   NablaEventSubscription,
+  PaginatedList,
+  Response,
 } from '../types';
 import {
   mapConversation,
@@ -28,8 +28,8 @@ import {
   mapError,
   NativeConversation,
   NativeConversationItems,
-  NativeConversationList,
 } from './types';
+import { mapResponse } from './types/ResponseMapper';
 
 const conversationListEmitter = new NativeEventEmitter(
   conversationListWatcherModule,
@@ -78,7 +78,7 @@ export class NablaMessagingClient {
    */
   public watchConversations(
     errorCallback: (error: NablaError) => void,
-    successCallback: (conversationsList: ConversationList) => void,
+    successCallback: (response: Response<PaginatedList<Conversation>, NablaError>) => void,
   ): NablaEventSubscription {
     return new NablaEventSubscription(
       conversationListEmitter.addListener(
@@ -89,8 +89,10 @@ export class NablaMessagingClient {
       ),
       conversationListEmitter.addListener(
         'watchConversationsUpdated',
-        (data: NativeConversationList) => {
-          successCallback(mapConversationList(data));
+        (
+          response: Response<PaginatedList<NativeConversation>, NativeError>,
+        ) => {
+          successCallback(mapResponse(response, mapConversationList));
         },
       ),
     );
@@ -162,7 +164,7 @@ export class NablaMessagingClient {
   public async watchConversation(
     conversationId: ConversationId,
     errorCallback: (error: NablaError) => void,
-    successCallback: (conversation: Conversation) => void,
+    successCallback: (response: Response<Conversation, NablaError>) => void,
   ): Promise<NablaEventSubscription> {
     return new Promise((resolve, reject) => {
       const subscription = new NablaEventSubscription(
@@ -176,9 +178,9 @@ export class NablaMessagingClient {
         ),
         conversationEmitter.addListener(
           'watchConversationUpdated',
-          (data: NativeConversation) => {
-            if (equal(data.id, conversationId)) {
-              successCallback(mapConversation(data));
+          (response: Response<NativeConversation, NativeError>) => {
+            if (equal(response.data.id, conversationId)) {
+              successCallback(mapResponse(response, mapConversation));
             }
           },
         ),
@@ -206,7 +208,9 @@ export class NablaMessagingClient {
   public async watchItemsOfConversation(
     conversationId: ConversationId,
     errorCallback: (error: NablaError) => void,
-    successCallback: (conversationItems: ConversationItems) => void,
+    successCallback: (
+      response: Response<PaginatedList<ConversationItem>, NablaError>,
+    ) => void,
   ): Promise<NablaEventSubscription> {
     return new Promise((resolve, reject) => {
       const subscription = new NablaEventSubscription(
@@ -220,9 +224,9 @@ export class NablaMessagingClient {
         ),
         conversationItemsEmitter.addListener(
           'watchConversationItemsUpdated',
-          (data: NativeConversationItems) => {
-            if (equal(data.id, conversationId)) {
-              successCallback(mapConversationItems(data));
+          (response: Response<NativeConversationItems, NativeError>) => {
+            if (equal(response.data.id, conversationId)) {
+              successCallback(mapResponse(response, mapConversationItems));
             }
           },
         ),

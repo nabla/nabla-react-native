@@ -87,38 +87,38 @@ PODS:
     - WebRTC-SDK (~> 104.5112.07)
   - Logging (1.4.0)
   - nabla-react-native-core (1.0.0-alpha13):
-    - NablaCore (= 1.0.0-alpha30)
+    - NablaCore (= 1.0.0-alpha32)
     - React-Core
   - nabla-react-native-messaging-core (1.0.0-alpha13):
     - nabla-react-native-core
-    - NablaMessagingCore (= 1.0.0-alpha30)
+    - NablaMessagingCore (= 1.0.0-alpha32)
     - React-Core
   - nabla-react-native-messaging-ui (1.0.0-alpha13):
     - nabla-react-native-messaging-core
-    - NablaMessagingUI (= 1.0.0-alpha30)
+    - NablaMessagingUI (= 1.0.0-alpha32)
     - React-Core
   - nabla-react-native-video-call (1.0.0-alpha13):
     - nabla-react-native-core
-    - NablaVideoCall (= 1.0.0-alpha30)
+    - NablaVideoCall (= 1.0.0-alpha32)
     - React-Core
-  - NablaCore (1.0.0-alpha30):
+  - NablaCore (1.0.0-alpha32):
     - Apollo/SQLite (~> 0.50)
     - Apollo/WebSocket (~> 0.50)
-    - Sentry (~> 7.30.1)
-  - NablaDocumentScanner (1.0.0-alpha30)
-  - NablaMessagingCore (1.0.0-alpha30):
-    - NablaCore (= 1.0.0-alpha30)
-  - NablaMessagingUI (1.0.0-alpha30):
-    - NablaCore (= 1.0.0-alpha30)
-    - NablaDocumentScanner (= 1.0.0-alpha30)
-    - NablaMessagingCore (= 1.0.0-alpha30)
-  - NablaVideoCall (1.0.0-alpha30):
-    - LiveKitClient (~> 1.0.3)
-    - NablaCore (= 1.0.0-alpha30)
+    - Sentry (~> 8.1.0)
+  - NablaDocumentScanner (1.0.0-alpha32)
+  - NablaMessagingCore (1.0.0-alpha32):
+    - NablaCore (= 1.0.0-alpha32)
+  - NablaMessagingUI (1.0.0-alpha32):
+    - NablaCore (= 1.0.0-alpha32)
+    - NablaDocumentScanner (= 1.0.0-alpha32)
+    - NablaMessagingCore (= 1.0.0-alpha32)
+  - NablaVideoCall (1.0.0-alpha32):
+    - LiveKitClient (~> 1.0.8)
+    - NablaCore (= 1.0.0-alpha32)
   - OpenSSL-Universal (1.1.1100)
-  - PromisesObjC (2.1.1)
-  - PromisesSwift (2.1.1):
-    - PromisesObjC (= 2.1.1)
+  - PromisesObjC (2.2.0)
+  - PromisesSwift (2.2.0):
+    - PromisesObjC (= 2.2.0)
   - RCT-Folly (2021.07.22.00):
     - boost
     - DoubleConversion
@@ -394,15 +394,18 @@ PODS:
     - React-jsi (= 0.70.6)
     - React-logger (= 0.70.6)
     - React-perflogger (= 0.70.6)
-  - Sentry (7.30.2):
-    - Sentry/Core (= 7.30.2)
-  - Sentry/Core (7.30.2)
+  - Sentry (8.1.0):
+    - Sentry/Core (= 8.1.0)
+    - SentryPrivate (= 8.1.0)
+  - Sentry/Core (8.1.0):
+    - SentryPrivate (= 8.1.0)
+  - SentryPrivate (8.1.0)
   - SocketRocket (0.6.0)
   - SQLite.swift (0.13.3):
     - SQLite.swift/standard (= 0.13.3)
   - SQLite.swift/standard (0.13.3)
   - SwiftProtobuf (1.20.3)
-  - WebRTC-SDK (104.5112.08)
+  - WebRTC-SDK (104.5112.11)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -495,6 +498,7 @@ SPEC REPOS:
     - PromisesObjC
     - PromisesSwift
     - Sentry
+    - SentryPrivate
     - SocketRocket
     - SQLite.swift
     - SwiftProtobuf
@@ -596,18 +600,18 @@ SPEC CHECKSUMS:
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   LiveKitClient: e4c5d63cd7633a5006058f27ccfddd914c5fa592
   Logging: beeb016c9c80cf77042d62e83495816847ef108b
-  nabla-react-native-core: 4ecfd0ba468ed32975c38c29c4bbc80eb8e5af66
-  nabla-react-native-messaging-core: 6f5c7f803fd41c6dca058b13f7b94ecb99adcbdc
-  nabla-react-native-messaging-ui: f747f0407c863759ab76721f7edf1fc12c9b070a
-  nabla-react-native-video-call: 67e50f23f62e842241bb9d4f9118c48677e21192
-  NablaCore: cabe7a67184596bcdb87db8c384b4945cfaa4e2b
-  NablaDocumentScanner: 1c84c7813c2242137ee9442a16e8f7d6e176c810
-  NablaMessagingCore: 7f77bebb39b2fcdc0eead22128b8cd23a52e50c5
-  NablaMessagingUI: f8842233b2813726c8229e22c25bfa04f182ea1d
-  NablaVideoCall: 97564e510993e3cd57d0858120c367dd4d388c0b
+  nabla-react-native-core: c0a1c862c52dbcf2e7d3a8a106a54bb1abec6143
+  nabla-react-native-messaging-core: 9c6f915343fd765e879559baf3052629853c660c
+  nabla-react-native-messaging-ui: f6315d355831ecfc7bf9bde2972f936eb5f37063
+  nabla-react-native-video-call: a14e8bd01ff5bf95bf29cbf5a958401c5ec4df9a
+  NablaCore: 873295e95ed9e43d757864450bffc1d162f0c746
+  NablaDocumentScanner: 8c0542f70bc9b67f5afdfe06e14c1058d9126b51
+  NablaMessagingCore: f3c1168589cdf61c845d2c0ba5cf51137f024c42
+  NablaMessagingUI: 68806f4813ff6dd7b106f6b25601cef79836b33a
+  NablaVideoCall: ad42751ba6e930c0c80456276ebdc8ee3d976dff
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
-  PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
-  PromisesSwift: 99fddfe4a0ec88a56486644c0da106694c92a604
+  PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
+  PromisesSwift: cf9eb58666a43bbe007302226e510b16c1e10959
   RCT-Folly: 0080d0a6ebf2577475bda044aa59e2ca1f909cda
   RCTRequired: e1866f61af7049eb3d8e08e8b133abd38bc1ca7a
   RCTTypeSafety: 27c2ac1b00609a432ced1ae701247593f07f901e
@@ -634,11 +638,12 @@ SPEC CHECKSUMS:
   React-RCTVibration: c75ceef7aa60a33b2d5731ebe5800ddde40cefc4
   React-runtimeexecutor: 15437b576139df27635400de0599d9844f1ab817
   ReactCommon: 349be31adeecffc7986a0de875d7fb0dcf4e251c
-  Sentry: 9be48e341494bc976c963b05aa4a8ca48308c684
+  Sentry: a73976b9f5a5141187b0c15432425a167c90d80f
+  SentryPrivate: eb7ce6ea7ccf1bbeda1f3f37fa355668849426ae
   SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
   SQLite.swift: 903bfa3bc9ab06345fdfbb578e34f47cfcf417da
   SwiftProtobuf: b02b5075dcf60c9f5f403000b3b0c202a11b6ae1
-  WebRTC-SDK: d5816d8135a5a947839db0caa8d8ba0e94d2b1fb
+  WebRTC-SDK: 98ab93b8d28f33699a6d4909a06e824a6c7497aa
   Yoga: 99caf8d5ab45e9d637ee6e0174ec16fbbb01bcfc
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 

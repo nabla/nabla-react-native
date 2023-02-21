@@ -2,19 +2,15 @@ import {
   mapConversationItem,
   NativeConversationItem,
 } from './NativeConversationItem';
-import { ConversationId, ConversationItems } from '../../types';
+import { ConversationId, ConversationItem, PaginatedList } from '../../types';
 
-export interface NativeConversationItems {
+export type NativeConversationItems = PaginatedList<NativeConversationItem> & {
   id: ConversationId;
-  hasMore: boolean;
-  items: NativeConversationItem[];
-}
+};
 
 export const mapConversationItems: (
   conversationItems: NativeConversationItems,
-) => ConversationItems = (conversationItems) => {
-  return new ConversationItems(
-    conversationItems.hasMore,
-    conversationItems.items.map(mapConversationItem),
-  );
-};
+) => PaginatedList<ConversationItem> = (conversationItems) => ({
+  hasMore: conversationItems.hasMore,
+  elements: conversationItems.elements.map(mapConversationItem),
+});

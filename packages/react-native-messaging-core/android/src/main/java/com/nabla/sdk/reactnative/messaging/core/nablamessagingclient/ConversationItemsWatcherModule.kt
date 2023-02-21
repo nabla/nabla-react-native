@@ -6,7 +6,10 @@ import com.nabla.sdk.core.NablaClient
 import com.nabla.sdk.core.annotation.NablaInternal
 import com.nabla.sdk.core.domain.entity.InternalException.Companion.asNablaInternal
 import com.nabla.sdk.core.domain.entity.NablaException
+import com.nabla.sdk.core.domain.entity.PaginatedContent
+import com.nabla.sdk.core.domain.entity.Response
 import com.nabla.sdk.messaging.core.domain.entity.ConversationId
+import com.nabla.sdk.messaging.core.domain.entity.ConversationItem
 import com.nabla.sdk.messaging.core.messagingClient
 import com.nabla.sdk.reactnative.messaging.core.models.toConversationId
 import com.nabla.sdk.reactnative.messaging.core.models.toMap
@@ -43,13 +46,14 @@ internal class ConversationItemsWatcherModule(
         var loadMoreItemsCallback: ToUnitResult = null
         val watchItemsJob =
             NablaClient.getInstance().messagingClient.watchConversationItems(conversationId)
-                .onEach {
-                    loadMoreItemsCallback = it.loadMore
+                .onEach { response: Response<PaginatedContent<List<ConversationItem>>> ->
+                    loadMoreItemsCallback = response.data.loadMore
                     sendUpdate(
-                        Arguments.createMap().apply {
-                            putMap("id", conversationId.toMap())
-                            putArray("items", it.content.toMapArray())
-                            putBoolean("hasMore", it.loadMore != null)
+                        response.toMap { list ->
+                            list.toMap(ConversationItem::toMap)
+                                .also {
+                                    it.putMap("id", conversationId.toMap())
+                                }
                         }
                     )
                 }

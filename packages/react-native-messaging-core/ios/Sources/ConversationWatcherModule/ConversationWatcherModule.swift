@@ -56,13 +56,13 @@ final class ConversationWatcherModule: RCTEventEmitter {
                         )
                     }
                 },
-                receiveValue: { [weak self] conversation in
+                receiveValue: { [weak self] response in
                     guard let self = self else {
                         return
                     }
                     self.sendEvent(
                         withName: Event.watchConversationUpdated.rawValue,
-                        body: conversation.dictionaryRepresentation
+                        body: response.dictionaryRepresentation(\.dictionaryRepresentation)
                     )
                 }
             )

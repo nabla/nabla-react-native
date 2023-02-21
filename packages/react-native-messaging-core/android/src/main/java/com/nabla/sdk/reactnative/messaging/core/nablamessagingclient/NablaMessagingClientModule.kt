@@ -4,7 +4,6 @@ import com.benasher44.uuid.Uuid
 import com.facebook.react.bridge.*
 import com.nabla.sdk.core.NablaClient
 import com.nabla.sdk.core.annotation.NablaInternal
-import com.nabla.sdk.core.domain.entity.InternalException
 import com.nabla.sdk.core.domain.entity.InternalException.Companion.asNablaInternal
 import com.nabla.sdk.core.domain.entity.NablaException
 import com.nabla.sdk.messaging.core.NablaMessagingModule
@@ -56,6 +55,7 @@ internal class NablaMessagingClientModule(
                 .createConversationWithMessage(
                     initialMessage,
                     title,
+                    providerUuids
                 )
                 .onSuccess {
                     callback(null, it.id.toMap())

@@ -4,16 +4,23 @@
 
 ### Added
 
+- Messaging Core: Added a new `Response` object returned by watchers. It contains metadata about the freshness of the data returned, allowing the caller to know if the data comes from cache or is fresh and if a background refresh is in progress.
+
 ### Changed
+
+- Messaging Core: `watchConversation` success callback is now called with a `Response<Conversation>, NablaError>`.
+- Messaging Core: `watchItemsOfConversation` success callback is now called with a `Response<PaginatedList<ConversationItem>, NablaError>`.
+- Messaging Core: `watchConversations` success callback is now called with a `Response<PaginatedList<Conversation>> NablaError>`.
 
 ### Fixed
 
 - Core: fixed a crash that occurred on iOS when authenticating a different user or the same user multiple times. 
+- Messaging Core: Fixed `createConversationWithMessage` not correctly setting providerIds on Android.
 
 ### Versions
 
-- Android: [`1.0.0-alpha22`](https://github.com/nabla/nabla-android/releases/tag/1.0.0-alpha22)
-- iOS: [`1.0.0-alpha30`](https://github.com/nabla/nabla-ios/releases/tag/1.0.0-alpha30)
+- Android: [`1.0.0-alpha24`](https://github.com/nabla/nabla-android/releases/tag/1.0.0-alpha24)
+- iOS: [`1.0.0-alpha32`](https://github.com/nabla/nabla-ios/releases/tag/1.0.0-alpha32)
 
 
 ## [1.0.0-alpha13] - 2023-01-30

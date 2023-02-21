@@ -4,7 +4,6 @@ import com.facebook.react.bridge.*
 import com.facebook.react.modules.core.DeviceEventManagerModule
 import com.nabla.sdk.core.NablaClient
 import com.nabla.sdk.core.annotation.NablaInternal
-import com.nabla.sdk.core.domain.entity.InternalException
 import com.nabla.sdk.core.domain.entity.InternalException.Companion.asNablaInternal
 import com.nabla.sdk.core.domain.entity.NablaException
 import com.nabla.sdk.messaging.core.domain.entity.ConversationId
@@ -41,8 +40,8 @@ internal class ConversationWatcherModule(
         }
         val watchConversationJob =
             NablaClient.getInstance().messagingClient.watchConversation(conversationId)
-                .onEach {
-                    sendUpdate(it.toMap(reactApplicationContext))
+                .onEach { response ->
+                    sendUpdate(response.toMap { it.toMap(reactApplicationContext) })
                 }
                 .catch { exception: Throwable ->
                     sendError(

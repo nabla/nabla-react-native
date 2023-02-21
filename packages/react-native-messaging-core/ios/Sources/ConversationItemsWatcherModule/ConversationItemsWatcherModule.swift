@@ -59,13 +59,16 @@ final class ConversationItemsWatcherModule: RCTEventEmitter {
                     }
 
                 },
-                receiveValue: { [weak self] conversationItems in
+                receiveValue: { [weak self] response in
                     guard let self = self else {
                         return
                     }
-                    var dictionaryRepresentation = conversationItems.dictionaryRepresentation
-                    dictionaryRepresentation["id"] = conversationIdMap
-                    self.conversationItemsLoadMoreFunctions[conversationId] = conversationItems.loadMore
+                    let dictionaryRepresentation = response.dictionaryRepresentation { list in
+                        var dictionaryRepresentation = list.dictionaryRepresentation(\.dictionaryRepresentation)
+                        dictionaryRepresentation["id"] = conversationIdMap
+                        return dictionaryRepresentation
+                    }
+                    self.conversationItemsLoadMoreFunctions[conversationId] = response.data.loadMore
                     self.sendEvent(
                         withName: Event.watchConversationItemsUpdated.rawValue,
                         body: dictionaryRepresentation

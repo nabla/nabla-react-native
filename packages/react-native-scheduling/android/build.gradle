@@ -47,5 +47,5 @@ dependencies {
     implementation project(path: ':nabla_react-native-core')
     implementation 'androidx.fragment:fragment-ktx:1.5.5'
 
-    implementation 'com.nabla.nabla-android:scheduling:1.0.0-alpha22'
+    implementation 'com.nabla.nabla-android:scheduling:1.0.0-alpha24'
 }

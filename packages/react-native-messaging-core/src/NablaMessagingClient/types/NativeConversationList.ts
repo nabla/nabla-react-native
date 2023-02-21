@@ -1,21 +1,11 @@
 import { mapConversation, NativeConversation } from './NativeConversation';
-import { ConversationList } from '../../types';
+import { Conversation, PaginatedList } from '../../types';
 
-export class NativeConversationList {
-  conversations: NativeConversation[];
-  hasMore: Boolean;
-
-  constructor(conversations: NativeConversation[], hasMore: Boolean) {
-    this.conversations = conversations;
-    this.hasMore = hasMore;
-  }
-}
+export type NativeConversationList = PaginatedList<NativeConversation>;
 
 export const mapConversationList: (
   conversationList: NativeConversationList,
-) => ConversationList = (conversationList) => {
-  return new ConversationList(
-    conversationList.conversations.map(mapConversation),
-    conversationList.hasMore,
-  );
-};
+) => PaginatedList<Conversation> = (conversationList) => ({
+  elements: conversationList.elements.map(mapConversation),
+  hasMore: conversationList.hasMore,
+});
