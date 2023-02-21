@@ -8,6 +8,8 @@
 
 ### Fixed
 
+- Core: fixed a crash that occurred on iOS when authenticating a different user or the same user multiple times. 
+
 ### Versions
 
 - Android: [`1.0.0-alpha22`](https://github.com/nabla/nabla-android/releases/tag/1.0.0-alpha22)

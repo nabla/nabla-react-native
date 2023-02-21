@@ -19,6 +19,7 @@ const logsEmitter = new NativeEventEmitter(
 export class NablaClient {
   private static instance: NablaClient;
   private logEmitterSubscription?: EmitterSubscription;
+  private needProvideTokensSubscription?: EmitterSubscription;
   private logger?: Logger;
 
   private constructor() {
@@ -69,7 +70,8 @@ export class NablaClient {
     provideAuthTokens: () => Promise<AuthTokens>,
   ) {
     nablaClientModule.willAuthenticateUser(userId);
-    emitter.addListener('needProvideTokens', async () => {
+    this.needProvideTokensSubscription?.remove()
+    this.needProvideTokensSubscription = emitter.addListener('needProvideTokens', async () => {
       const authTokens = await provideAuthTokens();
       nablaClientModule.provideTokens(
         authTokens.refreshToken,
