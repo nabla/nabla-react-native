@@ -1,6 +1,6 @@
 {
   "name": "@nabla/react-native-messaging-ui",
-  "version": "1.0.0-alpha13",
+  "version": "1.0.0-alpha14",
   "description": "Nabla Messaging UI SDK",
   "repository": "https://github.com/nabla/nabla-react-native",
   "main": "lib/index.js",
@@ -26,7 +26,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@nabla/react-native-messaging-core": "1.0.0-alpha13"
+    "@nabla/react-native-messaging-core": "1.0.0-alpha14"
   },
   "devDependencies": {
     "@babel/core": "^7.16.12",

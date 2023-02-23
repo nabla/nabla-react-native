@@ -4,6 +4,19 @@
 
 ### Added
 
+### Changed
+
+### Fixed
+
+### Versions
+
+- Android: [`1.0.0-alpha24`](https://github.com/nabla/nabla-android/releases/tag/1.0.0-alpha24)
+- iOS: [`1.0.0-alpha32`](https://github.com/nabla/nabla-ios/releases/tag/1.0.0-alpha32)
+
+## [1.0.0-alpha14] - 2023-02-22
+
+### Added
+
 - Messaging Core: Added a new `Response` object returned by watchers. It contains metadata about the freshness of the data returned, allowing the caller to know if the data comes from cache or is fresh and if a background refresh is in progress.
 
 ### Changed
@@ -21,7 +34,6 @@
 
 - Android: [`1.0.0-alpha24`](https://github.com/nabla/nabla-android/releases/tag/1.0.0-alpha24)
 - iOS: [`1.0.0-alpha32`](https://github.com/nabla/nabla-ios/releases/tag/1.0.0-alpha32)
-
 
 ## [1.0.0-alpha13] - 2023-01-30
 
