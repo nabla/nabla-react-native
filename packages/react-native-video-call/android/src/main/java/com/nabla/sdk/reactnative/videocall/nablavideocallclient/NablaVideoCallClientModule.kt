@@ -7,7 +7,7 @@ import com.nabla.sdk.core.domain.entity.InternalException.Companion.asNablaInter
 import com.nabla.sdk.reactnative.core.models.toCoreMap
 import com.nabla.sdk.reactnative.core.nablaclient.NablaClientModule
 import com.nabla.sdk.videocall.NablaVideoCallModule
-import com.nabla.sdk.videocall.videoCallModule
+import com.nabla.sdk.videocall.videoCallClient
 
 class NablaVideoCallClientModule(
     reactContext: ReactApplicationContext,
@@ -39,7 +39,7 @@ class NablaVideoCallClientModule(
         currentActivity?.let {
             NablaClient
                 .getInstance()
-                .videoCallModule
+                .videoCallClient
                 .openVideoCall(
                     it,
                     url,

@@ -11,9 +11,7 @@ import {
   Configuration,
   NablaClient,
 } from '@nabla/react-native-core';
-import {
-  NablaMessagingClient,
-} from '@nabla/react-native-messaging-core';
+import { NablaMessagingClient } from '@nabla/react-native-messaging-core';
 import { useState } from 'react';
 import { NablaVideoCallClient } from '@nabla/react-native-video-call';
 
@@ -33,12 +31,12 @@ enum NablaClientState {
 async function initializeNablaClients() {
   await NablaMessagingClient.initializeMessagingModule();
   await NablaVideoCallClient.initializeVideoCallModule();
-  await nablaClient.initialize(new Configuration(apiKey));
-
-  const dummyUserId = 'f0faa561-5707-402e-b7b9-5b747995e1fe';
-  nablaClient.authenticate(dummyUserId, async () => {
+  await nablaClient.initialize(new Configuration(apiKey), async () => {
     return new AuthTokens(refreshToken, accessToken);
   });
+
+  const dummyUserId = 'f0faa561-5707-402e-b7b9-5b747995e1fe';
+  await nablaClient.setCurrentUserOrThrow(dummyUserId);
 }
 
 const startConversationIcon = () => (

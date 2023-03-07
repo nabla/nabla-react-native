@@ -24,3 +24,5 @@ export class AuthenticationProviderFailedToProvideTokensError extends Authentica
 export class AuthenticationProviderDidProvideExpiredTokensError extends AuthenticationError {}
 export class AuthorizationDeniedError extends AuthenticationError {}
 export class FailedToRefreshTokensError extends AuthenticationError {}
+export class UnknownAuthenticationError extends AuthenticationError {}
+export class CurrentUserAlreadySetError extends AuthenticationError {}

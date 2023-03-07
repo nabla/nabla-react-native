@@ -1,7 +1,7 @@
 import Foundation
 import NablaMessagingCore
 
-extension ConversationActivity.Activity {
+extension ConversationActivity.Content {
     var dictionaryRepresentation: [String: Any] {
         var result = [String: Any]()
         switch self {

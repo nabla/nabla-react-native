@@ -7,7 +7,6 @@ import { mapCoreError, mergeVoid } from '@nabla/react-native-core/lib/internal';
  * Main entry-point to SDK-wide features.
  */
 export class NablaVideoCallClient {
-
   /**
    * Initializes the VideoCall module and register it on `NablaClient`
    * Must be called before `NablaClient.getInstance().initialize()`
@@ -22,9 +21,11 @@ export class NablaVideoCallClient {
    * @param errorCallback The callback called in case of error.
    * @param successCallback The callback called when joined successfully.
    */
-  public static joinVideoCallRoom(room: VideoCallRoom,
-                                  errorCallback: (error: NablaError) => void,
-                                  successCallback: () => void) {
+  public static joinVideoCallRoom(
+    room: VideoCallRoom,
+    errorCallback: (error: NablaError) => void,
+    successCallback: () => void,
+  ) {
     nablaVideoCallClientModule.joinVideoCall(
       room,
       mergeVoid(mapCoreError, errorCallback, successCallback),

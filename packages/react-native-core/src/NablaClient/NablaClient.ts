@@ -1,4 +1,9 @@
-import { AuthTokens, Configuration, LogLevel, NetworkConfiguration } from '../types';
+import {
+  AuthTokens,
+  Configuration,
+  LogLevel,
+  NetworkConfiguration,
+} from '../types';
 import { EmitterSubscription, NativeEventEmitter } from 'react-native';
 import { nablaClientModule } from './NativeModules/NablaClientModule';
 import { Logger } from './Logger';
@@ -8,10 +13,9 @@ import { NativeLog } from './NativeModules/NativeLog';
 import { logWatcherModule } from './NativeModules/LogWatcherModule';
 
 const emitter = new NativeEventEmitter(nablaClientModule);
-const logsEmitter = new NativeEventEmitter(
-  logWatcherModule,
-);
+const logsEmitter = new NativeEventEmitter(logWatcherModule);
 
+type PromiseError = { code: string; message: string };
 
 /**
  * Main entry-point to SDK-wide features.
@@ -23,9 +27,12 @@ export class NablaClient {
   private logger?: Logger;
 
   private constructor() {
-    this.logEmitterSubscription = logsEmitter.addListener('log', async (data: NativeLog) => {
-      this.handleNativeLog(data);
-    });
+    this.logEmitterSubscription = logsEmitter.addListener(
+      'log',
+      async (data: NativeLog) => {
+        this.handleNativeLog(data);
+      },
+    );
   }
 
   /**
@@ -45,11 +52,13 @@ export class NablaClient {
    * You must call this method only once.
    *
    * @param configuration Your organisation's configuration containing the API key (created online on Nabla dashboard).
+   * @param provideAuthTokens `AuthTokens` provider.
    * @param logger logger used by the SDK. You can replace the default `ConsoleLogger` with your own implementation or adjust the log level using `setLogLevel`.
    * @param networkConfiguration optional network configuration, exposed for internal tests purposes and should not be used in your app.
    */
   public async initialize(
     configuration: Configuration,
+    provideAuthTokens: (userId: String) => Promise<AuthTokens>,
     networkConfiguration: NetworkConfiguration | undefined = undefined,
     logger: Logger = new ConsoleLogger(),
   ) {
@@ -57,27 +66,47 @@ export class NablaClient {
     await nablaClientModule.initialize(
       configuration.apiKey,
       configuration.enableReporting,
-      networkConfiguration);
+      networkConfiguration,
+    );
+    this.needProvideTokensSubscription?.remove();
+    this.needProvideTokensSubscription = emitter.addListener(
+      'needProvideTokens',
+      async (data: { userId: String }) => {
+        const authTokens = await provideAuthTokens(data.userId);
+        nablaClientModule.provideTokens(
+          authTokens.refreshToken,
+          authTokens.accessToken,
+        );
+      },
+    );
   }
 
   /**
    * Authenticate the current user.
    * @param userId Identifies the user between sessions.
-   * @param provideAuthTokens `AuthTokens` provider.
+   * @throws CurrentUserAlreadySetError
    */
-  public authenticate(
-    userId: string,
-    provideAuthTokens: () => Promise<AuthTokens>,
-  ) {
-    nablaClientModule.willAuthenticateUser(userId);
-    this.needProvideTokensSubscription?.remove()
-    this.needProvideTokensSubscription = emitter.addListener('needProvideTokens', async () => {
-      const authTokens = await provideAuthTokens();
-      nablaClientModule.provideTokens(
-        authTokens.refreshToken,
-        authTokens.accessToken,
-      );
-    });
+  public async setCurrentUserOrThrow(userId: string) {
+    try {
+      await nablaClientModule.setCurrentUser(userId);
+    } catch (error) {
+      const promiseError = <PromiseError>error;
+      if (promiseError.code && promiseError.message) {
+        throw mapCoreError({
+          code: parseInt(promiseError.code),
+          message: promiseError.message,
+        });
+      } else {
+        throw error;
+      }
+    }
+  }
+
+  /**
+   * Clear the user currently used by this SDK instance alongside all its data.
+   */
+  public async clearCurrentUser() {
+    await nablaClientModule.clearCurrentUser();
   }
 
   /**
@@ -89,7 +118,9 @@ export class NablaClient {
   }
 
   private handleNativeLog(nativeLog: NativeLog) {
-    let nablaError = nativeLog.error ? mapCoreError(nativeLog.error) : undefined;
+    let nablaError = nativeLog.error
+      ? mapCoreError(nativeLog.error)
+      : undefined;
     switch (nativeLog.level) {
       case 'debug':
         this.logger?.debug(nativeLog.tag, nativeLog.message, nablaError);

@@ -10,8 +10,23 @@
 
 ### Versions
 
-- Android: [`1.0.0-alpha24`](https://github.com/nabla/nabla-android/releases/tag/1.0.0-alpha24)
-- iOS: [`1.0.0-alpha32`](https://github.com/nabla/nabla-ios/releases/tag/1.0.0-alpha32)
+- Android: [`1.0.0-alpha25`](https://github.com/nabla/nabla-android/releases/tag/1.0.0-alpha25)
+- iOS: [`1.0.0-alpha33`](https://github.com/nabla/nabla-ios/releases/tag/1.0.0-alpha33)
+
+## [1.0.0-alpha15] - 2023-03-07
+
+### Added
+- Scheduling: support for registering a payment step. See [doc](https://docs.nabla.com/docs/scheduling-payments-rn) for details/instructions.
+
+### Changed
+- Core: `NablaClient.authenticate` is replaced by `NablaClient.setCurrentUser` and `NablaClient.clearCurrentUser`. `provideAuthTokens` is set during `NablaClient.initialize`.
+
+### Fixed
+
+### Versions
+
+- Android: [`1.0.0-alpha25`](https://github.com/nabla/nabla-android/releases/tag/1.0.0-alpha25)
+- iOS: [`1.0.0-alpha33`](https://github.com/nabla/nabla-ios/releases/tag/1.0.0-alpha33)
 
 ## [1.0.0-alpha14] - 2023-02-22
 

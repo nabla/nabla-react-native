@@ -2,9 +2,11 @@ import Foundation
 import NablaCore
 import NablaScheduling
 import nabla_react_native_core
+import React
 
 @objc(NablaSchedulingUIModule)
 final class NablaSchedulingUIModule: NSObject {
+
     @objc(navigateToScheduleAppointmentScreen)
     func navigateToScheduleAppointmentScreen() {
         DispatchQueue.main.async {
@@ -12,7 +14,10 @@ final class NablaSchedulingUIModule: NSObject {
                 CoreLogger.sharedInstance.error(message: "Missing Application window rootViewController")
                 return
             }
-            NablaClient.shared.scheduling.views.presentScheduleAppointmentNavigationController(from: rootViewController)
+
+            rootViewController.present(
+                NablaClient.shared.scheduling.views.createScheduleAppointmentNavigationController(delegate: self),
+                animated: true)
         }
     }
 
@@ -47,7 +52,6 @@ final class NablaSchedulingUIModule: NSObject {
             }
         }
     }
-
 
     // MARK: - Overridden
     @objc(requiresMainQueueSetup)
@@ -96,3 +100,17 @@ extension NablaSchedulingUIModule: AppointmentDetailsDelegate {
         dismissNavigationController()
     }
 }
+
+extension NablaSchedulingUIModule: ScheduleAppointmentDelegate {
+    func scheduleAppointmentDidSucceed(with appointment: NablaScheduling.Appointment) {
+        Self.applicationRootViewController?.dismiss(animated: true)
+    }
+
+    public func paymentViewController(
+        for appointment: Appointment,
+        completion: @escaping (Result<Void, Error>) -> Void) -> UIViewController {
+
+        NablaSchedulingClientModule.createPaymentViewController(for: appointment, completion: completion)
+    }
+}
+

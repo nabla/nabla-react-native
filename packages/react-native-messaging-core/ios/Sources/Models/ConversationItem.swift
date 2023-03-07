@@ -10,7 +10,7 @@ extension ConversationItem {
         if let conversationActivity = self as? ConversationActivity {
             result["id"] = id.uuidString
             result["type"] = "ConversationActivity"
-            result["activity"] = conversationActivity.activity.dictionaryRepresentation
+            result["activity"] = conversationActivity.content.dictionaryRepresentation
             return result
         }
 

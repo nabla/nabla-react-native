@@ -1,7 +1,7 @@
 import Foundation
 import NablaCore
 
-struct SharedNetworkConfiguration: NetworkConfiguration {
+struct NetworkConfiguration: NablaCore.NetworkConfiguration {
     let domain: String
     let scheme: String
     let port: Int?
@@ -28,42 +28,62 @@ final class NablaClientModule: RCTEventEmitter {
         resolver: RCTPromiseResolveBlock,
         rejecter _: RCTPromiseRejectBlock
     ) {
+        var configuration = Configuration(
+            apiKey: apiKey,
+            enableReporting: enableReporting,
+            logger: CoreLogger.sharedInstance
+        )
+
         if let networkConfiguration = networkConfiguration,
            let scheme = networkConfiguration["scheme"] as? String,
            let domain = networkConfiguration["domain"] as? String,
            let path = networkConfiguration["path"] as? String {
 
-            let networkConfiguration = SharedNetworkConfiguration(
+            configuration.network = NetworkConfiguration(
                 domain: domain,
                 scheme: scheme,
                 port: networkConfiguration["port"] as? Int,
                 path: path
             )
-            NablaClient.initialize(
-                modules: NablaModules.modules,
-                configuration: .init(
-                    apiKey: apiKey,
-                    logger: CoreLogger.sharedInstance,
-                    enableReporting: enableReporting
-                ),
-                networkConfiguration: networkConfiguration
-            )
-        } else {
-            NablaClient.initialize(
-                modules: NablaModules.modules,
-                configuration: .init(
-                    apiKey: apiKey,
-                    logger: CoreLogger.sharedInstance,
-                    enableReporting: enableReporting
-                )
-            )
+
         }
+        NablaClient.initialize(
+            configuration: configuration,
+            modules: NablaModules.modules,
+            sessionTokenProvider: self
+        )
         resolver(NSNull())
     }
 
-    @objc(willAuthenticateUser:)
-    func willAuthenticateUser(userId: String) {
-        currentUserId = userId
+    @objc(setCurrentUser:resolver:rejecter:)
+    func setCurrentUser(
+        userId: String,
+        resolver: RCTPromiseResolveBlock,
+        rejecter: RCTPromiseRejectBlock
+    ) {
+        do {
+            try NablaClient.shared.setCurrentUser(userId: userId)
+            resolver(NSNull())
+        } catch {
+            let dictionaryRepresentation = error.dictionaryRepresentation
+
+            rejecter(
+                "\(dictionaryRepresentation["code"] ?? error._code)",
+                dictionaryRepresentation["message"] as? String ?? error._domain,
+                error
+            )
+        }
+    }
+
+    @objc(clearCurrentUser:rejecter:)
+    func clearCurrentUser(
+        resolver: @escaping RCTPromiseResolveBlock,
+        rejecter _: RCTPromiseRejectBlock
+    ) {
+        Task {
+            await NablaClient.shared.clearCurrentUser()
+            resolver(NSNull())
+        }
     }
 
     @objc(provideTokens:accessToken:)
@@ -79,15 +99,7 @@ final class NablaClientModule: RCTEventEmitter {
 
     // MARK: - Overridden
 
-    override func startObserving() {
-        guard let currentUserId = currentUserId else {
-            return
-        }
-        NablaClient.shared.authenticate(userId: currentUserId, provider: self)
-    }
-
     override func stopObserving() {
-        currentUserId = nil
         provideTokensCompletion = nil
     }
 
@@ -102,7 +114,6 @@ final class NablaClientModule: RCTEventEmitter {
 
     // MARK: - Private
 
-    private var currentUserId: String?
     private var provideTokensCompletion: ((AuthTokens?) -> Void)?
 
     private enum Event: String, CaseIterable {
@@ -111,8 +122,8 @@ final class NablaClientModule: RCTEventEmitter {
 }
 
 extension NablaClientModule: SessionTokenProvider {
-    func provideTokens(forUserId _: String, completion: @escaping (AuthTokens?) -> Void) {
+    func provideTokens(forUserId userId: String, completion: @escaping (AuthTokens?) -> Void) {
         provideTokensCompletion = completion
-        sendEvent(withName: Event.needProvideTokens.rawValue, body: [:])
+        sendEvent(withName: Event.needProvideTokens.rawValue, body: ["userId": userId])
     }
 }

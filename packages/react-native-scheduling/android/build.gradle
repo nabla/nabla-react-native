@@ -9,7 +9,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.2.1'
+        classpath 'com.android.tools.build:gradle:7.2.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${safeExtGet('kotlinVersion', '1.6.21')}"
     }
 }
@@ -46,6 +46,7 @@ dependencies {
 
     implementation project(path: ':nabla_react-native-core')
     implementation 'androidx.fragment:fragment-ktx:1.5.5'
+    implementation 'androidx.lifecycle:lifecycle-common:2.5.1'
 
-    implementation 'com.nabla.nabla-android:scheduling:1.0.0-alpha24'
+    implementation 'com.nabla.nabla-android:scheduling:1.0.0-alpha25'
 }

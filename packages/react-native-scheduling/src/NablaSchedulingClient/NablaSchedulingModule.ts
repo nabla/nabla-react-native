@@ -8,6 +8,9 @@ const LINKING_ERROR =
 
 interface NablaSchedulingClientModule extends NativeModule {
   initializeSchedulingModule(): Promise<void>;
+  setupCustomPaymentStep(componentName: string): void;
+  didSucceedPaymentStep(): void;
+  didFailPaymentStep(): void;
 }
 
 export const nablaSchedulingClientModule: NablaSchedulingClientModule =

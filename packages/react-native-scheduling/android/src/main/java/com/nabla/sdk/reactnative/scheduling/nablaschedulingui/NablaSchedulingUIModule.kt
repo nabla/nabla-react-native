@@ -13,7 +13,7 @@ import com.nabla.sdk.reactnative.core.models.toCoreMap
 import com.nabla.sdk.reactnative.core.nablaclient.CoreLogger
 import com.nabla.sdk.scheduling.domain.entity.AppointmentId
 import com.nabla.sdk.scheduling.scene.details.AppointmentDetailsActivity
-import com.nabla.sdk.scheduling.schedulingModule
+import com.nabla.sdk.scheduling.schedulingClient
 import kotlin.random.Random
 
 @OptIn(NablaInternal::class)
@@ -40,7 +40,7 @@ internal class NablaSchedulingUIModule(
             CoreLogger.error("Missing current activity in `NablaSchedulingUIModule`")
             return
         }
-        NablaClient.getInstance().schedulingModule.openScheduleAppointmentActivity(currentActivity!!)
+        NablaClient.getInstance().schedulingClient.openScheduleAppointmentActivity(currentActivity!!)
     }
 
     @ReactMethod

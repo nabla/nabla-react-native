@@ -5,22 +5,26 @@ import com.facebook.react.modules.core.DeviceEventManagerModule
 import com.nabla.sdk.core.Configuration
 import com.nabla.sdk.core.NablaClient
 import com.nabla.sdk.core.NetworkConfiguration
+import com.nabla.sdk.core.annotation.NablaInternal
 import com.nabla.sdk.core.domain.boundary.Module
 import com.nabla.sdk.core.domain.boundary.SessionTokenProvider
 import com.nabla.sdk.core.domain.entity.AuthTokens
-import com.nabla.sdk.core.domain.entity.StringId
-import kotlinx.coroutines.CancellableContinuation
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.suspendCancellableCoroutine
+import com.nabla.sdk.core.domain.entity.AuthenticationException
+import com.nabla.sdk.reactnative.core.models.coreCode
+import com.nabla.sdk.reactnative.core.models.toCoreMap
+import kotlinx.coroutines.*
+import okhttp3.internal.http2.ErrorCode
+
 
 class NablaClientModule(
     reactContext: ReactApplicationContext,
-) : ReactContextBaseJavaModule(reactContext), SessionTokenProvider {
+) : ReactContextBaseJavaModule(reactContext), SessionTokenProvider,
+    CoroutineScope by CoroutineScope(SupervisorJob() + Dispatchers.Default) {
 
     override fun getName() = "NablaClientModule"
     private var provideAuthTokensContinuation: CancellableContinuation<Result<AuthTokens>>? = null
-    private var currentUserId: String? = null
 
+    @OptIn(NablaInternal::class)
     @ReactMethod
     fun initialize(
         apiKey: String,
@@ -28,6 +32,11 @@ class NablaClientModule(
         networkConfiguration: ReadableMap?,
         promise: Promise,
     ) {
+        val configuration = Configuration(
+            publicApiKey = apiKey,
+            logger = CoreLogger,
+            enableReporting = enableReporting
+        )
         if (networkConfiguration != null) {
             val scheme = networkConfiguration.getString("scheme")
             val domain = networkConfiguration.getString("domain")
@@ -38,58 +47,49 @@ class NablaClientModule(
                 val baseUrl =
                     if (port != 0) "$scheme://$domain:$port$path" else "$scheme://$domain$path"
 
-                NablaClient.initialize(
-                    modules = MODULES,
-                    configuration = Configuration(
-                        publicApiKey = apiKey,
-                        logger = CoreLogger,
-                        enableReporting = enableReporting
-                    ),
-                    networkConfiguration = NetworkConfiguration(baseUrl = baseUrl)
-                )
-            } else {
-                NablaClient.initialize(
-                    modules = MODULES,
-                    configuration = Configuration(
-                        publicApiKey = apiKey,
-                        logger = CoreLogger,
-                        enableReporting = enableReporting
-                    )
-                )
+                configuration.networkConfiguration = NetworkConfiguration(baseUrl = baseUrl)
             }
-        } else {
-            NablaClient.initialize(
-                modules = MODULES,
-                configuration = Configuration(
-                    publicApiKey = apiKey,
-                    logger = CoreLogger,
-                    enableReporting = true
-                )
-            )
         }
+
+        NablaClient.initialize(
+            modules = MODULES,
+            configuration = configuration,
+            sessionTokenProvider = this
+        )
+        POST_INIT_ACTIONS.forEach { it() }
+        POST_INIT_ACTIONS.clear()
         promise.resolve(null)
     }
 
     @ReactMethod
-    fun willAuthenticateUser(
+    fun setCurrentUser(
         userId: String,
+        promise: Promise,
     ) {
-        currentUserId = userId
+        try {
+            NablaClient.getInstance().setCurrentUserOrThrow(userId)
+            promise.resolve(null)
+        } catch (e: AuthenticationException.CurrentUserAlreadySet) {
+            promise.reject(e.coreCode.toString(), e.message, e)
+        }
+    }
+
+    @ReactMethod
+    fun clearCurrentUser(promise: Promise) {
+        this.launch {
+            NablaClient.getInstance().clearCurrentUser()
+            promise.resolve(null)
+        }
     }
 
     @ReactMethod
     fun addListener(eventName: String) {
-        if (eventName == NEED_PROVIDE_TOKENS) {
-            currentUserId?.let {
-                NablaClient.getInstance().authenticate(it, this)
-            }
-        }
+        // This method is required even if empty
     }
 
     @ReactMethod
     fun removeListeners(count: Int) {
         if (count == 0) {
-            currentUserId = null
             provideAuthTokensContinuation?.cancel()
         }
     }
@@ -107,8 +107,12 @@ class NablaClientModule(
         provideAuthTokensContinuation = null
     }
 
-    override suspend fun fetchNewSessionAuthTokens(userId: StringId): Result<AuthTokens> {
-        sendEvent(reactApplicationContext, NEED_PROVIDE_TOKENS, null)
+
+    override suspend fun fetchNewSessionAuthTokens(userId: String): Result<AuthTokens> {
+        sendEvent(
+            reactApplicationContext,
+            NEED_PROVIDE_TOKENS,
+            Arguments.createMap().apply { putString("userId", userId) })
         return suspendCancellableCoroutine { this.provideAuthTokensContinuation = it }
     }
 
@@ -120,10 +124,15 @@ class NablaClientModule(
 
     companion object {
         private const val NEED_PROVIDE_TOKENS = "needProvideTokens"
-        private var MODULES: MutableList<Module.Factory<out Module>> = mutableListOf()
+        private var MODULES: MutableList<Module.Factory<out Module<*>>> = mutableListOf()
+        private val POST_INIT_ACTIONS = mutableListOf<() -> Unit>()
 
-        fun addModule(module: Module.Factory<out Module>) {
+        fun addModule(module: Module.Factory<out Module<*>>) {
             MODULES.add(module)
+        }
+
+        fun addPostInitializeAction(action: () -> Unit) {
+            POST_INIT_ACTIONS.add(action)
         }
     }
 }

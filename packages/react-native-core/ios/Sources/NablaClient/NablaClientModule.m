@@ -9,7 +9,12 @@ RCT_EXTERN_METHOD(initialize: (NSString *)apiKey
                     resolver: (RCTPromiseResolveBlock)resolve
                     rejecter: (RCTPromiseRejectBlock)reject)
 
-RCT_EXTERN_METHOD(willAuthenticateUser: (NSString *)userId)
+RCT_EXTERN_METHOD(setCurrentUser: (NSString *)userId
+                        resolver: (RCTPromiseResolveBlock)resolve
+                        rejecter: (RCTPromiseRejectBlock)reject)
+
+RCT_EXTERN_METHOD(clearCurrentUser: (RCTPromiseResolveBlock)resolve
+                          rejecter: (RCTPromiseRejectBlock)reject)
 
 RCT_EXTERN_METHOD(provideTokens: (NSString *)refreshToken
                     accessToken: (NSString *)accessToken)

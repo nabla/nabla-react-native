@@ -1,1 +1,2 @@
-export * from './AppointmentId'
+export * from './AppointmentId';
+export * from './Appointment';

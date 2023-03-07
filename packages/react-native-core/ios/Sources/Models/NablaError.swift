@@ -103,3 +103,21 @@ extension FailedToRefreshTokensError {
         ]
     }
 }
+
+extension UnknownAuthenticationError {
+    public override var dictionaryRepresentation: [String: Any] {
+        [
+            Constants.codeKey: 15,
+            Constants.extraKey: ["reason": underlyingError]
+        ]
+    }
+}
+
+extension CurrentUserAlreadySetError {
+    public override var dictionaryRepresentation: [String: Any] {
+        [
+            Constants.codeKey: 16,
+        ]
+    }
+}
+

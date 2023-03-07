@@ -48,9 +48,21 @@ extension NablaAppointmentListView: AppointmentListDelegate {
     }
 
     func appointmentListDidSelectNewAppointment() {
-        parentViewController.map {
-            NablaClient.shared.scheduling.views.presentScheduleAppointmentNavigationController(from: $0)
-        }
+        parentViewController?.present(
+            NablaClient.shared.scheduling.views.createScheduleAppointmentNavigationController(delegate: self),
+            animated: true)
+    }
+}
+
+extension NablaAppointmentListView: ScheduleAppointmentDelegate {
+    func scheduleAppointmentDidSucceed(with appointment: Appointment) {
+        parentViewController?.dismiss(animated: true)
+    }
+
+    public func paymentViewController(
+        for appointment: Appointment,
+        completion: @escaping (Result<(), Error>) -> ()) -> UIViewController {
+        NablaSchedulingClientModule.createPaymentViewController(for: appointment, completion: completion)
     }
 }
 
