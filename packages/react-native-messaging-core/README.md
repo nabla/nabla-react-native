@@ -28,29 +28,15 @@ const subscription = nablaMessagingClient.watchConversations(
     subscription.remove();
     // ...
   },
-  (list) => {
+  (response: Response<PaginatedList<Conversation>, NablaError>) => {
     /* */
   },
 );
 
-nablaMessagingClient.loadMoreConversations(
-  (error) => {
-    /* ... */
-  },
-  () => {
-    /* ... */
-  },
-);
-
-nablaMessagingClient.createConversation(
-  (error) => {
-    /* ... */
-  },
+nablaMessagingClient.startConversation(
   (conversationId) => {
     /* ... */
   },
-  title,
-  providerId,
 );
 ```
 

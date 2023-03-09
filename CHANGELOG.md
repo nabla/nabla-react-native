@@ -19,7 +19,7 @@
 - Scheduling: support for registering a payment step. See [doc](https://docs.nabla.com/docs/scheduling-payments-rn) for details/instructions.
 
 ### Changed
-- Core: `NablaClient.authenticate` is replaced by `NablaClient.setCurrentUser` and `NablaClient.clearCurrentUser`. `provideAuthTokens` is set during `NablaClient.initialize`.
+- Core: `NablaClient.authenticate` is replaced by `NablaClient.setCurrentUserOrThrow` and `NablaClient.clearCurrentUser`. `provideAuthTokens` is set during `NablaClient.initialize`.
 
 ### Fixed
 
