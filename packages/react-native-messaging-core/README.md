@@ -16,29 +16,7 @@ yarn add '@nabla/react-native-messaging-core'
 
 ## Usage
 
-### NablaMessagingClient
-
-```ts
-import { NablaMessagingClient } from '@nabla/react-native-messaging-core';
-
-const nablaMessagingClient = NablaMessagingClient.getInstance();
-
-const subscription = nablaMessagingClient.watchConversations(
-  (error) => {
-    subscription.remove();
-    // ...
-  },
-  (response: Response<PaginatedList<Conversation>, NablaError>) => {
-    /* */
-  },
-);
-
-nablaMessagingClient.startConversation(
-  (conversationId) => {
-    /* ... */
-  },
-);
-```
+You can find detailed documentation and code samples of the MessagingCore SDK usage in the [documentation](https://docs.nabla.com/docs/messaging-core-rn)
 
 ## License
 

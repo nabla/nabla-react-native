@@ -16,22 +16,9 @@ Or
 yarn add '@nabla/react-native-core'
 ```
 
-## Usage
+## Setup
 
-### NablaClient
-
-```ts
-import { NablaClient } from '@nabla/react-native-messaging-core';
-
-await NablaClient.getInstance().initialize(
-  new Configuration("YOUR_API_KEY"),
-  async () => {
-    // Fetch current user authentication tokens from your server
-    // See server side documentation https://docs.nabla.com/reference/mobile-sdk-authentication for more details.
-    return new AuthTokens(refreshToken, accessToken);
-  }
-);
-```
+You can find detailed documentation and code samples of the Core SDK setup in the [setup documentation](https://docs.nabla.com/docs/init-rn)
 
 ## License
 

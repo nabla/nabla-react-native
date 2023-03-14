@@ -18,14 +18,9 @@ yarn add '@nabla/react-native-video-call'
 
 ## Usage
 
-### NablaVideoCallClient
-
-```ts
-import { NablaVideoCallClient } from '@nabla/react-native-video-call';
-
-// To initialize the video call module, you will need to call this method before `NablaClient.getInstance.initialize`:
-await NablaVideoCallClient.initializeVideoCallModule()
-```
+You can find detailed documentation and code samples of how to configure video calls for messaging and scheduling in these pages:  
+- [Messaging video calls](https://docs.nabla.com/docs/messaging-video-calls-rn)
+- [Scheduling setup](https://docs.nabla.com/docs/scheduling-setup-rn#setup-scheduling-module)
 
 ## License
 

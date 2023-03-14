@@ -18,14 +18,7 @@ yarn add '@nabla/react-native-scheduling'
 
 ## Usage
 
-### NablaSchedulingClient
-
-```ts
-import { NablaSchedulingClient } from '@nabla/react-native-scheduling';
-
-// To initialize the scheduling module, you will need to call this method before `NablaClient.getInstance.initialize`:
-await NablaSchedulingClient.initializeSchedulingModule()
-```
+You can find detailed documentation and code samples of the Scheduling SDK setup and usage in the [documentation](https://docs.nabla.com/docs/scheduling-setup-rn)
 
 ## License
 

@@ -18,16 +18,7 @@ yarn add '@nabla/react-native-messaging-ui'
 
 ## Usage
 
-### NablaMessagingUI
-
-```ts
-import { NablaMessagingUI } from '@nabla/react-native-messaging-ui';
-
-NablaMessagingUI.navigateToInbox();
-
-// You can use retrieve the `conversationId` from using `watchConversations` in messaging core.
-NablaMessagingUI.navigateToConversation(conversationId);
-```
+You can find detailed documentation and code samples of the MessagingUI SDK usage in the [documentation](https://docs.nabla.com/docs/messaging-ui-components-rn)
 
 ## License
 
