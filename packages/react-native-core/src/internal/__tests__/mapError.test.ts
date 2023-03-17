@@ -8,11 +8,11 @@ import {
   InvalidAndroidAppThemeError,
   MissingAndroidContextError,
   MissingApiKeyError,
-  MissingAuthenticationProviderError,
   MissingInitializeError,
   NetworkError,
   ServerError,
   UnknownError,
+  UserIdNotSetError,
 } from '../../types';
 
 describe('mapCoreError', () => {
@@ -36,7 +36,7 @@ describe('mapCoreError', () => {
     ],
     [
       { code: 10, message: 'message', extra: { reason: 'reason' } },
-      MissingAuthenticationProviderError,
+      UserIdNotSetError,
     ],
     [
       { code: 11, message: 'message', extra: { reason: 'reason' } },

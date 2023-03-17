@@ -8,8 +8,10 @@ import com.nabla.sdk.core.NetworkConfiguration
 import com.nabla.sdk.core.annotation.NablaInternal
 import com.nabla.sdk.core.domain.boundary.Module
 import com.nabla.sdk.core.domain.boundary.SessionTokenProvider
+import com.nabla.sdk.core.domain.entity.AccessToken
 import com.nabla.sdk.core.domain.entity.AuthTokens
 import com.nabla.sdk.core.domain.entity.AuthenticationException
+import com.nabla.sdk.core.domain.entity.RefreshToken
 import com.nabla.sdk.reactnative.core.models.coreCode
 import com.nabla.sdk.reactnative.core.models.toCoreMap
 import kotlinx.coroutines.*
@@ -101,7 +103,7 @@ class NablaClientModule(
         accessToken: String,
     ) {
         provideAuthTokensContinuation?.resume(
-            value = Result.success(AuthTokens(refreshToken, accessToken)),
+            value = Result.success(AuthTokens(AccessToken(accessToken), RefreshToken(refreshToken))),
             onCancellation = null
         )
         provideAuthTokensContinuation = null

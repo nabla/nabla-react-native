@@ -10,8 +10,8 @@
 
 ### Versions
 
-- Android: [`1.0.0-alpha25`](https://github.com/nabla/nabla-android/releases/tag/1.0.0-alpha25)
-- iOS: [`1.0.0-alpha33`](https://github.com/nabla/nabla-ios/releases/tag/1.0.0-alpha33)
+- Android: [`1.0.0`](https://github.com/nabla/nabla-android/releases/tag/1.0.0)
+- iOS: [`1.0.0`](https://github.com/nabla/nabla-ios/releases/tag/1.0.0)
 
 ## [1.0.0-alpha15] - 2023-03-07
 

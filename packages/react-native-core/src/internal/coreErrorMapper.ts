@@ -2,19 +2,21 @@ import { NativeError } from './NativeError';
 import {
   AuthenticationProviderDidProvideExpiredTokensError,
   AuthenticationProviderFailedToProvideTokensError,
-  AuthorizationDeniedError, CurrentUserAlreadySetError,
+  AuthorizationDeniedError,
+  CurrentUserAlreadySetError,
   FailedToRefreshTokensError,
   InternalError,
   InvalidAndroidAppThemeError,
   MissingAndroidContextError,
   MissingApiKeyError,
-  MissingAuthenticationProviderError,
   MissingInitializeError,
   NablaError,
   NetworkError,
-  ServerError, UnknownAuthenticationError,
-  UnknownError
-} from "../types";
+  ServerError,
+  UnknownAuthenticationError,
+  UnknownError,
+  UserIdNotSetError,
+} from '../types';
 
 export const mapCoreError: (error: NativeError) => NablaError = (error) => {
   const { code, message, extra } = error;
@@ -30,7 +32,7 @@ export const mapCoreError: (error: NativeError) => NablaError = (error) => {
     case 4:
       return new InvalidAndroidAppThemeError(message, extra);
     case 10:
-      return new MissingAuthenticationProviderError(message, extra);
+      return new UserIdNotSetError(message, extra);
     case 11:
       return new AuthenticationProviderFailedToProvideTokensError(
         message,

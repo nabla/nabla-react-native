@@ -51,7 +51,7 @@ final class NablaErrorTest: XCTestCase {
 
     func test_missingAuthenticationProviderError() {
         checkDictionaryRepresentation(
-            of: MissingAuthenticationProviderError(),
+            of: UserIdNotSetError(),
             expectedCode: 10,
             expectedMessage: nil)
     }

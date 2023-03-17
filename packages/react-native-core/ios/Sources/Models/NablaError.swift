@@ -62,7 +62,7 @@ extension InternalError {
     }
 }
 
-extension MissingAuthenticationProviderError {
+extension UserIdNotSetError {
     public override var dictionaryRepresentation: [String: Any] {
         [
             Constants.codeKey: 10

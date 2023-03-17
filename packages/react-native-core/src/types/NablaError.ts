@@ -19,7 +19,7 @@ export class MissingAndroidContextError extends ConfigurationError {}
 export class MissingInitializeError extends ConfigurationError {}
 
 export class AuthenticationError extends NablaError {}
-export class MissingAuthenticationProviderError extends AuthenticationError {}
+export class UserIdNotSetError extends AuthenticationError {}
 export class AuthenticationProviderFailedToProvideTokensError extends AuthenticationError {}
 export class AuthenticationProviderDidProvideExpiredTokensError extends AuthenticationError {}
 export class AuthorizationDeniedError extends AuthenticationError {}
