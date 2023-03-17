@@ -1,6 +1,6 @@
 {
   "name": "@nabla/react-native-core",
-  "version": "1.0.0-alpha15",
+  "version": "1.0.0",
   "description": "Nabla Core SDK",
   "repository": "https://github.com/nabla/nabla-react-native",
   "main": "lib/index.js",
