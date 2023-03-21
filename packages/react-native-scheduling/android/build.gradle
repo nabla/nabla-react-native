@@ -48,5 +48,5 @@ dependencies {
     implementation 'androidx.fragment:fragment-ktx:1.5.5'
     implementation 'androidx.lifecycle:lifecycle-common:2.5.1'
 
-    implementation 'com.nabla.nabla-android:scheduling:1.0.0'
+    implementation 'com.nabla.nabla-android:scheduling:1.0.1'
 }

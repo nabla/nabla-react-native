@@ -13,6 +13,19 @@
 - Android: [`1.0.0`](https://github.com/nabla/nabla-android/releases/tag/1.0.0)
 - iOS: [`1.0.0`](https://github.com/nabla/nabla-ios/releases/tag/1.0.0)
 
+## [1.0.1] - 2023-03-21
+
+### Added
+
+### Changed
+
+### Fixed
+
+### Versions
+
+- Android: [`1.0.1`](https://github.com/nabla/nabla-android/releases/tag/1.0.1)
+- iOS: [`1.0.0`](https://github.com/nabla/nabla-ios/releases/tag/1.0.0)
+
 ## [1.0.0] - 2023-03-17
 
 ### Added
