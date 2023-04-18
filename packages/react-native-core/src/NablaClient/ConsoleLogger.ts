@@ -28,7 +28,7 @@ function formatAndLog(
   let log = `[${tag}] ${message}`;
   if (error) {
     const errorDescription = JSON.stringify(error, null, 2);
-    log += `\nerror: ${errorDescription}`;
+    log += `\nerror: ${error.message}\n${errorDescription}`;
   }
   logFunction(log);
 }
