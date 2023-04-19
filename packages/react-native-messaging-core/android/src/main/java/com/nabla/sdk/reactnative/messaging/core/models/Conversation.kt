@@ -25,6 +25,7 @@ internal fun Conversation.toMap(context: Context): ReadableMap {
         pictureUrl?.url?.toString()?.let { putString("pictureURL", it) }
         putArray("providers", providersInConversation.toMapArray())
         putBoolean("isLocked", isLocked)
+        lastMessage?.let { putMap("lastMessage", it.toMap()) }
     }
 }
 

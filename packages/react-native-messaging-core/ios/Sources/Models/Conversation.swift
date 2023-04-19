@@ -13,6 +13,7 @@ extension Conversation {
         result["pictureURL"] = pictureUrl?.absoluteString
         result["providers"] = providers.map(\.dictionaryRepresentation)
         result["isLocked"] = isLocked
+        result["lastMessage"] = lastMessage?.dictionaryRepresentation
         return result
     }
 }

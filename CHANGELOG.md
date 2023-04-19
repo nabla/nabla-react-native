@@ -3,15 +3,18 @@
 ## [Unreleased]
 
 ### Added
+- Messaging core: Added new `lastMessage` property on `Conversation` that gives access to the whole message and not just its preview.
+- Add Portuguese translations
 
 ### Changed
 
 ### Fixed
+- The default `Logger` will now correctly print the error message if any.
 
 ### Versions
 
-- Android: [`1.0.0`](https://github.com/nabla/nabla-android/releases/tag/1.0.0)
-- iOS: [`1.0.0`](https://github.com/nabla/nabla-ios/releases/tag/1.0.0)
+- Android: [`1.1.0`](https://github.com/nabla/nabla-android/releases/tag/1.1.0)
+- iOS: [`1.1.0`](https://github.com/nabla/nabla-ios/releases/tag/1.1.0)
 
 ## [1.0.1] - 2023-03-21
 

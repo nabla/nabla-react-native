@@ -46,6 +46,6 @@ dependencies {
 
     implementation project(path: ':nabla_react-native-core')
 
-    implementation 'com.nabla.nabla-android:messaging-core:1.0.1'
+    implementation 'com.nabla.nabla-android:messaging-core:1.1.0'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
 }

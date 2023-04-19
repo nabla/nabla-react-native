@@ -7,6 +7,7 @@ export type MaybeProvider =
 export type ConversationActivity = {
   id: string;
   type: 'ConversationActivity';
+  createdAt: Date;
   activity: {
     type: 'ProviderJoined';
     maybeProvider: MaybeProvider;
@@ -22,6 +23,7 @@ export type VideoCallRoom = {
 export type VideoCallRoomInteractiveMessage = {
   id: string;
   type: 'VideoCallRoomInteractiveMessage';
+  createdAt: Date;
   sender: ConversationItemSender;
   videoCallRoomInteractiveMessage:
     | {
@@ -89,7 +91,7 @@ type DocumentMessageItemContent = {
   document: Media & { thumbnailURL: string };
 };
 
-type ConversationMessageContent =
+export type ConversationMessageContent =
   | DeletedMessageItemContent
   | TextMessageItemContent
   | ImageMessageItemContent
@@ -108,14 +110,13 @@ export type ConversationItemSender =
 export type ConversationMessage = {
   id: MessageId;
   type: 'ConversationMessage';
+  createdAt: Date;
   sender: ConversationItemSender;
   sendingState: 'sent' | 'toBeSent' | 'sending' | 'failed';
   replyTo: ConversationMessage | undefined;
   content: ConversationMessageContent;
 };
 
-export type ConversationItem = { createdAt: Date } & (
-  | ConversationActivity
-  | ConversationMessage
-  | VideoCallRoomInteractiveMessage
-);
+export type ConversationItem = ConversationActivity |
+  ConversationMessage |
+  VideoCallRoomInteractiveMessage;

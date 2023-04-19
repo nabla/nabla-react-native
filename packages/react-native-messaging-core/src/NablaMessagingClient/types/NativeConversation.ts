@@ -3,6 +3,10 @@ import {
   mapProviderInConversation,
   NativeProviderInConversation,
 } from './NativeProviderInConversation';
+import {
+  mapToConversationMessage,
+  NativeConversationMessage,
+} from './NativeConversationItem';
 
 export interface NativeConversation {
   id: ConversationId;
@@ -13,6 +17,8 @@ export interface NativeConversation {
   patientUnreadMessageCount: number;
   providers: NativeProviderInConversation[];
   isLocked: boolean;
+  pictureURL?: string;
+  lastMessage?: NativeConversationMessage;
 }
 
 export const mapConversation: (
@@ -27,5 +33,9 @@ export const mapConversation: (
     conversation.isLocked,
     conversation.title,
     conversation.lastMessagePreview,
+    conversation.pictureURL,
+    conversation.lastMessage
+      ? mapToConversationMessage(conversation.lastMessage)
+      : undefined,
   );
 };
