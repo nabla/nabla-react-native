@@ -3,6 +3,19 @@
 ## [Unreleased]
 
 ### Added
+
+### Changed
+
+### Fixed
+
+### Versions
+
+- Android: [`1.1.0`](https://github.com/nabla/nabla-android/releases/tag/1.1.0)
+- iOS: [`1.1.0`](https://github.com/nabla/nabla-ios/releases/tag/1.1.0)
+
+## [1.1.0] - 2023-04-19
+
+### Added
 - Messaging core: Added new `lastMessage` property on `Conversation` that gives access to the whole message and not just its preview.
 - Add Portuguese translations
 
