@@ -3,6 +3,19 @@
 ## [Unreleased]
 
 ### Added
+
+### Changed
+
+### Fixed
+
+### Versions
+
+- Android: [`1.1.1`](https://github.com/nabla/nabla-android/releases/tag/1.1.1)
+- iOS: [`1.1.1`](https://github.com/nabla/nabla-ios/releases/tag/1.1.1)
+
+## [1.1.1] - 2023-04-25
+
+### Added
 - Core: Add a new `getCurrentUserId` method to `NablaClient` to get the currently set user id if any.
 
 ### Changed
@@ -11,8 +24,8 @@
 
 ### Versions
 
-- Android: [`1.1.0`](https://github.com/nabla/nabla-android/releases/tag/1.1.0)
-- iOS: [`1.1.0`](https://github.com/nabla/nabla-ios/releases/tag/1.1.0)
+- Android: [`1.1.1`](https://github.com/nabla/nabla-android/releases/tag/1.1.1)
+- iOS: [`1.1.1`](https://github.com/nabla/nabla-ios/releases/tag/1.1.1)
 
 ## [1.1.0] - 2023-04-19
 
