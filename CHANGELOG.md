@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 ### Added
+- Core: Add a new `getCurrentUserId` method to `NablaClient` to get the currently set user id if any.
 
 ### Changed
 

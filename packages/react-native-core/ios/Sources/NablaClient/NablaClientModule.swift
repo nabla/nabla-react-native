@@ -86,6 +86,14 @@ final class NablaClientModule: RCTEventEmitter {
         }
     }
 
+    @objc(getCurrentUserId:rejecter:)
+    func getCurrentUserId(
+        resolver: @escaping RCTPromiseResolveBlock,
+        rejecter _: RCTPromiseRejectBlock
+    ) {
+        resolver(NablaClient.shared.currentUserId)
+    }
+
     @objc(provideTokens:accessToken:)
     func provideTokens(refreshToken: String, accessToken: String) {
         provideTokensCompletion?(

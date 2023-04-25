@@ -110,6 +110,13 @@ export class NablaClient {
   }
 
   /**
+   * Get the user currently used by the SDK.
+   */
+  public async getCurrentUserId() {
+    return await nablaClientModule.getCurrentUserId();
+  }
+
+  /**
    * Set the log level for the sdk logs
    * @param level the minimum logs level for the logs that are sent to the logger
    */

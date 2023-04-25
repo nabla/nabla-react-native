@@ -85,6 +85,11 @@ class NablaClientModule(
     }
 
     @ReactMethod
+    fun getCurrentUserId(promise: Promise) {
+        promise.resolve(NablaClient.getInstance().currentUserId)
+    }
+
+    @ReactMethod
     fun addListener(eventName: String) {
         // This method is required even if empty
     }

@@ -15,6 +15,7 @@ interface NablaClientModule extends NativeModule {
   ): Promise<void>;
   setCurrentUser(userId: String): Promise<void>;
   clearCurrentUser(): Promise<void>;
+  getCurrentUserId(): Promise<string|undefined>;
   provideTokens(refreshToken: string, accessToken: string): void;
 }
 

@@ -16,6 +16,9 @@ RCT_EXTERN_METHOD(setCurrentUser: (NSString *)userId
 RCT_EXTERN_METHOD(clearCurrentUser: (RCTPromiseResolveBlock)resolve
                           rejecter: (RCTPromiseRejectBlock)reject)
 
+RCT_EXTERN_METHOD(getCurrentUserId: (RCTPromiseResolveBlock)resolve
+                          rejecter: (RCTPromiseRejectBlock)reject)
+
 RCT_EXTERN_METHOD(provideTokens: (NSString *)refreshToken
                     accessToken: (NSString *)accessToken)
 @end
