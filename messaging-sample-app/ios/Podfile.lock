@@ -1,9 +1,9 @@
 PODS:
-  - Apollo/Core (1.0.7)
-  - Apollo/SQLite (1.0.7):
+  - Apollo/Core (0.51.2)
+  - Apollo/SQLite (0.51.2):
     - Apollo/Core
     - SQLite.swift (~> 0.13.1)
-  - Apollo/WebSocket (1.0.7):
+  - Apollo/WebSocket (0.51.2):
     - Apollo/Core
   - boost (1.76.0)
   - CocoaAsyncSocket (7.6.5)
@@ -87,34 +87,34 @@ PODS:
     - WebRTC-SDK (~> 104.5112.07)
   - Logging (1.4.0)
   - nabla-react-native-core (1.1.2):
-    - NablaCore (= 1.1.1)
+    - NablaCore (= 1.1.2)
     - React-Core
   - nabla-react-native-messaging-core (1.1.2):
     - nabla-react-native-core
-    - NablaMessagingCore (= 1.1.1)
+    - NablaMessagingCore (= 1.1.2)
     - React-Core
   - nabla-react-native-messaging-ui (1.1.2):
     - nabla-react-native-messaging-core
-    - NablaMessagingUI (= 1.1.1)
+    - NablaMessagingUI (= 1.1.2)
     - React-Core
   - nabla-react-native-video-call (1.1.2):
     - nabla-react-native-core
-    - NablaVideoCall (= 1.1.1)
+    - NablaVideoCall (= 1.1.2)
     - React-Core
-  - NablaCore (1.1.1):
-    - Apollo/SQLite (~> 1.0.7)
-    - Apollo/WebSocket (~> 1.0.7)
+  - NablaCore (1.1.2):
+    - Apollo/SQLite (~> 0.51.2)
+    - Apollo/WebSocket (~> 0.51.2)
     - Sentry (~> 8.1.0)
-  - NablaDocumentScanner (1.1.1)
-  - NablaMessagingCore (1.1.1):
-    - NablaCore (= 1.1.1)
-  - NablaMessagingUI (1.1.1):
-    - NablaCore (= 1.1.1)
-    - NablaDocumentScanner (= 1.1.1)
-    - NablaMessagingCore (= 1.1.1)
-  - NablaVideoCall (1.1.1):
+  - NablaDocumentScanner (1.1.2)
+  - NablaMessagingCore (1.1.2):
+    - NablaCore (= 1.1.2)
+  - NablaMessagingUI (1.1.2):
+    - NablaCore (= 1.1.2)
+    - NablaDocumentScanner (= 1.1.2)
+    - NablaMessagingCore (= 1.1.2)
+  - NablaVideoCall (1.1.2):
     - LiveKitClient (~> 1.0.8)
-    - NablaCore (= 1.1.1)
+    - NablaCore (= 1.1.2)
   - OpenSSL-Universal (1.1.1100)
   - PromisesObjC (2.2.0)
   - PromisesSwift (2.2.0):
@@ -580,7 +580,7 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
-  Apollo: 4db36a7f08ded7a9f73a72eb90457d98dc4c68f9
+  Apollo: e5bc805c3f3556c18edc4eae4e2ea4723cea2318
   boost: a7c83b31436843459a1961bfd74b96033dc77234
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   DoubleConversion: 5189b271737e1565bdce30deb4a08d647e3f5f54
@@ -600,15 +600,15 @@ SPEC CHECKSUMS:
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   LiveKitClient: e4c5d63cd7633a5006058f27ccfddd914c5fa592
   Logging: beeb016c9c80cf77042d62e83495816847ef108b
-  nabla-react-native-core: 4fdbba058e7651be8ec3ddd5a61d5f5fc324a662
-  nabla-react-native-messaging-core: a4747a8b9366e48ae64e5e3098100307713b4b3f
-  nabla-react-native-messaging-ui: 02c7184cc8f3d9c4e97d003e41871f0f1f429db0
-  nabla-react-native-video-call: b9005eaebc17645136170866bf45a31a5492298a
-  NablaCore: 0d60a3237187753b60a3a4bed4671ceca844826d
-  NablaDocumentScanner: defcb30b34a2706f1e2693332bae267173d53242
-  NablaMessagingCore: a3cd586e9b452ea5dbec7309c30f2e9c68531d16
-  NablaMessagingUI: e12b9da2a7c52be5d957b6037a1a0df2e3a43a70
-  NablaVideoCall: 9b3b3ceadd4430abb9d55d0405bbf02411e88dc6
+  nabla-react-native-core: ee74a3428f9a3ed35db90d9fe24f23a1bbcd1728
+  nabla-react-native-messaging-core: f9d0b5b8654a63e86bc6efc277fdc88cda34df39
+  nabla-react-native-messaging-ui: 7778ba03db0a2ebb0ff11d1292b4667b98aa3937
+  nabla-react-native-video-call: 0c1053534027118004d13a7005c38d2881b23ae3
+  NablaCore: 47e1fb0d3de6d55462931df1dd07e4cce0863086
+  NablaDocumentScanner: ebcf4381ee96ef5d09ad33bc75418b2a50c4a85e
+  NablaMessagingCore: 2824a167c94b1f399828beb4f50afe16123dd1b9
+  NablaMessagingUI: 1993165c88a7e6dbb4a38a5d8d767bda9c21e60a
+  NablaVideoCall: 73633f0828706481f4af19aff9bbdafb2e4a3cf8
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
   PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
   PromisesSwift: cf9eb58666a43bbe007302226e510b16c1e10959

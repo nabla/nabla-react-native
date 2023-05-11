@@ -11,9 +11,9 @@
 ### Versions
 
 - Android: [`1.1.2`](https://github.com/nabla/nabla-android/releases/tag/1.1.2)
-- iOS: [`1.1.1`](https://github.com/nabla/nabla-ios/releases/tag/1.1.1)
+- iOS: [`1.1.2`](https://github.com/nabla/nabla-ios/releases/tag/1.1.2g)
 
-## [1.1.2] - 2023-05-09
+## [1.1.2] - 2023-05-11
 
 ### Added
 
@@ -21,11 +21,12 @@
 
 ### Fixed
 - Android: Fix a bug leading to new messages and items not being fetched in real time when using `clearCurrentUser`.
+- iOS: Reverted Apollo library to version `0.51.2`. Fixes cache issue preventing the loading of older conversation messages.
 
 ### Versions
 
 - Android: [`1.1.2`](https://github.com/nabla/nabla-android/releases/tag/1.1.2)
-- iOS: [`1.1.1`](https://github.com/nabla/nabla-ios/releases/tag/1.1.1)
+- iOS: [`1.1.2`](https://github.com/nabla/nabla-ios/releases/tag/1.1.2)
 
 ## [1.1.1] - 2023-04-25
 
