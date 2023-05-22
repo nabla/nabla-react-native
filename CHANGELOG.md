@@ -10,8 +10,23 @@
 
 ### Versions
 
-- Android: [`1.1.2`](https://github.com/nabla/nabla-android/releases/tag/1.1.2)
-- iOS: [`1.1.2`](https://github.com/nabla/nabla-ios/releases/tag/1.1.2g)
+- Android: [`1.1.3`](https://github.com/nabla/nabla-android/releases/tag/1.1.3)
+- iOS: [`1.1.3`](https://github.com/nabla/nabla-ios/releases/tag/1.1.3)
+
+## [1.1.3] - 2023-05-22
+
+### Added
+
+### Changed
+
+### Fixed
+- Fix a race condition that could lead to the following warning being sent by React Native: "Sending needProvideTokens with no listeners registered".
+- Fix a serialization issue for errors on iOS that would prevent displaying error details.
+
+### Versions
+
+- Android: [`1.1.3`](https://github.com/nabla/nabla-android/releases/tag/1.1.3)
+- iOS: [`1.1.3`](https://github.com/nabla/nabla-ios/releases/tag/1.1.3)
 
 ## [1.1.2] - 2023-05-11
 
