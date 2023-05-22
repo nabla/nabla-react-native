@@ -4,24 +4,25 @@ private enum Constants {
     static let codeKey = "code"
     static let messageKey = "message"
     static let extraKey = "extra"
+    
+    static let unknownErrorCode = 3
 }
 
 extension Error {
     public var dictionaryRepresentation: [String: Any] {
-        (self as? NablaError)?.dictionaryRepresentation ?? NablaError.unknownErrorDictionaryRepresentation
+        (self as? NablaError)?.dictionaryRepresentation ?? [
+            Constants.codeKey: Constants.unknownErrorCode
+        ]
     }
 }
 
 extension NablaError {
 
-    static var unknownErrorDictionaryRepresentation: [String: Any] {
-        [
-            Constants.codeKey: 3 // UnknownError
-        ]
-    }
-
     @objc open var dictionaryRepresentation: [String: Any] {
-        Self.unknownErrorDictionaryRepresentation
+        [
+            Constants.codeKey: Constants.unknownErrorCode,
+            Constants.extraKey: self.serialize()
+        ]
     }
 }
 
@@ -29,7 +30,8 @@ extension NetworkError {
     public override var dictionaryRepresentation: [String: Any] {
         [
             Constants.codeKey: 0,
-            Constants.messageKey: message
+            Constants.messageKey: message,
+            Constants.extraKey: self.serialize()
         ]
     }
 }
@@ -39,7 +41,7 @@ extension ServerError {
         [
             Constants.codeKey: 1,
             Constants.messageKey: message,
-            Constants.extraKey: ["underlyingError": underlyingError]
+            Constants.extraKey: self.serialize()
         ]
     }
 }
@@ -58,14 +60,18 @@ extension InternalError {
     }
 
     public override var dictionaryRepresentation: [String: Any] {
-        Self.createDictionaryRepresentation(message: nil, underlyingError: underlyingError)
+        [
+            Constants.codeKey: Self.code,
+            Constants.extraKey: self.serialize()
+        ]
     }
 }
 
 extension UserIdNotSetError {
     public override var dictionaryRepresentation: [String: Any] {
         [
-            Constants.codeKey: 10
+            Constants.codeKey: 10,
+            Constants.extraKey: self.serialize()
         ]
     }
 }
@@ -73,7 +79,8 @@ extension UserIdNotSetError {
 extension AuthenticationProviderFailedToProvideTokensError {
     public override var dictionaryRepresentation: [String: Any] {
         [
-            Constants.codeKey: 11
+            Constants.codeKey: 11,
+            Constants.extraKey: self.serialize()
         ]
     }
 }
@@ -81,7 +88,8 @@ extension AuthenticationProviderFailedToProvideTokensError {
 extension AuthenticationProviderDidProvideExpiredTokensError {
     public override var dictionaryRepresentation: [String: Any] {
         [
-            Constants.codeKey: 12
+            Constants.codeKey: 12,
+            Constants.extraKey: self.serialize()
         ]
     }
 }
@@ -90,7 +98,7 @@ extension AuthorizationDeniedError {
     public override var dictionaryRepresentation: [String: Any] {
         [
             Constants.codeKey: 13,
-            Constants.extraKey: ["reason": reason]
+            Constants.extraKey: self.serialize()
         ]
     }
 }
@@ -99,7 +107,7 @@ extension FailedToRefreshTokensError {
     public override var dictionaryRepresentation: [String: Any] {
         [
             Constants.codeKey: 14,
-            Constants.extraKey: ["reason": reason]
+            Constants.extraKey: self.serialize()
         ]
     }
 }
@@ -108,7 +116,7 @@ extension UnknownAuthenticationError {
     public override var dictionaryRepresentation: [String: Any] {
         [
             Constants.codeKey: 15,
-            Constants.extraKey: ["reason": underlyingError]
+            Constants.extraKey: self.serialize()
         ]
     }
 }
@@ -117,7 +125,7 @@ extension CurrentUserAlreadySetError {
     public override var dictionaryRepresentation: [String: Any] {
         [
             Constants.codeKey: 16,
+            Constants.extraKey: self.serialize()
         ]
     }
 }
-

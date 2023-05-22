@@ -63,11 +63,7 @@ export class NablaClient {
     logger: Logger = new ConsoleLogger(),
   ) {
     this.logger = logger;
-    await nablaClientModule.initialize(
-      configuration.apiKey,
-      configuration.enableReporting,
-      networkConfiguration,
-    );
+
     this.needProvideTokensSubscription?.remove();
     this.needProvideTokensSubscription = emitter.addListener(
       'needProvideTokens',
@@ -78,6 +74,12 @@ export class NablaClient {
           authTokens.accessToken,
         );
       },
+    );
+
+    await nablaClientModule.initialize(
+      configuration.apiKey,
+      configuration.enableReporting,
+      networkConfiguration,
     );
   }
 
