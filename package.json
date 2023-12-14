@@ -29,5 +29,8 @@
       "**/@jest",
       "**/@jest/**"
     ]
+  },
+  "devDependencies": {
+    "license-checker": "^25.0.1"
   }
 }
