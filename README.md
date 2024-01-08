@@ -4,6 +4,12 @@ The [Nabla](https://www.nabla.com/) React Native SDK makes it quick and easy to 
 
 Right now the library is in alpha, meaning all core features are here and ready to be used but API might change during the journey to a stable 1.0 version.
 
+## ⚠️ End of support
+
+We took the decision to discontinue the Nabla Care Platform and with that stop maintaining the Nabla RN SDK.
+
+The Nabla Care Platform will remain operational until September 30th, 2024, but we would greatly appreciate it if you could transition before that date. We are committed to ensuring a seamless transition and are here to assist you in any way you need. You can fork this SDK repository if you want to modify it or reuse it with a different backend.
+
 ## Documentation
 
 Check our [documentation portal](https://docs.nabla.com/docs/concepts-rn) for in depth documentation about integrating the SDK.
